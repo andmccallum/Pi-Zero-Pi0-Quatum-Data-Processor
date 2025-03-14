@@ -1,0 +1,42 @@
+
+## 4. Astrophysical Equations in the Gpi04n Framework
+
+### 4.1 Extended Gravitational Scaling
+
+The Gpi04n framework incorporates additional gravitational effects:
+
+$$ \mathcal{G}_{\text{grav}}^{\text{Gpi04n}}(\mathbf{x}, M, r) = \mathcal{G}_{\text{grav}}^{\text{pi04n}}(\mathbf{x}, M, r) + \mathcal{G}_{\text{extra}}(\mathbf{x}, M, r) 
+= \frac{G\,M}{r^{2}} \cdot \left[1 + \epsilon(\mathbf{x}, M, r)\right] \cdot \exp\left(i\, \phi_{\text{grav}}^{\prime}(\mathbf{x}, M, r)\right) $$
+
+Where \(\epsilon(\mathbf{x}, M, r)\) encapsulates corrections due to extended gravitational or quantum considerations.
+
+### 4.2 Unified Radiative Equation in Gpi04n
+
+Unified radiative measurements incorporate both classical and extended corrections:
+
+$$ \mathcal{R}_{\text{Gpi04n}}(I, \nu, s) = \mathcal{R}_{\text{pi04n}}(I, \nu, s) + \Delta \mathcal{R}(I, \nu, s) 
+= \left\{\exp\left(-\tau(\nu)\right) \cdot I(\nu, s)\right\} \cdot \left[1 + \delta(\nu, s)\right] $$
+
+Where \(\delta(\nu, s)\) applies additional phase and amplitude modulation for astronomical regimes.
+
+## 5. Unified Astrophysical Operators
+
+The following operators bridge the astrophysical concepts within the Pi04n/Gpi04n unified framework:
+
+### 5.1 Unified Gravitational Operator
+
+$$ \mathcal{O}_{\text{grav}}(\mathbf{x}, M, r) = \mathcal{G}_{\text{grav}}^{\text{pi04n}}(\mathbf{x}, M, r) + \mathcal{G}_{\text{grav}}^{\text{Gpi04n}}(\mathbf{x}, M, r) $$
+
+### 5.2 Unified Radiative Operator
+
+$$ \mathcal{O}_{\text{rad}}(I, \nu, s) = \mathcal{R}_{\text{pi04n}}(I, \nu, s) + \mathcal{R}_{\text{Gpi04n}}(I, \nu, s) $$
+
+### 5.3 Oscillatory Harmonic Realization Operator
+
+The operator responsible for the harmonic realization and balance of the oscillatory framework is:
+
+$$ \mathcal{O}_{\text{harm}}^{\text{uni}}(t) = \mathcal{O}_{\text{osc}}^{\text{pi04n}}(t) \cdot \mathcal{H}_{\text{cor}}(\omega, t) + \Delta \mathcal{O}_{\text{osc}}(t) $$
+
+## 6. Conclusion
+
+This collection of equations and operators provides a rigorous framework for astrophysical modeling within the unified Pi04n/Gpi04n architecture. It integrates classical and extended gravitational effects, radiative processes, and oscillatory dynamics, ensuring a balanced and self-consistent approach to astronomical measurements under the invariant condition g₁g₂g₃g₄=1.

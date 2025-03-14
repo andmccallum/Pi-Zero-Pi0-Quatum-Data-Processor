@@ -1,0 +1,44 @@
+
+# Operator Classes and Types Documentation
+================================================================================
+
+This document provides a detailed overview of the operator classes and types within the Pi04N (and extended Gpi04N) framework, including their mathematical formulations and functional roles for modeling complex systems.
+
+--------------------------------------------------------------------------------
+## 1. Operator Types
+
+### 1.1 Direct Operators
+
+**Functionality**: Direct Operators apply transformations directly to the input parameters. They are used to scale and modulate the inputs without intermediary blending, ensuring that the core forces of the system are maintained.
+
+**Mathematical Equation**:
+
+$$
+\mathcal{O}_{\text{direct}}(\mathbf{y}, \lambda) = \lambda^{\beta} \cdot \mathbf{y} \cdot \exp\Bigl(i\,\phi(\lambda)\Bigr)
+$$
+
+**Components**:
+- $\mathbf{y}$: Input parameter vector.
+- $\lambda$: Scaling factor.
+- $\beta$: Scaling exponent (commonly $\beta=1$ for linear scaling).
+- $\phi(\lambda)$: Phase function dictated by the scaling factor.
+
+**Usage**: To access the information mathematically, compute $\lambda^{\beta}$, evaluate $\phi(\lambda)$, multiply $\mathbf{y}$ by these values, and combine them through complex multiplication. This direct mapping is fundamental in ensuring that raw inputs are consistently scaled.
+
+--------------------------------------------------------------------------------
+### 1.2 Indirect Operators
+
+**Functionality**: Indirect Operators blend the original input with an external influence. This operator is key when environmental factors or auxiliary data must be integrated into the transformation process.
+
+**Mathematical Equation**:
+
+$$
+\mathcal{O}_{\text{indirect}}(\mathbf{y}, \lambda, \xi) = \lambda^{\beta} \cdot \Bigl[(1-\xi)\,\mathbf{y} + \xi\,\mathbf{y}_{\text{ext}}\Bigr] \cdot \exp\Bigl(i\,\phi(\lambda, \xi)\Bigr)
+$$
+
+**Components**:
+- $\xi$: Blending parameter (ranging from 0 to 1) representing the weight of the external influence.
+- $\mathbf{y}_{\text{ext}}$: External input vector.
+- Other variables as defined in the Direct Operator.
+
+**Usage**: Blend the input $\mathbf{y}$ with the external vector $\mathbf{y}_{\text{ext}}$ according to $\xi$, then apply the scaling $\lambda^{\beta}$ and phase modulation $\phi(\lambda, \xi)$. This operator is useful when the system requires conformity with both internal properties and external forces.
