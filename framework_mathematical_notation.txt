@@ -1,0 +1,35 @@
+
+# Mathematical Notation for the Framework
+
+## Unique Identifier
+
+The framework can be uniquely identified using the notation:
+
+$$\mathcal{G}_{\pi}^{(0)} \equiv \{G^4,\; G^n,\; \pi\Phi,\; C_0\}$$
+
+Where:
+- $G^4 = 1$ represents the fourth root of unity
+- $G^n = 1$ represents the nth roots of unity
+- $\pi\Phi$ represents the π-encoding transformation
+- $C_0$ represents the floating zero normalization
+
+This notation $\mathcal{G}_{\pi}^{(0)}$ serves as a compact mathematical identifier for the complete framework, where:
+- The base symbol $\mathcal{G}$ references the generator/roots of unity
+- The subscript $\pi$ highlights the central role of π-encoding
+- The superscript $(0)$ indicates the incorporation of the floating zero concept
+
+## Expanded Representation
+
+When fully expanded, the components are defined as:
+
+1. $G^4 = 1$ with solutions $G \in \{1, i, -1, -i\}$
+
+2. $G^n = 1$ with solutions $G_k = e^{\frac{2\pi i k}{n}}, \quad k = 0, 1, 2, \ldots, n-1$
+
+3. $\pi\Phi$ encoding: $\Pi(x, \lambda) = D(\pi, (|x| + \lambda \mod M) + \Phi(x, \lambda))$
+
+4. Floating zero: $C_0(x, \lambda) = \frac{1}{n} \sum_{d=1}^{n} \Pi_d(x, \lambda)$
+   with balanced representation: $B_0(\Pi_d)(x, \lambda) = \Pi_d(x, \lambda) - C_0(x, \lambda)$
+   ensuring: $\sum_{d=1}^{n} B_0(\Pi_d)(x, \lambda) = 0$
+
+The notation $\mathcal{G}_{\pi}^{(0)}$ thus encapsulates the entire mathematical structure of the framework in a single, elegant identifier.
