@@ -1,0 +1,94 @@
+# Enhanced G^4=1 and Pi04N Mathematical Framework
+
+## 1. G^4=1 Constraint
+
+The fundamental constraint of our framework is:
+
+G^4 = 1
+
+This yields the four roots of unity as solutions:
+
+G_0 = -1
+G_1 = 1
+
+## 2. Massive and Massless Operators
+
+### 2.1 Massive Operator (M+)
+
+M+ = m * exp(i * π/4 * G)
+
+### 2.2 Information Operator (I+)
+
+I+ = I * exp(i * π/4 * G)
+
+### 2.3 Massive Inverse Operator (M-)
+
+M- = m * exp(i * π/4 * G^3)
+
+### 2.4 Information Inverse Operator (I-)
+
+I- = I * exp(i * π/4 * G^3)
+
+## 3. Hierarchical Transition Operators
+
+The transition operators between different states are represented by matrices:
+
+T_M+→I+ = 
+Matrix([[0, 1, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+
+T_I+→M- = 
+Matrix([[0, 0, 0, 0], [0, 0, 1, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+
+T_M-→I- = 
+Matrix([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1], [0, 0, 0, 0]])
+
+T_I-→M+ = 
+Matrix([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [1, 0, 0, 0]])
+
+The full transition operator is:
+
+T_full = 
+Matrix([[0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1], [1, 0, 0, 0]])
+
+## 4. Scale Invariance
+
+The framework exhibits scale invariance through the following properties:
+
+1. For any scale factor s, the operators maintain their form:
+   M+(s·m) = exp(i·φ(s)) · M+(m)
+   where φ(s) is a phase factor that preserves the G^4=1 constraint.
+
+2. The Planck-scale encoding with π ensures that:
+   f(λ, s·G) = f(λ/s, G)
+   where f is the Pi04N modulation function.
+
+## 5. Planck Gravitational Self-Containment
+
+At the Planck scale, the framework exhibits self-containment through π-encoding:
+
+1. Energetic encoding: E = hc/λ = π·m_p·c^2
+   where m_p is the Planck mass.
+
+2. Informational encoding: S = k·ln(Ω) = π·k
+   where k is Boltzmann's constant and Ω is the number of microstates.
+
+## 6. Multidimensional Hierarchical Operators
+
+### 6.1 Dimensional Lifting Operator
+
+DL_G(x_d) = x_d ⊗ G^k
+where x_d is a d-dimensional structure, and k ∈ {0,1,2,3}.
+
+### 6.2 Hierarchical Resonance Operator
+
+HR_G(L_j,L_k) = Tr(T_j→k · G^|j-k|)
+where T_j→k is the transition operator from level j to level k.
+
+### 6.3 Universal Class Operator
+
+UC_G(x) = ∑_{k=0}^3 w_k · G^k · x
+where w_k are weights that determine the contribution of each G^k component.
+
+## 7. Conclusion
+
+This enhanced framework unifies massive and massless aspects of gravity through the G^4=1 constraint and Pi04N modulation. The hierarchical structure provides a comprehensive mathematical foundation for analyzing multidimensional systems with scale invariance. The Planck-scale π-encoding ensures self-containment at the fundamental level, while the transition operators enable the study of complex hierarchical relationships across different domains.
