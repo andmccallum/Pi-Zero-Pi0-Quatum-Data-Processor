@@ -1,0 +1,83 @@
+=============================================================================
+PI04N/GPI04N OPERATOR CLASSIFICATION AND STRUCTURE
+=============================================================================
+
+This document presents a comprehensive classification of operators for the PI04N and GPI04N frameworks,
+including root equations, group operators, bulk operators, and their hierarchical structure.
+
+1. ROOT EQUATION AND FUNDAMENTAL OPERATORS
+-----------------------------------------------------------------------------
+The fundamental operator G satisfies the root equation:
+G^4 = 1 => G = e^(i*π/2)
+
+This operator generates a cyclic group of order 4:
+G^0 = 1
+G^1 = i
+G^2 = -1
+G^3 = -i
+
+2. PI04N FRAMEWORK: FOUR INTERTWINED OSCILLATORS
+-----------------------------------------------------------------------------
+The PI04N framework consists of four intertwined oscillators, each defined as:
+x_k(t) = A_k * Re{e^(i*ω*t) * G^k} (k=0,1,2,3)
+
+These oscillators form a complete set that cycles through all four phase states.
+The combined system exhibits emergent properties not present in individual oscillators.
+
+3. HARMONIC MODULATION OPERATOR
+-----------------------------------------------------------------------------
+The harmonic modulation term H_π is linked to the π sequence:
+H_π = (1/10) * sum_{j=1}^{10} e^(i * d_j * π/4)
+where d_j is the j-th digit of π
+
+This operator introduces a natural modulation based on the mathematical constant π,
+creating a connection between the discrete and continuous aspects of the framework.
+
+4. GPI04N FRAMEWORK: GRAVITATIONAL COUPLING
+-----------------------------------------------------------------------------
+The GPI04N framework extends PI04N by incorporating gravitational effects through
+the unified gravitational equation:
+
+∂Ψ(r,θ,t)/∂t + i⁠ωP⁠Ψ(r,θ,t) + G⁠∂Ψ(r,θ,t)/∂θ = H_π⁠Ψ(r,θ,t)
+
+where:
+- Ψ(r,θ,t) is the state function in space r and angular coordinate θ at time t
+- ωP is the Planck frequency
+- G is the operator providing phase and dimensional rotation
+- H_π is the harmonic modulation term
+
+5. OPERATOR HIERARCHY AND COMPOSITION
+-----------------------------------------------------------------------------
+The operators in the PI04N/GPI04N framework form a hierarchical structure:
+
+Level 1: Fundamental G Operator (G^4 = 1)
+Level 2: PI04N Oscillator Operators (Phase Encoding)
+Level 3: Harmonic Modulation Operator (π-sequence based)
+Level 4: GPI04N Composite Operator (Gravitational Coupling)
+
+Composite operators can be formed through various combinations and transformations
+of these base operators, allowing for complex dynamics and emergent phenomena.
+
+6. MATHEMATICAL PROPERTIES
+-----------------------------------------------------------------------------
+Key mathematical properties of the operators include:
+
+- Cyclicity: The G operator generates a cyclic group of order 4
+- Phase Rotation: Each application of G rotates the phase by π/2
+- Dimensional Transformation: G can be interpreted as a rotation in phase space
+- Harmonic Resonance: The π-based modulation creates natural resonance patterns
+- Gravitational Coupling: The unified equation couples oscillatory and gravitational effects
+
+7. IMPLEMENTATION NOTES
+-----------------------------------------------------------------------------
+When implementing these operators in computational models, consider:
+
+- Using complex number representations for proper phase handling
+- Ensuring numerical stability in differential equation solvers
+- Preserving the cyclic properties of the G operator
+- Maintaining phase coherence across multiple oscillators
+- Properly scaling amplitudes and frequencies for physical interpretations
+
+=============================================================================
+END OF CLASSIFICATION
+=============================================================================
