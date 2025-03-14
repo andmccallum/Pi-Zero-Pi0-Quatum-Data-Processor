@@ -1,0 +1,589 @@
+# =============================================================================
+# Pi0 Foundational Build Package
+# =============================================================================
+# This package provides the complete core implementations for the Pi0 system.
+# It defines a series of operators, functions, and modules (time, spatial,
+# gravitational, repository) to create the root package for a foundational build
+# of Pi0. These elements are designed for production and maintain complete
+# internal repository information.
+# 
+# Author: Your Team
+# Date: 2025-03-14
+
+import math
+import logging
+import numpy as np
+from typing import Dict, List, Tuple, Callable, Union, Optional, Any
+
+# -----------------------------------------------------------------------------
+# Set Up Logging
+# -----------------------------------------------------------------------------
+logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
+logger = logging.getLogger(__name__)
+
+
+# -----------------------------------------------------------------------------
+# Base Operator Class and Common Utilities
+# -----------------------------------------------------------------------------
+class BaseOperator:
+    """Base class for all operators in the Pi0 system."""
+    
+    def __call__(self, x: Any) -> Any:
+        """Apply the operator to input x."""
+        raise NotImplementedError('This operator must implement __call__ method.')
+
+    def compose(self, other: 'BaseOperator') -> 'CompositeOperator':
+        """Compose two operators: o1.compose(o2)(x) returns o1(o2(x))"""
+        return CompositeOperator(self, other)
+
+    def parallel(self, other: 'BaseOperator', alpha: float = 0.5) -> 'ParallelOperator':
+        """Parallel composition: alpha*o1(x) + (1-alpha)*o2(x)"""
+        return ParallelOperator(self, other, alpha)
+    
+    def inverse(self) -> 'BaseOperator':
+        """Return the inverse operator if available."""
+        raise NotImplementedError('Inverse not implemented for this operator.')
+
+
+class CompositeOperator(BaseOperator):
+    """Represents the composition of two operators."""
+    
+    def __init__(self, op1: BaseOperator, op2: BaseOperator):
+        self.op1 = op1
+        self.op2 = op2
+
+    def __call__(self, x: Any) -> Any:
+        return self.op1(self.op2(x))
+
+
+class ParallelOperator(BaseOperator):
+    """Represents the parallel application of two operators with weighting."""
+    
+    def __init__(self, op1: BaseOperator, op2: BaseOperator, alpha: float = 0.5):
+        self.op1 = op1
+        self.op2 = op2
+        self.alpha = alpha
+
+    def __call__(self, x: Any) -> Any:
+        return self.alpha * self.op1(x) + (1 - self.alpha) * self.op2(x)
+
+
+class IdentityOperator(BaseOperator):
+    """Identity operator that returns its input unchanged."""
+    
+    def __call__(self, x: Any) -> Any:
+        return x
+    
+    def inverse(self) -> 'IdentityOperator':
+        return self
+
+
+class ScalingOperator(BaseOperator):
+    """Scales the input by a constant factor."""
+    
+    def __init__(self, scale_factor: float):
+        self.scale_factor = scale_factor
+    
+    def __call__(self, x: Any) -> Any:
+        return x * self.scale_factor
+    
+    def inverse(self) -> 'ScalingOperator':
+        return ScalingOperator(1.0 / self.scale_factor)
+
+
+class LambdaOperator(BaseOperator):
+    """Wraps a lambda or function as an operator."""
+    
+    def __init__(self, func: Callable, inverse_func: Optional[Callable] = None):
+        self.func = func
+        self.inverse_func = inverse_func
+    
+    def __call__(self, x: Any) -> Any:
+        return self.func(x)
+    
+    def inverse(self) -> 'LambdaOperator':
+        if self.inverse_func is None:
+            raise NotImplementedError('Inverse function not provided for this LambdaOperator.')
+        return LambdaOperator(self.inverse_func, self.func)
+
+
+# -----------------------------------------------------------------------------
+# Time Operators
+# -----------------------------------------------------------------------------
+class ContinuousTimeOperator(BaseOperator):
+    """Linear time transformation: a * t + b"""
+    
+    def __init__(self, a: float = 1.0, b: float = 0.0):
+        self.a = a
+        self.b = b
+
+    def __call__(self, t: float) -> float:
+        return self.a * t + self.b
+    
+    def inverse(self) -> 'ContinuousTimeOperator':
+        if self.a == 0:
+            raise ValueError("Cannot invert a ContinuousTimeOperator with a=0")
+        return ContinuousTimeOperator(1.0/self.a, -self.b/self.a)
+
+
+class DiscreteTimeOperator(BaseOperator):
+    """Rounds time to the nearest multiple of delta_t"""
+    
+    def __init__(self, delta_t: float = 1.0):
+        self.delta_t = delta_t
+
+    def __call__(self, t: float) -> float:
+        return round(t / self.delta_t) * self.delta_t
+
+
+class PulseTimeOperator(BaseOperator):
+    """Applies a pulse effect if time modulo delta_t is within tau"""
+    
+    def __init__(self, delta_t: float = 1.0, tau: float = 0.5, scale_factor: float = 1.1):
+        self.delta_t = delta_t
+        self.tau = tau
+        self.scale_factor = scale_factor
+
+    def __call__(self, t: float) -> float:
+        mod_time = t % self.delta_t
+        if mod_time < self.tau:
+            return t * self.scale_factor
+        else:
+            return t
+
+
+class OscillatoryTimeOperator(BaseOperator):
+    """Applies an oscillatory modulation to time"""
+    
+    def __init__(self, frequency: float = 1.0, amplitude: float = 0.1, phase: float = 0.0):
+        self.frequency = frequency
+        self.amplitude = amplitude
+        self.phase = phase
+
+    def __call__(self, t: float) -> float:
+        return t + self.amplitude * math.sin(2 * math.pi * self.frequency * t + self.phase)
+
+
+class BurstTimeOperator(BaseOperator):
+    """Applies time scaling during specific burst periods"""
+    
+    def __init__(self, burst_times: List[float], burst_durations: List[float], burst_factors: List[float]):
+        """
+        Parameters:
+        - burst_times: list of times when bursts occur
+        - burst_durations: list of durations for each burst
+        - burst_factors: list of factors to scale time during a burst
+        """
+        if not (len(burst_times) == len(burst_durations) == len(burst_factors)):
+            raise ValueError("burst_times, burst_durations, and burst_factors must have the same length")
+        
+        self.burst_times = burst_times
+        self.burst_durations = burst_durations
+        self.burst_factors = burst_factors
+
+    def __call__(self, t: float) -> float:
+        # Check if current time is within a burst period
+        for burst_time, duration, factor in zip(self.burst_times, self.burst_durations, self.burst_factors):
+            if burst_time <= t < burst_time + duration:
+                return t * factor
+        return t
+
+
+class TimeBarrierOperator(BaseOperator):
+    """Creates a time barrier that prevents or modifies temporal influences"""
+    
+    def __init__(self, barrier_time: float, pre_barrier_op: BaseOperator, post_barrier_op: BaseOperator):
+        self.barrier_time = barrier_time
+        self.pre_barrier_op = pre_barrier_op
+        self.post_barrier_op = post_barrier_op
+    
+    def __call__(self, t: float) -> float:
+        if t < self.barrier_time:
+            return self.pre_barrier_op(t)
+        else:
+            return self.post_barrier_op(t)
+
+
+class TimeBubbleOperator(BaseOperator):
+    """Creates an isolated temporal domain with minimal interaction with surrounding spacetime"""
+    
+    def __init__(self, center_time: float, radius: float, interior_op: BaseOperator, exterior_op: BaseOperator):
+        self.center_time = center_time
+        self.radius = radius
+        self.interior_op = interior_op
+        self.exterior_op = exterior_op
+    
+    def __call__(self, t: float) -> float:
+        if abs(t - self.center_time) <= self.radius:
+            return self.interior_op(t)
+        else:
+            return self.exterior_op(t)
+
+
+# -----------------------------------------------------------------------------
+# Spatial Module
+# -----------------------------------------------------------------------------
+class SpatialRegion:
+    """Defines a spatial region with a center and radius."""
+    
+    def __init__(self, center: Tuple[float, float], radius: float):
+        self.center = center  # e.g., (x, y) coordinate
+        self.radius = radius
+
+    def contains(self, position: Tuple[float, float]) -> bool:
+        """Check if a position is within this region."""
+        dx = position[0] - self.center[0]
+        dy = position[1] - self.center[1]
+        distance = math.sqrt(dx*dx + dy*dy)
+        return distance <= self.radius
+
+
+class ComplexSpatialRegion:
+    """Defines a complex spatial region using a combination of basic regions."""
+    
+    def __init__(self):
+        self.regions = []
+        self.operations = []  # 'union', 'intersection', 'difference'
+    
+    def add_region(self, region: SpatialRegion, operation: str = 'union'):
+        """Add a region with a specified operation."""
+        self.regions.append(region)
+        self.operations.append(operation)
+    
+    def contains(self, position: Tuple[float, float]) -> bool:
+        """Check if a position is within this complex region."""
+        if not self.regions:
+            return False
+        
+        result = self.regions[0].contains(position)
+        
+        for i in range(1, len(self.regions)):
+            region = self.regions[i]
+            operation = self.operations[i]
+            
+            if operation == 'union':
+                result = result or region.contains(position)
+            elif operation == 'intersection':
+                result = result and region.contains(position)
+            elif operation == 'difference':
+                if region.contains(position):
+                    result = False
+        
+        return result
+
+
+class RegionOperator(BaseOperator):
+    """Applies different operators based on spatial position."""
+    
+    def __init__(self, spatial_region: Union[SpatialRegion, ComplexSpatialRegion], 
+                 op_inside: BaseOperator, op_outside: BaseOperator = None):
+        self.spatial_region = spatial_region
+        self.op_inside = op_inside
+        self.op_outside = op_outside or IdentityOperator()
+
+    def __call__(self, t: float, position: Tuple[float, float]) -> float:
+        if self.spatial_region.contains(position):
+            return self.op_inside(t)
+        else:
+            return self.op_outside(t)
+
+
+class SpatialBarrierOperator(BaseOperator):
+    """Creates a spatial barrier that prevents or modifies influences across regions."""
+    
+    def __init__(self, barrier_region: Union[SpatialRegion, ComplexSpatialRegion], 
+                 attenuation_factor: float = 0.5):
+        self.barrier_region = barrier_region
+        self.attenuation_factor = attenuation_factor
+    
+    def __call__(self, t: float, position: Tuple[float, float], direction: Tuple[float, float]) -> float:
+        """
+        Modifies time based on whether a path crosses the barrier.
+        
+        Parameters:
+        - t: time value
+        - position: current position
+        - direction: direction vector of influence
+        """
+        if self.barrier_region.contains(position):
+            return t * self.attenuation_factor
+        return t
+
+
+# -----------------------------------------------------------------------------
+# Gravitational Module
+# -----------------------------------------------------------------------------
+class GravitationalOperator(BaseOperator):
+    """Models gravitational time dilation effects."""
+    
+    def __init__(self, potential: float = 0):
+        self.potential = potential
+        self.c_squared = 9e16  # Speed of light squared (m^2/s^2)
+
+    def __call__(self, t: float) -> float:
+        # Simple model of gravitational time dilation
+        return t * math.sqrt(1 - 2 * self.potential / self.c_squared)
+
+
+class UnifiedGravitationalOperator(BaseOperator):
+    """Unified gravitational operator that combines multiple gravitational effects."""
+    
+    def __init__(self, mass_distribution: List[Tuple[Tuple[float, float], float]]):
+        """
+        Parameters:
+        - mass_distribution: list of ((x, y), mass) tuples representing point masses
+        """
+        self.mass_distribution = mass_distribution
+        self.G = 6.67430e-11  # Gravitational constant
+        self.c_squared = 9e16  # Speed of light squared
+    
+    def potential_at(self, position: Tuple[float, float]) -> float:
+        """Calculate gravitational potential at a position."""
+        potential = 0
+        for (mass_pos, mass) in self.mass_distribution:
+            dx = position[0] - mass_pos[0]
+            dy = position[1] - mass_pos[1]
+            distance = math.sqrt(dx*dx + dy*dy)
+            if distance > 0:  # Avoid division by zero
+                potential -= self.G * mass / distance
+        return potential
+    
+    def __call__(self, t: float, position: Tuple[float, float]) -> float:
+        potential = self.potential_at(position)
+        return t * math.sqrt(1 - 2 * potential / self.c_squared)
+
+
+# -----------------------------------------------------------------------------
+# Repository Module
+# -----------------------------------------------------------------------------
+class OperatorRepository:
+    """Central repository for storing and retrieving operators."""
+    
+    def __init__(self):
+        self.operators = {}
+        self.metadata = {}
+    
+    def register(self, name: str, op: BaseOperator, metadata: Dict = None):
+        """Register an operator with optional metadata."""
+        self.operators[name] = op
+        if metadata:
+            self.metadata[name] = metadata
+        else:
+            self.metadata[name] = {"description": f"Operator: {name}", "created": "now"}
+        logger.info(f'Registered operator: {name}')
+    
+    def get(self, name: str) -> Optional[BaseOperator]:
+        """Get an operator by name."""
+        return self.operators.get(name)
+    
+    def get_metadata(self, name: str) -> Optional[Dict]:
+        """Get metadata for an operator."""
+        return self.metadata.get(name)
+    
+    def apply(self, name: str, value: Any, **kwargs) -> Any:
+        """Apply an operator to a value with optional kwargs."""
+        op = self.get(name)
+        if op is None:
+            logger.error(f'Operator {name} not found')
+            return None
+        # Check if the operator expects additional arguments (like position)
+        try:
+            return op(value, **kwargs)
+        except TypeError:
+            return op(value)
+    
+    def list_operators(self) -> List[str]:
+        """List all registered operators."""
+        return list(self.operators.keys())
+    
+    def create_composite(self, name: str, op_names: List[str]) -> Optional[BaseOperator]:
+        """Create and register a composite operator from a list of operator names."""
+        if not op_names:
+            logger.error("No operators provided to create composite")
+            return None
+        
+        ops = [self.get(op_name) for op_name in op_names]
+        if None in ops:
+            logger.error("One or more operators not found")
+            return None
+        
+        # Compose operators in sequence
+        composite = ops[0]
+        for op in ops[1:]:
+            composite = composite.compose(op)
+        
+        self.register(name, composite, {
+            "description": f"Composite of {', '.join(op_names)}",
+            "components": op_names
+        })
+        
+        return composite
+    
+    def create_parallel(self, name: str, op1_name: str, op2_name: str, alpha: float = 0.5) -> Optional[BaseOperator]:
+        """Create and register a parallel operator from two operator names."""
+        op1 = self.get(op1_name)
+        op2 = self.get(op2_name)
+        
+        if op1 is None or op2 is None:
+            logger.error("One or more operators not found")
+            return None
+        
+        parallel = op1.parallel(op2, alpha)
+        
+        self.register(name, parallel, {
+            "description": f"Parallel of {op1_name} and {op2_name} with alpha={alpha}",
+            "components": [op1_name, op2_name],
+            "alpha": alpha
+        })
+        
+        return parallel
+
+
+# -----------------------------------------------------------------------------
+# System Initialization
+# -----------------------------------------------------------------------------
+def initialize_pi0() -> OperatorRepository:
+    """Initialize the Pi0 system with all core operators."""
+    repository = OperatorRepository()
+    
+    # Register Base Operators
+    repository.register('identity', IdentityOperator(), {"description": "Identity operator"})
+    repository.register('scaling', ScalingOperator(2.0), {"description": "Scaling operator with factor 2.0"})
+    
+    # Register Time Operators
+    repository.register('continuous_time', ContinuousTimeOperator(a=1, b=0), 
+                       {"description": "Linear time transformation"})
+    repository.register('discrete_time', DiscreteTimeOperator(delta_t=1), 
+                       {"description": "Discrete time with step 1.0"})
+    repository.register('pulse_time', PulseTimeOperator(delta_t=1, tau=0.5), 
+                       {"description": "Pulse time operator"})
+    repository.register('oscillatory_time', OscillatoryTimeOperator(frequency=0.1, amplitude=0.1), 
+                       {"description": "Oscillatory time with frequency 0.1"})
+    repository.register('burst_time', BurstTimeOperator(
+        burst_times=[5, 15], burst_durations=[2, 3], burst_factors=[1.5, 0.8]), 
+        {"description": "Burst time with two bursts"})
+    
+    # Register Time Barrier and Bubble Operators
+    repository.register('time_barrier', TimeBarrierOperator(
+        barrier_time=10.0, 
+        pre_barrier_op=ContinuousTimeOperator(a=1, b=0),
+        post_barrier_op=ContinuousTimeOperator(a=0.5, b=5)), 
+        {"description": "Time barrier at t=10"})
+    
+    repository.register('time_bubble', TimeBubbleOperator(
+        center_time=15.0, 
+        radius=3.0,
+        interior_op=ContinuousTimeOperator(a=2, b=0),
+        exterior_op=IdentityOperator()), 
+        {"description": "Time bubble centered at t=15 with radius 3"})
+    
+    # Register Gravitational Operators
+    repository.register('gravitational', GravitationalOperator(potential=1e9), 
+                       {"description": "Simple gravitational time dilation"})
+    
+    repository.register('unified_gravitational', UnifiedGravitationalOperator(
+        mass_distribution=[((0, 0), 1e10), ((10, 0), 5e9)]), 
+        {"description": "Unified gravitational with two masses"})
+    
+    # Create and register composite operators
+    repository.create_composite('gravitational_continuous', ['gravitational', 'continuous_time'])
+    repository.create_parallel('mixed_time', 'continuous_time', 'oscillatory_time', 0.7)
+    
+    # Register lambda-based custom operators
+    repository.register('custom_time_transform', 
+                       LambdaOperator(
+                           lambda t: t**2 if t > 0 else t,
+                           lambda t: math.sqrt(t) if t > 0 else t
+                       ), 
+                       {"description": "Custom time transform with inverse"})
+    
+    logger.info("Pi0 foundation build initialization complete.")
+    return repository
+
+
+# -----------------------------------------------------------------------------
+# Utility Functions
+# -----------------------------------------------------------------------------
+def apply_operator_sequence(repository: OperatorRepository, operator_names: List[str], 
+                           initial_value: Any, **kwargs) -> List[Any]:
+    """Apply a sequence of operators and return all intermediate results."""
+    results = [initial_value]
+    current_value = initial_value
+    
+    for op_name in operator_names:
+        current_value = repository.apply(op_name, current_value, **kwargs)
+        results.append(current_value)
+    
+    return results
+
+
+def create_time_evolution_map(repository: OperatorRepository, operator_name: str, 
+                             time_range: Tuple[float, float], num_points: int = 100) -> Tuple[List[float], List[float]]:
+    """Create a map of time evolution for a given operator."""
+    t_values = np.linspace(time_range[0], time_range[1], num_points)
+    transformed_t = [repository.apply(operator_name, t) for t in t_values]
+    
+    return t_values.tolist(), transformed_t
+
+
+def create_spatial_time_map(repository: OperatorRepository, operator_name: str, 
+                           x_range: Tuple[float, float], y_range: Tuple[float, float], 
+                           time_value: float, resolution: int = 20) -> List[List[float]]:
+    """Create a 2D map of time transformation across space."""
+    x_values = np.linspace(x_range[0], x_range[1], resolution)
+    y_values = np.linspace(y_range[0], y_range[1], resolution)
+    
+    result = []
+    for y in y_values:
+        row = []
+        for x in x_values:
+            transformed_t = repository.apply(operator_name, time_value, position=(x, y))
+            row.append(transformed_t)
+        result.append(row)
+    
+    return result
+
+
+# -----------------------------------------------------------------------------
+# Main testing: Only run if executed as a script
+# -----------------------------------------------------------------------------
+if __name__ == '__main__':
+    repo = initialize_pi0()
+    test_time = 10.0
+    
+    # Test individual operator calls
+    logger.info(f"Identity operator output: {repo.apply('identity', test_time)}")
+    logger.info(f"Continuous time operator output: {repo.apply('continuous_time', test_time)}")
+    logger.info(f"Discrete time operator output: {repo.apply('discrete_time', test_time)}")
+    logger.info(f"Pulse time operator output: {repo.apply('pulse_time', test_time)}")
+    logger.info(f"Oscillatory time operator output: {repo.apply('oscillatory_time', test_time)}")
+    logger.info(f"Gravitational operator output: {repo.apply('gravitational', test_time)}")
+    logger.info(f"Composite gravitational_continuous operator output: {repo.apply('gravitational_continuous', test_time)}")
+    
+    # Test spatial region operator
+    region = SpatialRegion(center=(0, 0), radius=5)
+    region_op = RegionOperator(
+        spatial_region=region, 
+        op_inside=ContinuousTimeOperator(a=2, b=0), 
+        op_outside=IdentityOperator()
+    )
+    
+    result_inside = region_op(test_time, position=(1, 1))
+    result_outside = region_op(test_time, position=(10, 10))
+    logger.info(f"Region operator (inside) output: {result_inside}")
+    logger.info(f"Region operator (outside) output: {result_outside}")
+    
+    # Test time evolution map
+    t_values, transformed_t = create_time_evolution_map(
+        repo, 'oscillatory_time', (0, 20), 100
+    )
+    logger.info(f"Created time evolution map with {len(t_values)} points")
+    
+    # Test spatial time map
+    spatial_map = create_spatial_time_map(
+        repo, 'unified_gravitational', (-10, 10), (-10, 10), test_time, 10
+    )
+    logger.info(f"Created spatial time map with dimensions {len(spatial_map)}x{len(spatial_map[0])}")
+    
+    # List registered operators
+    logger.info(f"Registered operators: {repo.list_operators()}")
