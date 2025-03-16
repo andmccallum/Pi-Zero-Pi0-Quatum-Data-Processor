@@ -1,0 +1,21 @@
+
+% Representative Composite Equation for the Pi0 System
+
+\[
+\begin{aligned}
+\Pi_0[\Psi_X, t] = \; &\Biggl\{\int_{\Omega} K_{trans}(\mathbf{r},\mathbf{r}',\alpha_X)\,\Psi_{H2O}(\mathbf{r})\,d\mathbf{r}\Biggr\}\cdot \exp\left[-\sum_{i=1}^{N}\lambda_i\left(P_i^X - P_i^{H2O}\right)^2\right]\\[1em]
+&\cdot \begin{cases}
+\mathcal{E}_{n_{H2O}\to n_X} \; (\text{if } n_X > n_{H2O})\\[1em]
+\mathcal{R}_{n_{H2O}\to n_X} \; (\text{if } n_X < n_{H2O})\\[1em]
+\mathcal{I} \; (\text{if } n_X = n_{H2O})
+\end{cases}\\[1em]
+&\cdot \Bigl(\cos(\alpha)\,\Psi_{\text{real}} + i\,\sin(\alpha)\,\Psi_{\text{imag}}\Bigr)\\[1em]
+&\cdot \exp\left(-\frac{G\,m^2}{\hbar\,c}\right)\cdot \Xi(\psi) 
+\end{aligned}
+\]
+
+\[ 
+\frac{\partial \Pi_0[\Psi]}{\partial t} = -\frac{i}{\hbar}\, \hat{H}\,\Pi_0[\Psi] + \mathcal{D}[\Pi_0[\Psi]] + \mathcal{QF}[\Pi_0[\Psi]] 
+\]
+
+% Note: All operators are as defined in the unified Pi0 framework.
