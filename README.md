@@ -2,7 +2,7 @@
 Full rep for GPi04N Quantum Gravitational Math 
 The G⁴=1 Framework: A Unified Approach to π-Encoding, Prime Numbers, and Quantum Gravity
 
-Has full Mathmatical build no other library required, after install called by "Pi0" by command line.
+Has full Mathmatical build no other library required, after install called by "Pi0". Please teach it with the text files, and allow it to process your data in abstract and rational form. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
