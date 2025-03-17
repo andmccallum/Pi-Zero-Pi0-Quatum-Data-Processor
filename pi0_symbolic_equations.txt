@@ -1,0 +1,16 @@
+B_scaled: B_scaled(d) = { B_base * f(d) if 1 ≤ d ≤ 12, 0 otherwise }
+
+B_int: B_int(d) = { g(e_odd((d+1)/2)) if d odd, g(e_even(d/2)) if d even }
+
+B_opt: B_opt = B_base * min_{1≤d≤12} f(d) + δ
+
+M_small: M_small(t) = (1/12) * Σ_{d=1}^{12} [B_scaled(d) * exp(-γ * t_d)]
+
+R_tilde: R̃(t) = ∏_{k=1}^{N} [1 + ε sin(2πt / p_k)] with p_29 replaced by p_9
+
+Phi_new: Φ_new(t,d) = Φ(t,d) + β * R₉₀(I)[0,0] * Φ_half(t,d)
+
+Phi_quad: Φ_quad(t,d) = Φ_new(t,d) + β * Φ_new(t,d+π/2)
+
+B_dim13: B_dim13 = B_base * f_13(13) + η
+

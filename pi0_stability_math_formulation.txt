@@ -1,0 +1,138 @@
+
+Pi0 Stability Mathematical Formulation
+======================================
+
+This document provides the formal mathematical definitions of the new Pi0 operators
+designed to address stability issues identified in the stress test.
+
+1. Channel Prioritization Operator (CPO)
+----------------------------------------
+
+Definition:
+CPO: C → [0,1]
+
+For any channel c ∈ C:
+CPO(c) = α * T(c) + β * R(c) + γ * RT⁻¹(c)
+
+Where:
+- C is the set of all channels
+- T: C → [0,1] is the normalized throughput function
+- R: C → [0,1] is the reliability function
+- RT⁻¹: C → [0,1] is the inverse recovery time function (faster = higher)
+- α, β, γ ∈ [0,1] are weighting coefficients such that α + β + γ = 1
+
+Properties:
+- Monotonicity: If T(c₁) ≥ T(c₂), R(c₁) ≥ R(c₂), and RT⁻¹(c₁) ≥ RT⁻¹(c₂), then CPO(c₁) ≥ CPO(c₂)
+- Bounded: ∀c ∈ C, 0 ≤ CPO(c) ≤ 1
+- Weighted: The importance of throughput, reliability, and recovery time can be adjusted via α, β, γ
+
+2. Graceful Degradation Operator (GDO)
+--------------------------------------
+
+Definition:
+GDO: P(C) × [0,1] → P(C)
+
+For any subset S ⊆ C and load threshold L ∈ [0,1]:
+GDO(S, L) = {c ∈ S | CPO(c) < L}
+
+Where:
+- P(C) is the power set of C (set of all subsets)
+- L is the load threshold
+
+Properties:
+- Threshold-based: Only channels with priority below L are included
+- Subset: GDO(S, L) ⊆ S for any S and L
+- Monotonicity in L: If L₁ ≤ L₂, then GDO(S, L₁) ⊆ GDO(S, L₂)
+- Empty at L=0: GDO(S, 0) = ∅ for any S
+
+3. Buffer Allocation Operator (BAO)
+-----------------------------------
+
+Definition:
+BAO: C × ℝ⁺ → ℝ⁺
+
+For any channel c ∈ C and total buffer B ∈ ℝ⁺:
+BAO(c, B) = min(B_max, B * CPO(c) / max_{c' ∈ C} CPO(c'))
+
+Where:
+- B_max is the maximum buffer size for any channel
+- max_{c' ∈ C} CPO(c') is the maximum CPO value across all channels
+
+Properties:
+- Bounded: ∀c ∈ C, 0 ≤ BAO(c, B) ≤ B_max
+- Proportional: Higher priority channels receive proportionally more buffer
+- Conservation: ∑_{c ∈ C} BAO(c, B) ≤ B
+- Maximum utilization: The channel with highest CPO gets the maximum allocation (up to B_max)
+
+4. Stability Assurance Operator (SAO)
+-------------------------------------
+
+Definition:
+SAO: P(C) → [0,1]
+
+For any subset S ⊆ C:
+SAO(S) = ∏_{c ∈ S} (1 - FP(c))
+
+Where:
+- FP: C → [0,1] is the failure probability function
+
+Properties:
+- Bounded: 0 ≤ SAO(S) ≤ 1
+- Monotonicity: If S₁ ⊆ S₂, then SAO(S₁) ≥ SAO(S₂)
+- Perfect stability: SAO(S) = 1 if and only if FP(c) = 0 for all c ∈ S
+- Composition: SAO(S₁ ∪ S₂) = SAO(S₁) * SAO(S₂) if S₁ and S₂ are independent
+
+5. Composite System Stability Metric (CSSM)
+-------------------------------------------
+
+Definition:
+CSSM: P(C) × ℝ⁺ → [0,1]
+
+For any subset S ⊆ C and total buffer B ∈ ℝ⁺:
+CSSM(S, B) = SAO(S) * (1 - e^(-λ * ∑_{c ∈ S} BAO(c, B)))
+
+Where:
+- λ is a scaling factor for buffer effectiveness
+
+Properties:
+- Bounded: 0 ≤ CSSM(S, B) ≤ 1
+- Increases with stability: Higher SAO(S) leads to higher CSSM
+- Increases with buffer: More buffer allocation leads to higher CSSM
+- Diminishing returns: The effect of additional buffer follows a diminishing returns curve
+
+6. Optimal Channel Subset Selection
+----------------------------------
+
+Problem:
+Given a set C of channels, a load threshold L, and a total buffer B, find the subset S* ⊆ C that maximizes CSSM while ensuring all critical functions are maintained.
+
+Formulation:
+S* = argmax_{S ⊆ C} CSSM(S, B)
+subject to:
+- Critical(S) = true (all critical functions are covered)
+- |S| ≤ N_max (maximum number of active channels)
+- ∀c ∈ S, CPO(c) ≥ L (all active channels meet minimum priority)
+
+Where:
+- Critical: P(C) → {true, false} indicates whether all critical functions are covered
+- N_max is the maximum number of channels that can be active simultaneously
+
+7. Dynamic Stability Control
+---------------------------
+
+The dynamic control of system stability can be modeled as a discrete-time system:
+
+S(t+1) = S(t) - GDO(S(t), L(t)) + R(t)
+B(t+1) = B_total - ∑_{c ∈ S(t+1)} BAO(c, B_total)
+
+Where:
+- S(t) is the set of active channels at time t
+- L(t) is the load threshold at time t
+- R(t) is the set of recovered channels at time t
+- B(t) is the remaining unallocated buffer at time t
+- B_total is the total system buffer
+
+The control objective is to maximize:
+∑_{t=0}^T CSSM(S(t), B_total)
+
+subject to the dynamics above and the constraint that critical functions are always maintained.

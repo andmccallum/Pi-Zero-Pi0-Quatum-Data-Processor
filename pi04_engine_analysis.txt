@@ -1,0 +1,68 @@
+
+Pi04 Engine Detailed System Test Analysis
+=========================================
+
+Test Description:
+-----------------
+The Pi04 engine underwent a rigorous hard load test with injection of quantum chaos and external chaos,
+including out-of-scale variant energy scenarios. The simulation aimed to analyze how the system balances
+internal states under quantum effects (quantum phase fluctuations, quantum noise) and external disturbances
+(chaotic bursts, high amplitude noise).
+
+Internal Mechanism:
+-------------------
+1. The internal state simulates quantum effects through oscillatory functions with phase shifts
+   and decaying quantum noise:
+   I(t) = sin(2πt + φ) + cos(4πt + φ) + N_q(t)
+   where N_q(t) ~ Gaussian(0, 0.4) * exp(-t/50)
+
+2. External chaos injection involves extremely volatile signals:
+   E(t) = sin(3πt) + cos(2πt) + Chaos_Burst(t) + N_e(t)
+   Chaos_Burst(t) is a random high amplitude burst (occurring with 5% probability)
+   N_e(t) is high amplitude Gaussian noise modulated by a tanh function.
+
+Combined System Balancing:
+--------------------------
+The system response is modeled by a non-linear balance operator defined as:
+   balance_factor = tanh(|I(t)|) * exp(-|E(t)|/5)
+   Combined Response = I(t) * (1 - balance_factor) + E(t) * balance_factor
+
+Harmonic Analysis:
+------------------
+An advanced harmonic analyzer (in 12 dimensions) computes a harmonic model:
+   Harmonic Model = Sum[i=1 to 12] [ A_i * sin(2πf_i t + φ_i) ]
+The correlation between the combined response and the harmonic model is calculated to assess
+harmonic balance under chaos injection.
+
+Results:
+--------
+Advanced harmonic balance correlation: -0.05739161615234751
+
+
+
+Operators and Classes (Key Components):
+-----------------------------------------
+1. Pi04EngineSimulator:
+   - simulate_internal_state(): Generates quantum fluctuating internal state
+   - simulate_external_chaos(): Generates external chaos with variant energy bursts
+   - combine_signals(): Applies a non-linear operator to combine internal and external signals
+
+2. AdvancedHarmonicAnalyzer (12-Dimensional):
+   - compute_harmonic_model(): Constructs a composite harmonic signal
+   - analyze_correlation(): Computes statistical correlation (balance metric) between the harmonic model and the system response
+
+Mathematical Equations:
+-----------------------
+Internal State:
+   I(t) = sin(2πt + φ) + cos(4πt + φ) + N_q(t)
+
+External Chaos:
+   E(t) = sin(3πt) + cos(2πt) + Chaos_Burst(t) + N_e(t)
+
+Combined Response:
+   C(t) = I(t) * (1 - balance_factor) + E(t) * balance_factor
+   where balance_factor = tanh(|I(t)|) * exp(-|E(t)|/5)
+
+Harmonic Model:
+   H(t) = Sum[i=1 to 12] [ A_i * sin(2πf_i t + φ_i) ]
+

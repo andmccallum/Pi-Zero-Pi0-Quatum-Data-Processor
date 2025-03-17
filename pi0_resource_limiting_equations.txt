@@ -1,0 +1,146 @@
+
+PI0 System Resource Limiting and Compression Operator
+=====================================================
+
+Overview
+--------
+This document describes the mathematical operators and class design to control the PI battery in the PI0 system. The goal is to limit the battery usage to at most 10% of full capacity for instantaneous loads, while providing a compression operator to prolong battery life under prolonged stress conditions.
+
+1. Instantaneous Resource Limiting
+------------------------------------
+We define:
+
+- $$B_{max}$$: Maximum battery capacity
+- $$B_{current}$$: Current battery level
+
+The effective available battery at any moment is limited by:
+
+\[
+B_{eff} = \min\left\{ B_{current},\; 0.1 \cdot B_{max} \right\}
+\]
+
+This ensures that the system never draws more than 10% of the battery capacity at any instant.
+
+2. Compression Operator for Battery Lifespan Control
+-----------------------------------------------------
+Define a compression factor $$\eta$$, which controls how the battery is slowly discharged to support the system over a sustained period. Let:
+
+- $$t$$: Time in hours
+- $$L$$: Load (energy units per hour)
+- $$T_{nominal}$$: The nominal lifetime in hours under full load
+
+The ideal battery discharge under full usage follows an exponential decay:
+
+\[
+B(t) = B_{current} \cdot \exp\Bigl(-\frac{L \; t}{B_{max}}\Bigr)
+\]
+
+To prolong battery life, we introduce a compression operator $$C(\eta)$$ defined as:
+
+\[
+C(\eta) = \begin{cases}
+1, & \text{if } \eta \le 1\\
+\frac{1}{\eta}, & \text{if } \eta > 1
+\end{cases}
+\]
+
+The effective load is then given by:
+
+\[
+L_{eff} = L \cdot C(\eta)
+\]
+
+And the modified discharge equation becomes:
+
+\[
+B(t) = B_{current} \cdot \exp\Bigl(-\frac{L \; C(\eta) \; t}{B_{max}}\Bigr)
+\]
+
+There is also a constraint to guarantee a minimum battery lifetime (e.g. at least 24 hours):
+
+\[
+B(24) \geq \delta \cdot B_{current}\quad (\text{with } \delta \text{ a degradation factor, for example } \delta = 0.9)
+\]
+
+3. Summary of the Combined Control Equations
+----------------------------------------------
+
+- **Instantaneous Resource Limiting:**
+
+  \[
+  B_{eff} = \min\left\{ B_{current},\; 0.1 \cdot B_{max} \right\}
+  \]
+
+- **Battery Discharge Under Compression:**
+
+  \[
+  B(t) = B_{current} \cdot \exp\Bigl(-\frac{L \; C(\eta) \; t}{B_{max}}\Bigr)
+  \]
+
+  with
+
+  \[
+  C(\eta) = \begin{cases}
+  1, & \text{if } \eta \le 1\\
+  \frac{1}{\eta}, & \text{if } \eta > 1
+  \end{cases}
+  \]
+
+These equations provide a theoretical framework to limit system resource interactions and ensure that battery utilization is modulated to prevent sudden drain and guarantee minimal operation periods.
+
+4. Python Class and Operator Implementation
+---------------------------------------------
+Below is an example class that implements the above logic in a simplified manner.
+
+```python
+import math
+
+class PiBatteryController:
+    def __init__(self, B_max, B_current, degradation_factor=0.9):
+        self.B_max = B_max  # Maximum battery capacity
+        self.B_current = B_current  # Current battery level
+        self.degradation_factor = degradation_factor  # Minimum fraction after 24 hours
+        self.instantaneous_limit = 0.1 * B_max  # 10% limit of B_max
+
+    def effective_battery(self):
+        # Limit the battery for immediate use
+        return min(self.B_current, self.instantaneous_limit)
+
+    def compression_operator(self, eta):
+        # Compression operator to scale load
+        if eta <= 1:
+            return 1
+        else:
+            return 1 / eta
+
+    def battery_discharge(self, L, eta, t):
+        # Compute the battery discharge at time t given load L and compression operator
+        C_eta = self.compression_operator(eta)
+        # Exponential decay equation
+        B_t = self.B_current * math.exp(- (L * C_eta * t) / self.B_max)
+        return B_t
+
+    def meets_minimum_lifetime(self, L, eta, t_min=24):
+        # Check if battery meets minimum lifetime criteria after t_min hours
+        B_after = self.battery_discharge(L, eta, t_min)
+        return B_after >= self.B_current * self.degradation_factor
+
+# Example usage:
+if __name__ == '__main__':
+    # Initialize system parameters
+    B_max = 2000.0  # Maximum battery capacity
+    B_current = 2000.0 # Battery at full charge
+    controller = PiBatteryController(B_max, B_current)
+    
+    # Example parameters
+    L = 10.0         # Load in energy units per hour
+    eta = 2.0        # Compression factor
+    t = 10           # Time in hours
+    
+    print('Effective Battery for Immediate Use:', controller.effective_battery())
+    print('Battery Level after', t, 'hours:', controller.battery_discharge(L, eta, t))
+    print('Meets minimum lifetime (24h)?', controller.meets_minimum_lifetime(L, eta, 24))
+```
+
+This class and its methods provide a basic operational model for the PI battery resource limiting and compression operator within the PI0 system. Modify these parameters and equations as needed for more detailed simulation.
+
