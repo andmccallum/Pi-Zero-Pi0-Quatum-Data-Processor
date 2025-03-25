@@ -1,0 +1,20 @@
+
+# Example Usage of Pi0M Math Module
+
+from pi0m_math_module import pi0m_solve, pi0m_visualize, pi0m_transform
+
+# Example 1: Solve a quadratic equation
+result = pi0m_solve('x**2 - 4')
+print("Original solutions:", result["original"])
+print("Pi0n transformed solutions:", result["pi0n_transformed"])
+print("GPi0n transformed solutions:", result["gpi0n_transformed"])
+
+# Example 2: Visualize a function
+result = pi0m_visualize('sin(x) * exp(-x/10)')
+print("Function visualization saved to:", result["visualization_saved"])
+
+# Example 3: Transform an expression
+result = pi0m_transform('(x**2 + y**2) / (1 + x*y)')
+print("Original expression:", result["original_expr"])
+print("Pi0n transformation:", result["pi0n_transform"])
+print("GPi0n transformation:", result["gpi0n_transform"])

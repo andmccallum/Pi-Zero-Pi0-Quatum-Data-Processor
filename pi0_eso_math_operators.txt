@@ -1,0 +1,96 @@
+# Pi0 Mathematical Operators for ESO Archive Data Processing
+
+## Core Operators
+
+### Ω_DataIngestion (Ω_DI)
+**Definition:** Ω_DI(D_raw) = N(T(D_raw))
+**Description:** Ingests and normalizes astronomical data from ESO archives
+**Components:**
+- D_raw: Raw data from ESO archive
+- T: Transformation function to Pi0-compatible format
+- N: Normalization function
+
+### Ω_SpectralAnalysis (Ω_SA)
+**Definition:** Ω_SA(S, λ) = ∫S(λ')K(λ-λ')dλ'
+**Description:** Analyzes spectral data from astronomical observations
+**Components:**
+- S: Spectral data
+- λ: Wavelength
+- K: Kernel function for spectral analysis
+
+### Ω_OrbitalDynamics (Ω_OD)
+**Definition:** Ω_OD(m, r, v) = {a, e, i, Ω, ω, M}
+**Description:** Calculates orbital parameters and dynamics for exoplanetary systems
+**Components:**
+- m: Mass
+- r: Position
+- v: Velocity
+- Output: Orbital elements (semi-major axis, eccentricity, inclination, longitude of ascending node, argument of periapsis, mean anomaly)
+
+### Ω_SystemEvolution (Ω_SE)
+**Definition:** Ω_SE(S_0, t) = S_0 + ∫_0^t F(S(τ), τ)dτ
+**Description:** Simulates the evolution of planetary systems over time
+**Components:**
+- S_0: Initial system state
+- t: Time
+- F: Evolution function
+
+### Ω_CrossScaleTransform (Ω_CST)
+**Definition:** Ω_CST(I, s_1, s_2) = T_s1→s2(I)
+**Description:** Transforms information across different astronomical scales
+**Components:**
+- I: Information
+- s_1: Source scale
+- s_2: Target scale
+- T: Scale transformation function
+
+### Ω_UncertaintyPropagation (Ω_UP)
+**Definition:** Ω_UP(x, σ_x, f) = {f(x), σ_f}
+**Description:** Propagates measurement uncertainties through calculations
+**Components:**
+- x: Input data
+- σ_x: Uncertainty in x
+- f: Function
+- Output: Function result and propagated uncertainty
+
+### Ω_HabitabilityIndex (Ω_HI)
+**Definition:** Ω_HI(T, R, M, C) = w_T·f_T(T) + w_R·f_R(R) + w_M·f_M(M) + w_C·f_C(C)
+**Description:** Calculates habitability indices for exoplanets
+**Components:**
+- T: Temperature
+- R: Radius
+- M: Mass
+- C: Composition
+- w: Weights
+- f: Scoring functions
+
+## Composite Operations
+
+### Planetary System Analysis
+**Definition:** PSA = Ω_OD ∘ Ω_DI
+**Description:** Complete pipeline from data ingestion to orbital dynamics calculation
+
+### Habitability Assessment
+**Definition:** HA = Ω_HI ∘ Ω_SA ∘ Ω_DI
+**Description:** Pipeline from data ingestion through spectral analysis to habitability calculation
+
+### System Evolution Prediction
+**Definition:** SEP = Ω_SE ∘ Ω_OD ∘ Ω_DI
+**Description:** Pipeline from data ingestion through orbital dynamics to system evolution prediction
+
+## Pi0 Integration
+
+The above operators integrate with the Pi0 framework through the following mechanisms:
+
+1. **Scale Invariance:** All operators maintain information integrity across scale transformations using Ω_CST
+2. **Deterministic Evolution:** System evolution is tracked deterministically using Ω_SE
+3. **Information Preservation:** Information is preserved across transformations using built-in preservation mechanisms
+4. **Cross-Connection:** Operators can be composed and connected across different modules and scales
+
+## Mathematical Notation
+
+- Ω: Denotes a Pi0 operator
+- ∫: Integration
+- ∘: Function composition
+- {}: Set notation
+- →: Mapping or transformation

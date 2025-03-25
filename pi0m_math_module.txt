@@ -1,0 +1,315 @@
+# =============================================================================
+# Pi0M Math Visualization Module
+# =============================================================================
+# This module is dedicated to handling mathematical inputs, solving equations,
+# and providing polished visualizations using Unicode and attractive mathematical fonts.
+# The module is built on top of the Pi0 system's capabilities:
+#
+#   - Accepting input equations through keyboard or paste
+#   - Converting mathematical notation to formal expressions
+#   - Solving and processing equations using the Pi0n and GPi0n transformation frameworks
+#   - Visualizing equations and their transformations with nice fonts and Unicode symbols
+#
+# The module uses Python's sympy for symbolic mathematics and matplotlib for visualization.
+# =============================================================================
+
+import sympy as sp
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import font_manager
+from IPython.display import display, Math, HTML
+import re
+
+# -------------------------------
+# Section 1: Pi0n and GPi0n Transformation Operators
+# -------------------------------
+
+class Pi0nOperator:
+    """Base class for Pi0n mathematical operators that transform standard
+    mathematical expressions into Pi0n representations."""
+    
+    def __init__(self):
+        self.pi_digits = "3.14159265358979323846264338327950288419716939937510"
+        
+    def encode_with_pi(self, value):
+        """Encode a numerical value using Pi digits"""
+        str_val = str(abs(value))
+        encoded = ""
+        for digit in str_val:
+            if digit == '.':
+                encoded += '.'
+                continue
+            pos = self.pi_digits.find(digit)
+            if pos >= 0:
+                encoded += str(pos)
+            else:
+                encoded += digit
+        return encoded if value >= 0 else "-" + encoded
+    
+    def prime_harmonic_transform(self, expr):
+        """Transform expression using prime number harmonics"""
+        primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+        if isinstance(expr, (int, float)):
+            # Simple case: transform a number
+            val = float(expr)
+            harmonic_sum = sum(val % p for p in primes) / len(primes)
+            return harmonic_sum
+        else:
+            # For symbolic expressions, we return a symbolic transformation
+            x = sp.symbols('x')
+            return sp.Sum(expr % p, (p, primes)) / len(primes)
+    
+    def transform(self, expr):
+        """
+        Transform a mathematical expression into its Pi0n representation.
+        This is a placeholder for the actual transformation logic.
+        """
+        if isinstance(expr, (int, float)):
+            # For numerical values, apply pi encoding
+            return self.encode_with_pi(expr)
+        else:
+            # For symbolic expressions, return a symbolic transformation
+            return f"Pi0n({sp.latex(expr)})"
+
+
+class GPi0nOperator:
+    """Base class for GPi0n mathematical operators that transform standard
+    mathematical expressions into GPi0n geometric representations."""
+    
+    def __init__(self):
+        self.dimension = 3  # Default to 3D geometric representation
+        
+    def geometric_transform(self, expr):
+        """
+        Transform an expression into a geometric representation.
+        This is a placeholder for the actual geometric transformation logic.
+        """
+        if isinstance(expr, (int, float)):
+            # For numerical values, create a simple geometric representation
+            val = float(expr)
+            # Return coordinates in n-dimensional space
+            coords = [val * np.sin(i * np.pi / self.dimension) for i in range(self.dimension)]
+            return coords
+        else:
+            # For symbolic expressions, return a symbolic geometric transformation
+            return f"GPi0n({sp.latex(expr)})"
+    
+    def prime_spiral_mapping(self, value):
+        """Map a value to a point on a prime number spiral"""
+        # Simple Ulam spiral-like mapping
+        theta = value * np.pi / 4
+        r = np.sqrt(value)
+        x = r * np.cos(theta)
+        y = r * np.sin(theta)
+        return (x, y)
+    
+    def transform(self, expr):
+        """
+        Transform a mathematical expression into its GPi0n representation.
+        """
+        if isinstance(expr, (int, float)):
+            # For numerical values, apply geometric transformation
+            return self.geometric_transform(expr)
+        else:
+            # For symbolic expressions, return a symbolic transformation
+            return f"GPi0n({sp.latex(expr)})"
+
+
+# -------------------------------
+# Section 2: Equation Parsing and Processing
+# -------------------------------
+
+def parse_math_input(math_str):
+    """
+    Parses a string input of a mathematical equation, ensuring that symbols 
+    are recognized and formatted in Unicode for elegant display.
+
+    Input:
+        math_str (str): A mathematical expression provided by the user.
+    
+    Output:
+        expr (sympy expression): The parsed sympy expression.
+    """
+    try:
+        # Replace common mathematical notations with sympy-compatible syntax
+        math_str = math_str.replace('^', '**')  # Replace caret with power operator
+        
+        # Handle special functions and constants
+        math_str = re.sub(r'\\pi', 'pi', math_str)
+        math_str = re.sub(r'\\sin', 'sin', math_str)
+        math_str = re.sub(r'\\cos', 'cos', math_str)
+        math_str = re.sub(r'\\tan', 'tan', math_str)
+        math_str = re.sub(r'\\log', 'log', math_str)
+        math_str = re.sub(r'\\exp', 'exp', math_str)
+        math_str = re.sub(r'\\sqrt', 'sqrt', math_str)
+        
+        expr = sp.sympify(math_str)
+        return expr
+    except Exception as e:
+        print("Error in parsing input:", e)
+        return None
+
+def format_math_unicode(expr):
+    """
+    Formats a sympy expression into a Unicode string for display.
+    
+    Input:
+        expr (sympy expression): The mathematical expression.
+    
+    Output:
+        unicode_str (str): Unicode formatted string.
+    """
+    latex_str = sp.latex(expr)
+    # This would be rendered as Unicode in a proper display context
+    return latex_str
+
+# -------------------------------
+# Section 3: Equation Solving and Transformation
+# -------------------------------
+
+def solve_equation(equation_str, symbol_str='x'):
+    """
+    Solves a given equation for the provided symbol and returns the solutions
+    along with Pi0n and GPi0n transformations.
+
+    Input:
+        equation_str (str): A string representing the equation, e.g., 'x**2 - 4'.
+        symbol_str (str): The variable symbol (default 'x').
+
+    Output:
+        dict: Dictionary containing original solutions and their transformations.
+    """
+    x = sp.symbols(symbol_str)
+    expr = parse_math_input(equation_str)
+    if expr is None:
+        return {"error": "Invalid equation input."}
+    
+    # Solve the equation
+    solutions = sp.solve(expr, x)
+    
+    # Transform solutions using Pi0n and GPi0n operators
+    pi0n_op = Pi0nOperator()
+    gpi0n_op = GPi0nOperator()
+    
+    transformed_solutions = {
+        "original": solutions,
+        "pi0n_transformed": [pi0n_op.transform(sol) for sol in solutions],
+        "gpi0n_transformed": [gpi0n_op.transform(sol) for sol in solutions],
+        "unicode_representation": format_math_unicode(expr)
+    }
+    
+    return transformed_solutions
+
+# -------------------------------
+# Section 4: Function Visualization with Pi0n/GPi0n Transformations
+# -------------------------------
+
+def visualize_function(function_str, var_str='x', x_range=(-10, 10), num_points=400):
+    """
+    Visualize a function and its Pi0n/GPi0n transformations using matplotlib
+    with elegant Unicode formatting.
+
+    Input:
+        function_str (str): A string representing the function, e.g., 'sin(x)'.
+        var_str (str): The variable in the function (default 'x').
+        x_range (tuple): The range for x values (default (-10, 10)).
+        num_points (int): Number of points to sample in the range.
+    """
+    # Parse the function
+    expr = parse_math_input(function_str)
+    if expr is None:
+        return {"error": "Invalid function input."}
+    
+    x = sp.symbols(var_str)
+    f = sp.lambdify(x, expr, 'numpy')
+    x_vals = np.linspace(x_range[0], x_range[1], num_points)
+    
+    try:
+        y_vals = f(x_vals)
+    except Exception as e:
+        return {"error": f"Error in evaluating function: {e}"}
+
+    # Create Pi0n and GPi0n transformations
+    pi0n_op = Pi0nOperator()
+    gpi0n_op = GPi0nOperator()
+    
+    # Setup the plot with elegant styling
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 6))
+    plt.subplots_adjust(left=0.1, right=0.9, top=0.85, bottom=0.15)
+    
+    # Plot the original function
+    ax1.plot(x_vals, y_vals, color='#766CDB', label='f(' + var_str + ')')
+    ax1.set_title('Original Function: ' + sp.latex(expr), pad=15, fontsize=20, weight='semibold', color='#222222')
+    ax1.set_xlabel(var_str, labelpad=10, fontsize=16, weight='medium', color='#333333')
+    ax1.set_ylabel('f(' + var_str + ')', labelpad=10, fontsize=16, weight='medium', color='#333333')
+    ax1.grid(color='#E0E0E0')
+    ax1.set_axisbelow(True)
+    ax1.tick_params(axis='both', labelsize=14, colors='#555555')
+    ax1.legend(fontsize=12, loc='lower right', edgecolor='#333333')
+    
+    # Plot a visualization of the Pi0n/GPi0n transformation
+    # For demonstration, we'll plot a prime spiral representation
+    sample_points = 50
+    sample_x = np.linspace(x_range[0], x_range[1], sample_points)
+    sample_y = f(sample_x)
+    
+    # Generate points for the prime spiral visualization
+    spiral_points = [gpi0n_op.prime_spiral_mapping(abs(y)) for y in sample_y]
+    spiral_x = [p[0] for p in spiral_points]
+    spiral_y = [p[1] for p in spiral_points]
+    
+    # Plot the GPi0n transformation
+    ax2.scatter(spiral_x, spiral_y, c=sample_y, cmap='viridis', s=50, alpha=0.7)
+    ax2.set_title('GPi0n Transformation', pad=15, fontsize=20, weight='semibold', color='#222222')
+    ax2.set_xlabel('GPi0n X', labelpad=10, fontsize=16, weight='medium', color='#333333')
+    ax2.set_ylabel('GPi0n Y', labelpad=10, fontsize=16, weight='medium', color='#333333')
+    ax2.grid(color='#E0E0E0')
+    ax2.set_axisbelow(True)
+    ax2.tick_params(axis='both', labelsize=14, colors='#555555')
+    
+    plt.tight_layout()
+    plt.savefig('pi0m_visualization.png')
+    
+    return {
+        "original_expr": sp.latex(expr),
+        "pi0n_transform": pi0n_op.transform(expr),
+        "visualization_saved": "pi0m_visualization.png"
+    }
+
+# -------------------------------
+# Section 5: Pi0M Math System API
+# -------------------------------
+
+def pi0m_solve(equation_str, symbol_str='x'):
+    """
+    API function to solve an equation and return the results with transformations.
+    """
+    return solve_equation(equation_str, symbol_str)
+
+def pi0m_visualize(function_str, var_str='x', x_range=(-10, 10)):
+    """
+    API function to visualize a function and its transformations.
+    """
+    return visualize_function(function_str, var_str, x_range)
+
+def pi0m_transform(expr_str):
+    """
+    API function to transform an expression into Pi0n and GPi0n representations.
+    """
+    expr = parse_math_input(expr_str)
+    if expr is None:
+        return {"error": "Invalid expression input."}
+    
+    pi0n_op = Pi0nOperator()
+    gpi0n_op = GPi0nOperator()
+    
+    return {
+        "original_expr": sp.latex(expr),
+        "pi0n_transform": pi0n_op.transform(expr),
+        "gpi0n_transform": gpi0n_op.transform(expr),
+        "unicode_representation": format_math_unicode(expr)
+    }
+
+# =============================================================================
+# End of Pi0M Math Visualization Module
+# =============================================================================

@@ -1,0 +1,126 @@
+# Example: Using Pi0 Operators with ESO Archive Data
+
+## Retrieving Data from ESO Archive
+
+```python
+from pi0_eso_archive_connector import ESOArchiveConnector
+from pi0_operators import data_ingestion_operator, orbital_dynamics_operator, habitability_index_operator
+
+# Initialize the ESO Archive connector
+eso_connector = ESOArchiveConnector(
+    username="your_eso_username",
+    password="your_eso_password"
+)
+
+# Search for a planetary system approximately 300 light years away
+search_results = eso_connector.search(
+    object_type="exoplanet",
+    distance_range=(290, 310),  # light years
+    instrument="HARPS",
+    data_type="spectra"
+)
+
+# Download data for the first result
+system_data = eso_connector.download(search_results[0]["id"])
+```
+
+## Processing with Pi0 Operators
+
+```python
+# Ingest the data into Pi0 format
+pi0_data = data_ingestion_operator(system_data)
+
+# Extract the star and planet information
+star = pi0_data["stellar_data"]
+planets = pi0_data["planetary_data"]["planets"]
+
+# Calculate orbital dynamics for each planet
+for planet in planets:
+    orbital_params = orbital_dynamics_operator(
+        star["properties"]["mass"],
+        planet["orbital_parameters"]["semi_major_axis"],
+        planet["orbital_parameters"]["eccentricity"]
+    )
+    
+    # Update the planet data with calculated parameters
+    planet["calculated_parameters"] = orbital_params
+
+# Calculate habitability index for each planet
+for planet in planets:
+    habitability = habitability_index_operator(
+        planet["physical_parameters"]["equilibrium_temperature"],
+        planet["physical_parameters"]["radius"],
+        planet["physical_parameters"]["mass"],
+        planet.get("atmosphere", {}).get("composition", {})
+    )
+    
+    # Update the planet data with habitability information
+    planet["habitability"]["calculated_index"] = habitability["index"]
+    planet["habitability"]["assessment"] = habitability["assessment"]
+```
+
+## Visualizing the Results
+
+```python
+from pi0_visualization import SystemVisualizer
+
+# Initialize the visualizer
+visualizer = SystemVisualizer()
+
+# Create a 3D model of the planetary system
+system_model = visualizer.create_system_model(pi0_data)
+
+# Visualize the system
+visualizer.display(system_model)
+
+# Create a habitability comparison chart
+habitability_chart = visualizer.create_habitability_chart(pi0_data)
+visualizer.display(habitability_chart)
+```
+
+## Saving to Pi0 Memory
+
+```python
+from pi0_memory import Pi0Memory
+
+# Initialize Pi0 Memory
+pi0_memory = Pi0Memory()
+
+# Save the processed data to Pi0 Memory
+system_id = pi0_data["stellar_data"]["identifier"]
+pi0_memory.store(system_id, pi0_data)
+
+# Confirm storage
+print(f"System {system_id} stored in Pi0 Memory with ID: {pi0_memory.get_storage_id(system_id)}")
+```
+
+## Cross-Scale Analysis
+
+```python
+from pi0_cross_scale import CrossScaleAnalyzer
+
+# Initialize the cross-scale analyzer
+analyzer = CrossScaleAnalyzer()
+
+# Perform cross-scale analysis from planetary to stellar scale
+stellar_impact = analyzer.analyze_impact(
+    source_scale="planetary",
+    target_scale="stellar",
+    source_data=pi0_data["planetary_data"],
+    target_data=pi0_data["stellar_data"]
+)
+
+# Perform cross-scale analysis from stellar to galactic scale
+galactic_context = analyzer.analyze_context(
+    source_scale="stellar",
+    target_scale="galactic",
+    source_data=pi0_data["stellar_data"]
+)
+
+# Print results
+print("Stellar Impact Analysis:")
+print(stellar_impact)
+print("
+Galactic Context Analysis:")
+print(galactic_context)
+```

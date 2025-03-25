@@ -1,0 +1,81 @@
+Pi0 Operators and Data Structure for ESO Archive
+============================================
+
+Generated: 2025-03-25 16:13:04
+
+----- Pi0 Operators -----
+
+1) Ω_DataIngestion (Ω_DI)
+   Definition: Ω_DI(D_raw) = N(T(D_raw))
+   Description: Ingests and normalizes astronomical data from ESO archives
+   Explanation: Uses a transformation T on raw data then normalizes N to a Pi0 compatible format
+
+2) Ω_SpectralAnalysis (Ω_SA)
+   Definition: Ω_SA(S, λ) = ∫ S(λ')K(λ-λ') dλ'
+   Description: Analyzes spectral data from astronomical observations
+   Explanation: S is spectral data, λ is wavelength, and K is a kernel function for spectral analysis
+
+3) Ω_OrbitalDynamics (Ω_OD)
+   Definition: Ω_OD(m, r, v) = {a, e, i, Ω, ω, M}
+   Description: Calculates orbital parameters and dynamics for exoplanetary systems
+   Explanation: m is mass, r is position, v is velocity; the output is a set of orbital elements
+
+4) Ω_SystemEvolution (Ω_SE)
+   Definition: Ω_SE(S_0, t) = S_0 + ∫_0^t F(S(τ), τ)dτ
+   Description: Simulates evolution of planetary systems over time
+   Explanation: S_0 is the initial system state, t is time, and F is the evolution function
+
+5) Ω_CrossScaleTransform (Ω_CST)
+   Definition: Ω_CST(I, s_1, s_2) = T_s1→s2(I)
+   Description: Transforms information across different astronomical scales
+   Explanation: I is information; s_1 and s_2 are source and target scales; T is the scale transformation function
+
+6) Ω_UncertaintyPropagation (Ω_UP)
+   Definition: Ω_UP(x, σ_x, f) = {f(x), σ_f}
+   Description: Propagates measurement uncertainties through calculations
+   Explanation: Input x with uncertainty σ_x is transformed using function f resulting in uncertainty σ_f
+
+7) Ω_HabitabilityIndex (Ω_HI)
+   Definition: Ω_HI(T, R, M, C) = w_T·f_T(T) + w_R·f_R(R) + w_M·f_M(M) + w_C·f_C(C)
+   Description: Calculates habitability index for exoplanets
+   Explanation: T, R, M, C represent temperature, radius, mass, composition; w and f are weights and scoring functions respectively
+
+----- Pi0 Data Structure for ESO Archive -----
+
+Metadata:
+   - source: string (e.g., 'ESO Archive')
+   - instrument: string (e.g., 'HARPS')
+   - observation_date: datetime
+   - processing_level: integer (0=raw, 1=calibrated, etc.)
+   - quality_flags: dictionary
+   - access_rights: string
+
+Stellar Data:
+   - identifier: string
+   - coordinates: { ra: float (deg), dec: float (deg), distance: float (parsecs), distance_uncertainty: float }
+   - properties: { spectral_type: string, effective_temperature: float (K), mass: float (solar masses), radius: float (solar radii), metallicity: float, age: float (Gyr), luminosity: float, uncertainties: dictionary }
+
+Planetary Data:
+   - planets: [
+       { identifier: string, detection_method: string, discovery_date: datetime,
+         orbital_parameters: { semi_major_axis (AU), eccentricity, inclination (deg), longitude_of_ascending_node (deg), argument_of_periapsis (deg), mean_anomaly (deg), period (days), uncertainties: dictionary },
+         physical_parameters: { mass (Jupiter masses), radius (Jupiter radii), density (g/cm³), surface_gravity (m/s²), equilibrium_temperature (K), albedo, uncertainties: dictionary },
+         atmosphere: { composition: dictionary, pressure (bar), scale_height (km), cloud_coverage (0-1), uncertainties: dictionary },
+         habitability: { habitable_zone_status: string, habitability_index: float, biomarker_indicators: dictionary }
+       }
+     ]
+
+Observational Data:
+   - Spectra: [ { instrument: string, date: datetime, wavelength_range: { min (nm), max (nm) }, resolution: float, signal_to_noise: float, data: { wavelengths: array, flux: array, uncertainties: array } } ]
+   - Images: [ { instrument: string, date: datetime, filter: string, exposure_time: float (s), resolution: float (arcseconds), field_of_view: { width (arcseconds), height (arcseconds) }, data: { file_reference: string, wcs_information: dictionary } } ]
+   - Time Series: [ { type: string, instrument: string, start_date: datetime, end_date: datetime, cadence: float (s), data: { times: array, values: array, uncertainties: array } } ]
+
+Derived Products:
+   - Models: [ { type: string, description: string, parameters: dictionary, goodness_of_fit: float, data: object } ]
+   - Simulations: [ { type: string, description: string, initial_conditions: dictionary, duration: float (years), resolution: float (days), data: object } ]
+
+Pi0 Specific:
+   - cross_scale_mappings: dictionary
+   - information_preservation_flags: dictionary
+   - deterministic_path_tracers: array
+   - quantum_classical_interfaces: dictionary
