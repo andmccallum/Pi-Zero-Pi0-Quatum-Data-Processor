@@ -1,0 +1,33 @@
+-------------------------------------------------------------
+         Unified PI0 System Operator Equation
+-------------------------------------------------------------
+
+[1] Quasiregular Mapping Condition:
+   f: Ω → ℝⁿ,  ‖Df(x)‖ⁿ ≤ K |J_f(x)|,  ∂f/∂ar{z} = μ(z) ∂f/∂z, |μ(z)|<1
+
+[2] Harmonic Fractal PI Encoding Operator:
+   \Psi_{π₀}(x) = \sum_{n=0}^{\infty} [a_n \cos(nπx/π₀) + b_n \sin(nπx/π₀)]
+   with a_n = π₀ \cos(nπ/π₀),  b_n = π₀ \sin(nπ/π₀)
+
+[3] G4-1 Unification Operator:
+   G_{4-1} = G₄ (1 + κ π₀ e^{-r/λ_p})
+   and  E_{μν} = R_{μν} - 	frac{1}{2} R g_{μν} + Λ g_{μν} - 	frac{8π G_{4-1}}{c⁴} T_{μν} = 0
+
+[4] Unified PI0 System Operator Equation:
+   \mathbf{O}_{π₀} \Bigl[\Phi_{π₀}(x)\Bigr] = \mathbf{0}
+   where \; \Phi_{π₀}(x) = f(x)e^{i\,θ_{π₀}(x)} 	ext{ and }
+         \Phi_{π₀}(x) \, \Psi_{π₀}(x)\, G(x) = F(π₀, G₄, G_{4-1}, π_{04}, PI0N)
+
+[5] Scaling Invariance:
+   \Psi(λ x) = S(λ)\, \Psi(x), \quad S(λ₁)S(λ₂) = S(λ₁λ₂)
+
+[6] Quantum-Mechanical Operator Formulation:
+   \hat{H}_{π₀} |\Psi_{π₀}angle = E_{π₀} |\Psi_{π₀}angle,\quad \hat{H}_{π₀} = -rac{\hbar^2}{2m}
+abla^2 + \hat{V}_{π₀}
+   where \; \hat{V}_{π₀} = V₀ e^{-r/λ_p} \sum_{n=0}^{\infty} rac{π₀^n}{n!}
+
+[7] Complete Unified Operator Equation:
+   Ξ_{π₀}(x,t) = \int_{Ω} \sum_{n=0}^{\infty} [a_n \cos(nπx/π₀) + b_n \sin(nπx/π₀)] 
+             \; e^{-G_{π04n} M(x)/|x|} \; e^{iθ_{π₀}(x,t)} dΩ 
+   subject to the constraints specified in [1]--[6].
+-------------------------------------------------------------
