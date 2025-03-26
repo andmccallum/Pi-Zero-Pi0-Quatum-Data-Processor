@@ -1,0 +1,462 @@
+# Pi0 System: Quasiregular Boundary Conditions Implementation
+
+## 1. Mathematical Framework
+
+### 1.1 Enhanced Beltrami Coefficient
+
+The enhanced Beltrami coefficient is defined as:
+
+μ_enhanced(z) = μ(z) · (1 - |z|^(-2))
+
+Where:
+- μ(z) is the original Beltrami coefficient
+- |z| is the modulus of the complex variable z
+
+This enhancement ensures that the coefficient approaches zero as |z| approaches infinity, providing stable boundary conditions.
+
+### 1.2 Quasiregular Mapping Operator
+
+The quasiregular mapping operator Q is defined as:
+
+Q[f](z) = ∂f/∂z̄ - μ(z) · ∂f/∂z
+
+With the enhanced coefficient, this becomes:
+
+Q_enhanced[f](z) = ∂f/∂z̄ - μ_enhanced(z) · ∂f/∂z
+                  = ∂f/∂z̄ - μ(z) · (1 - |z|^(-2)) · ∂f/∂z
+
+### 1.3 Boundary Behavior
+
+For |z| → ∞, the enhancement factor (1 - |z|^(-2)) → 1, so:
+μ_enhanced(z) → μ(z)
+
+For |z| → 0, the enhancement factor (1 - |z|^(-2)) → -∞, creating a singularity.
+To address this, we use a modified form:
+
+μ_enhanced(z) = μ(z) · (1 - 1/(1 + |z|^2))
+
+This ensures μ_enhanced(0) = 0 and preserves the desired boundary behavior.
+
+## 2. Operator Classes
+
+### 2.1 BeltramiCoefficientOperator
+
+class BeltramiCoefficientOperator:
+    - Computes the Beltrami coefficient μ(z) for a given field
+    - Methods:
+        * compute(field, z) → μ(z)
+        * gradient(field, z) → ∇μ(z)
+        * laplacian(field, z) → ∇²μ(z)
+
+### 2.2 EnhancedBeltramiOperator
+
+class EnhancedBeltramiOperator:
+    - Extends BeltramiCoefficientOperator
+    - Implements the enhancement factor (1 - |z|^(-2))
+    - Methods:
+        * compute(field, z) → μ_enhanced(z)
+        * boundary_factor(z) → (1 - |z|^(-2))
+        * modified_boundary_factor(z) → (1 - 1/(1 + |z|^2))
+
+### 2.3 QuasiregularMappingOperator
+
+class QuasiregularMappingOperator:
+    - Implements the quasiregular mapping operator Q
+    - Methods:
+        * apply(field, z) → Q[field](z)
+        * jacobian(field, z) → J_Q[field](z)
+        * distortion(field, z) → K_Q[field](z)
+
+### 2.4 EnhancedQuasiregularOperator
+
+class EnhancedQuasiregularOperator:
+    - Extends QuasiregularMappingOperator
+    - Uses EnhancedBeltramiOperator for coefficient calculation
+    - Methods:
+        * apply(field, z) → Q_enhanced[field](z)
+        * boundary_behavior(r) → μ_enhanced(r·e^(iθ))
+
+## 3. Implementation Details
+
+### 3.1 Discretization
+
+For numerical implementation, we discretize the complex plane into a grid:
+z_jk = x_j + i·y_k
+
+Where:
+- x_j = x_min + j·Δx for j = 0, 1, ..., N_x
+- y_k = y_min + k·Δy for k = 0, 1, ..., N_y
+
+### 3.2 Derivative Approximation
+
+The partial derivatives are approximated using central differences:
+
+∂f/∂z̄ ≈ (1/2)·(∂f/∂x + i·∂f/∂y)
+∂f/∂z ≈ (1/2)·(∂f/∂x - i·∂f/∂y)
+
+Where:
+∂f/∂x|_jk ≈ (f_j+1,k - f_j-1,k)/(2·Δx)
+∂f/∂y|_jk ≈ (f_j,k+1 - f_j,k-1)/(2·Δy)
+
+### 3.3 Boundary Treatment
+
+At the computational domain boundaries, we use:
+- One-sided differences for derivatives
+- Asymptotic values for the enhanced coefficient
+- Absorbing boundary conditions to minimize reflections
+
+## 4. Pi0 System Integration
+
+### 4.1 Evolution Equation
+
+The Pi0 system evolution equation with quasiregular boundary conditions:
+
+∂Ψ/∂t = H[Ψ] + Q_enhanced[Ψ] + F[Ψ] + S[Ψ]
+
+Where:
+- H is the Hamiltonian operator
+- Q_enhanced is the enhanced quasiregular operator
+- F is the forcing operator
+- S is the stabilization operator
+
+### 4.2 Stability Condition
+
+For numerical stability with the enhanced quasiregular operator:
+
+Δt ≤ C·min(Δx², Δy²)/max|μ_enhanced|
+
+Where C is a constant depending on the integration scheme.
+
+### 4.3 Implementation Algorithm
+
+1. Initialize field Ψ and grid parameters
+2. For each time step:
+   a. Calculate μ(z) for current field
+   b. Compute enhancement factor (1 - 1/(1 + |z|^2))
+   c. Calculate enhanced coefficient μ_enhanced(z)
+   d. Compute spatial derivatives ∂Ψ/∂z and ∂Ψ/∂z̄
+   e. Apply quasiregular operator Q_enhanced[Ψ]
+   f. Apply other operators (H, F, S)
+   g. Update field Ψ using time integration scheme
+
+## 5. Mathematical Operators
+
+### 5.1 Complex Differential Operators
+
+∂/∂z = (1/2)·(∂/∂x - i·∂/∂y)
+∂/∂z̄ = (1/2)·(∂/∂x + i·∂/∂y)
+
+### 5.2 Beltrami Equation
+
+The Beltrami equation for quasiregular mappings:
+
+∂f/∂z̄ = μ(z)·∂f/∂z
+
+With enhanced coefficient:
+
+∂f/∂z̄ = μ_enhanced(z)·∂f/∂z
+
+### 5.3 Distortion Operator
+
+The distortion of a quasiregular mapping:
+
+K_f(z) = (1 + |μ(z)|)/(1 - |μ(z)|)
+
+With enhanced coefficient:
+
+K_f_enhanced(z) = (1 + |μ_enhanced(z)|)/(1 - |μ_enhanced(z)|)
+
+### 5.4 Laplacian in Complex Form
+
+The Laplacian operator in complex coordinates:
+
+∇² = 4·∂²/∂z∂z̄
+
+### 5.5 Quasiregular Laplacian
+
+The quasiregular extension of the Laplacian:
+
+∇²_μ = ∂/∂z̄·(1 - |μ|²)^(-1)·∂/∂z + ∂/∂z·(1 - |μ|²)^(-1)·∂/∂z̄
+
+With enhanced coefficient:
+
+∇²_μ_enhanced = ∂/∂z̄·(1 - |μ_enhanced|²)^(-1)·∂/∂z + ∂/∂z·(1 - |μ_enhanced|²)^(-1)·∂/∂z̄
+
+## 6. Verification and Testing
+
+### 6.1 Boundary Behavior Test
+
+Test that μ_enhanced(z) → 0 as |z| → ∞ by computing:
+
+E_boundary(R) = max_{|z|=R} |μ_enhanced(z)|
+
+Verify E_boundary(R) decreases as R increases.
+
+### 6.2 Quasiregularity Test
+
+Test that solutions satisfy the enhanced Beltrami equation by computing:
+
+E_quasi(z) = |∂f/∂z̄ - μ_enhanced(z)·∂f/∂z|
+
+Verify E_quasi(z) is small throughout the domain.
+
+### 6.3 Conservation Test
+
+For conservative fields, verify that:
+
+∫∫ |Ψ|² dxdy = constant
+
+throughout the evolution.
+
+## 7. Pi0 System Specific Implementation
+
+### 7.1 Pi0 Field Representation
+
+The Pi0 system field Ψ is represented as:
+
+Ψ(z, t) = ∑_n a_n(t)·φ_n(z)
+
+Where φ_n are basis functions and a_n are time-dependent coefficients.
+
+### 7.2 Pi0 Quasiregular Evolution
+
+The Pi0-specific quasiregular evolution equation:
+
+da_n/dt = ∑_m [H_nm + Q_enhanced_nm + F_nm + S_nm]·a_m
+
+Where the matrix elements are:
+
+Q_enhanced_nm = ∫∫ φ_n*(z)·Q_enhanced[φ_m](z) dxdy
+
+### 7.3 Pi0 Boundary Stabilization
+
+The Pi0 boundary stabilization operator:
+
+S_boundary[Ψ] = γ·(1 - e^(-α·|z|²))·(Ψ_target - Ψ)
+
+Where:
+- γ is the stabilization strength
+- α controls the boundary region width
+- Ψ_target is the target boundary state
+
+### 7.4 Pi0 Quasiregular Resonance
+
+The resonance condition for Pi0 quasiregular modes:
+
+det|H_nm + Q_enhanced_nm - ω·δ_nm| = 0
+
+This determines the quasiregular resonance frequencies ω.
+
+## 8. Code Implementation
+
+```python
+class EnhancedBeltramiCoefficient:
+    def __init__(self, use_modified=True):
+        self.use_modified = use_modified
+    
+    def compute(self, mu, z):
+        z_abs_squared = abs(z)**2
+        
+        if self.use_modified:
+            # Modified version to avoid singularity at z=0
+            enhancement = 1.0 - 1.0/(1.0 + z_abs_squared)
+        else:
+            # Original version: (1 - |z|^(-2))
+            if z_abs_squared > 0:
+                enhancement = 1.0 - 1.0/z_abs_squared
+            else:
+                enhancement = float('-inf')  # Singularity at z=0
+        
+        return mu * enhancement
+
+class QuasiregularOperator:
+    def __init__(self, dx, dy, use_modified=True):
+        self.dx = dx
+        self.dy = dy
+        self.beltrami = EnhancedBeltramiCoefficient(use_modified)
+    
+    def compute_derivatives(self, field, x_grid, y_grid):
+        # Create meshgrid
+        X, Y = np.meshgrid(x_grid, y_grid, indexing='ij')
+        Z = X + 1j * Y
+        
+        # Initialize derivative arrays
+        d_field_dx = np.zeros_like(field, dtype=complex)
+        d_field_dy = np.zeros_like(field, dtype=complex)
+        
+        # Interior points - central differences
+        d_field_dx[1:-1, :] = (field[2:, :] - field[:-2, :]) / (2 * self.dx)
+        d_field_dy[:, 1:-1] = (field[:, 2:] - field[:, :-2]) / (2 * self.dy)
+        
+        # Boundary points - one-sided differences
+        d_field_dx[0, :] = (field[1, :] - field[0, :]) / self.dx
+        d_field_dx[-1, :] = (field[-1, :] - field[-2, :]) / self.dx
+        d_field_dy[:, 0] = (field[:, 1] - field[:, 0]) / self.dy
+        d_field_dy[:, -1] = (field[:, -1] - field[:, -2]) / self.dy
+        
+        # Complex derivatives
+        d_field_dz = 0.5 * (d_field_dx - 1j * d_field_dy)
+        d_field_dz_bar = 0.5 * (d_field_dx + 1j * d_field_dy)
+        
+        return d_field_dz, d_field_dz_bar, Z
+    
+    def apply(self, field, mu_function, x_grid, y_grid):
+        # Compute derivatives and grid
+        d_field_dz, d_field_dz_bar, Z = self.compute_derivatives(field, x_grid, y_grid)
+        
+        # Compute Beltrami coefficient
+        mu = np.zeros_like(Z, dtype=complex)
+        for i in range(Z.shape[0]):
+            for j in range(Z.shape[1]):
+                mu[i, j] = mu_function(Z[i, j])
+        
+        # Compute enhanced coefficient
+        mu_enhanced = np.zeros_like(mu, dtype=complex)
+        for i in range(Z.shape[0]):
+            for j in range(Z.shape[1]):
+                mu_enhanced[i, j] = self.beltrami.compute(mu[i, j], Z[i, j])
+        
+        # Apply quasiregular operator
+        q_result = d_field_dz_bar - mu_enhanced * d_field_dz
+        
+        return q_result, mu_enhanced
+
+class Pi0QuasiregularSystem:
+    def __init__(self, x_min, x_max, y_min, y_max, nx, ny, dt):
+        self.x_grid = np.linspace(x_min, x_max, nx)
+        self.y_grid = np.linspace(y_min, y_max, ny)
+        self.dx = self.x_grid[1] - self.x_grid[0]
+        self.dy = self.y_grid[1] - self.y_grid[0]
+        self.dt = dt
+        
+        self.quasiregular_op = QuasiregularOperator(self.dx, self.dy)
+        
+        # Initialize meshgrid
+        X, Y = np.meshgrid(self.x_grid, self.y_grid, indexing='ij')
+        self.Z = X + 1j * Y
+    
+    def hamiltonian_operator(self, field):
+        # Example Hamiltonian operator (e.g., Laplacian)
+        laplacian = np.zeros_like(field, dtype=complex)
+        
+        # Interior points
+        laplacian[1:-1, 1:-1] = (
+            field[2:, 1:-1] + field[:-2, 1:-1] + 
+            field[1:-1, 2:] + field[1:-1, :-2] - 
+            4 * field[1:-1, 1:-1]
+        ) / (self.dx * self.dy)
+        
+        return -0.5 * laplacian
+    
+    def forcing_operator(self, field, t):
+        # Example forcing term
+        return 0.1 * np.exp(-0.01 * abs(self.Z)**2) * np.exp(1j * t)
+    
+    def stabilization_operator(self, field):
+        # Example stabilization term
+        target = np.zeros_like(field, dtype=complex)
+        gamma = 0.05
+        alpha = 0.1
+        
+        boundary_weight = gamma * (1 - np.exp(-alpha * abs(self.Z)**2))
+        return boundary_weight * (target - field)
+    
+    def evolve(self, initial_field, mu_function, t_final, save_interval=10):
+        field = initial_field.copy()
+        t = 0.0
+        step = 0
+        
+        results = {
+            'fields': [field.copy()],
+            'times': [t]
+        }
+        
+        while t < t_final:
+            # Apply quasiregular operator
+            q_result, _ = self.quasiregular_op.apply(field, mu_function, self.x_grid, self.y_grid)
+            
+            # Apply other operators
+            h_result = self.hamiltonian_operator(field)
+            f_result = self.forcing_operator(field, t)
+            s_result = self.stabilization_operator(field)
+            
+            # Update field using forward Euler
+            field = field + self.dt * (h_result + q_result + f_result + s_result)
+            
+            t += self.dt
+            step += 1
+            
+            # Save results at specified intervals
+            if step % save_interval == 0:
+                results['fields'].append(field.copy())
+                results['times'].append(t)
+        
+        return results
+```
+
+## 9. Example Application
+
+### 9.1 Initialization
+
+```python
+# Define domain
+x_min, x_max = -10, 10
+y_min, y_max = -10, 10
+nx, ny = 200, 200
+
+# Define time step and final time
+dt = 0.01
+t_final = 10.0
+
+# Initialize Pi0 system
+pi0_system = Pi0QuasiregularSystem(x_min, x_max, y_min, y_max, nx, ny, dt)
+
+# Define initial field
+X, Y = np.meshgrid(pi0_system.x_grid, pi0_system.y_grid, indexing='ij')
+Z = X + 1j * Y
+initial_field = np.exp(-0.1 * abs(Z)**2) * np.exp(1j * np.angle(Z))
+
+# Define Beltrami coefficient function
+def mu_function(z):
+    return 0.5 * np.exp(-0.2 * abs(z)**2) * np.exp(1j * np.angle(z))
+```
+
+### 9.2 Evolution
+
+```python
+# Evolve the system
+results = pi0_system.evolve(initial_field, mu_function, t_final)
+```
+
+### 9.3 Analysis
+
+```python
+# Analyze quasiregularity
+final_field = results['fields'][-1]
+q_result, mu_enhanced = pi0_system.quasiregular_op.apply(
+    final_field, mu_function, pi0_system.x_grid, pi0_system.y_grid
+)
+
+# Calculate quasiregularity error
+d_field_dz, d_field_dz_bar, _ = pi0_system.quasiregular_op.compute_derivatives(
+    final_field, pi0_system.x_grid, pi0_system.y_grid
+)
+
+quasiregularity_error = abs(d_field_dz_bar - mu_enhanced * d_field_dz)
+```
+
+## 10. Conclusion
+
+The implementation of quasiregular boundary conditions through the enhanced Beltrami coefficient:
+
+μ_enhanced(z) = μ(z) · (1 - |z|^(-2))
+
+provides a robust framework for handling boundary conditions in the Pi0 system. The enhancement ensures that the quasiregular properties are preserved in the interior while providing appropriate decay at the boundaries.
+
+The modified form:
+
+μ_enhanced(z) = μ(z) · (1 - 1/(1 + |z|^2))
+
+addresses the singularity at the origin while maintaining the desired asymptotic behavior.
+
+This implementation enables stable evolution of the Pi0 system with quasiregular mappings, ensuring proper boundary behavior and numerical stability.
