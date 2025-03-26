@@ -1,0 +1,213 @@
+Pi0 SYSTEM COMPREHENSIVE PERFORMANCE TEST
+===========================================
+Test Date: 2025-03-26 14:52:59
+CPU Cores: 8
+Total Memory: 62.80 GB
+Available Memory: 46.16 GB
+
+1. THREAD VERIFICATION TESTS
+----------------------------
+  Thread Test - 1 threads, Iteration 1: 0.4971 seconds
+  Thread Test - 1 threads, Iteration 2: 0.3789 seconds
+  Thread Test - 1 threads, Iteration 3: 0.3812 seconds
+  Average time with 1 threads: 0.4191 seconds
+  Thread Test - 2 threads, Iteration 1: 0.3878 seconds
+  Thread Test - 2 threads, Iteration 2: 0.4267 seconds
+  Thread Test - 2 threads, Iteration 3: 0.3951 seconds
+  Average time with 2 threads: 0.4032 seconds
+  Thread Test - 4 threads, Iteration 1: 0.4018 seconds
+  Thread Test - 4 threads, Iteration 2: 0.3979 seconds
+  Thread Test - 4 threads, Iteration 3: 0.3897 seconds
+  Average time with 4 threads: 0.3965 seconds
+  Thread Test - 8 threads, Iteration 1: 0.4118 seconds
+  Thread Test - 8 threads, Iteration 2: 0.3967 seconds
+  Thread Test - 8 threads, Iteration 3: 0.4014 seconds
+  Average time with 8 threads: 0.4033 seconds
+  Thread Test - 16 threads, Iteration 1: 0.4132 seconds
+  Thread Test - 16 threads, Iteration 2: 0.4221 seconds
+  Thread Test - 16 threads, Iteration 3: 0.4561 seconds
+  Average time with 16 threads: 0.4304 seconds
+
+Thread Scaling Efficiency:
+  1 threads: 100.00% efficiency
+  2 threads: 51.97% efficiency
+  4 threads: 26.43% efficiency
+  8 threads: 12.99% efficiency
+  16 threads: 6.09% efficiency
+
+2. Pi0n SIMULATION TESTS
+------------------------
+  Pi0n Simulation - 10D, Iteration 1: 0.0072 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 10D, Iteration 2: 0.0072 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 10D, Iteration 3: 0.0082 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 10D, Iteration 4: 0.0158 seconds, Final state max: 4.7393e+00
+  Pi0n Simulation - 10D, Iteration 5: 0.0090 seconds, Final state max: 1.0000e+00
+  Average time for 10D Pi0n simulation: 0.0095 seconds
+  Pi0n Simulation - 50D, Iteration 1: 0.0137 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 50D, Iteration 2: 0.0113 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 50D, Iteration 3: 0.0093 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 50D, Iteration 4: 0.0135 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 50D, Iteration 5: 0.0091 seconds, Final state max: 1.0000e+00
+  Average time for 50D Pi0n simulation: 0.0114 seconds
+  Pi0n Simulation - 100D, Iteration 1: 0.0264 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 2: 0.2994 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 3: 0.1043 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 4: 0.1931 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 5: 0.2035 seconds, Final state max: 1.0000e+00
+  Average time for 100D Pi0n simulation: 0.1653 seconds
+  Pi0n Simulation - 200D, Iteration 1: 0.0855 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 200D, Iteration 2: 0.1263 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 200D, Iteration 3: 0.1648 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 200D, Iteration 4: 0.1070 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 200D, Iteration 5: 0.0980 seconds, Final state max: 1.0000e+00
+  Average time for 200D Pi0n simulation: 0.1163 seconds
+  Pi0n Simulation - 500D, Iteration 1: 0.1996 seconds, Final state max: 2.2493e+02
+  Pi0n Simulation - 500D, Iteration 2: 0.2946 seconds, Final state max: 2.2513e+02
+  Pi0n Simulation - 500D, Iteration 3: 0.2803 seconds, Final state max: 2.2514e+02
+  Pi0n Simulation - 500D, Iteration 4: 0.2110 seconds, Final state max: 2.2500e+02
+  Pi0n Simulation - 500D, Iteration 5: 0.2905 seconds, Final state max: 2.2505e+02
+  Average time for 500D Pi0n simulation: 0.2552 seconds
+
+Pi0n Simulation Scaling:
+  10D: 0.0095 seconds, Max value: 1.0000e+00
+  50D: 0.0114 seconds, Max value: 1.0000e+00
+  100D: 0.1653 seconds, Max value: 1.0000e+00
+  200D: 0.1163 seconds, Max value: 1.0000e+00
+  500D: 0.2552 seconds, Max value: 2.2505e+02
+
+3. STABILITY TESTS
+----------------
+  Initial matrix condition number: 1.5280e+00
+  Stability Test - Iteration 1: 0.2513 seconds, Residual: 7.2606e-15, Condition: 1.5331e+00
+  Stability Test - Iteration 2: 0.1981 seconds, Residual: 7.5108e-15, Condition: 1.5382e+00
+  Stability Test - Iteration 3: 0.2001 seconds, Residual: 7.5484e-15, Condition: 1.5432e+00
+  Stability Test - Iteration 4: 0.2069 seconds, Residual: 7.5585e-15, Condition: 1.5483e+00
+  Stability Test - Iteration 5: 0.2934 seconds, Residual: 7.9433e-15, Condition: 1.5534e+00
+  Stability Test - Iteration 6: 0.1232 seconds, Residual: 7.6832e-15, Condition: 1.5585e+00
+  Stability Test - Iteration 7: 0.2041 seconds, Residual: 7.6316e-15, Condition: 1.5636e+00
+  Stability Test - Iteration 8: 0.2951 seconds, Residual: 7.3231e-15, Condition: 1.5687e+00
+  Stability Test - Iteration 9: 0.1202 seconds, Residual: 7.3202e-15, Condition: 1.5738e+00
+  Stability Test - Iteration 10: 0.1978 seconds, Residual: 7.0166e-15, Condition: 1.5790e+00
+  Average time for stability test: 0.2090 seconds
+  Condition number growth: 1.0334x
+
+4. PERFORMANCE METRICS
+--------------------
+
+Matrix Multiplication Benchmark:
+  MATRIX_MULT - Size 100, Iteration 1: 0.0002 seconds
+  MATRIX_MULT - Size 100, Iteration 2: 0.0016 seconds
+  MATRIX_MULT - Size 100, Iteration 3: 0.0004 seconds
+  Average MATRIX_MULT time for size 100: 0.0007 seconds
+  MATRIX_MULT - Size 500, Iteration 1: 0.0045 seconds
+  MATRIX_MULT - Size 500, Iteration 2: 0.0421 seconds
+  MATRIX_MULT - Size 500, Iteration 3: 0.0041 seconds
+  Average MATRIX_MULT time for size 500: 0.0169 seconds
+  MATRIX_MULT - Size 1000, Iteration 1: 0.0180 seconds
+  MATRIX_MULT - Size 1000, Iteration 2: 0.0410 seconds
+  MATRIX_MULT - Size 1000, Iteration 3: 0.0425 seconds
+  Average MATRIX_MULT time for size 1000: 0.0338 seconds
+  MATRIX_MULT - Size 2000, Iteration 1: 0.3967 seconds
+  MATRIX_MULT - Size 2000, Iteration 2: 0.3765 seconds
+  MATRIX_MULT - Size 2000, Iteration 3: 0.3899 seconds
+  Average MATRIX_MULT time for size 2000: 0.3877 seconds
+
+SVD Benchmark:
+  SVD - Size 100, Iteration 1: 0.0027 seconds
+  SVD - Size 100, Iteration 2: 0.0030 seconds
+  SVD - Size 100, Iteration 3: 0.0028 seconds
+  Average SVD time for size 100: 0.0028 seconds
+  SVD - Size 500, Iteration 1: 0.2106 seconds
+  SVD - Size 500, Iteration 2: 0.2904 seconds
+  SVD - Size 500, Iteration 3: 0.2990 seconds
+  Average SVD time for size 500: 0.2667 seconds
+  SVD - Size 1000, Iteration 1: 1.3965 seconds
+  SVD - Size 1000, Iteration 2: 1.2826 seconds
+  SVD - Size 1000, Iteration 3: 1.3855 seconds
+  Average SVD time for size 1000: 1.3549 seconds
+
+FFT Benchmark:
+  FFT - Size 1000, Iteration 1: 0.0001 seconds
+  FFT - Size 1000, Iteration 2: 0.0000 seconds
+  FFT - Size 1000, Iteration 3: 0.0001 seconds
+  Average FFT time for size 1000: 0.0001 seconds
+  FFT - Size 10000, Iteration 1: 0.0003 seconds
+  FFT - Size 10000, Iteration 2: 0.0003 seconds
+  FFT - Size 10000, Iteration 3: 0.0002 seconds
+  Average FFT time for size 10000: 0.0003 seconds
+  FFT - Size 100000, Iteration 1: 0.0037 seconds
+  FFT - Size 100000, Iteration 2: 0.0034 seconds
+  FFT - Size 100000, Iteration 3: 0.0020 seconds
+  Average FFT time for size 100000: 0.0030 seconds
+  FFT - Size 1000000, Iteration 1: 0.0352 seconds
+  FFT - Size 1000000, Iteration 2: 0.0308 seconds
+  FFT - Size 1000000, Iteration 3: 0.0191 seconds
+  Average FFT time for size 1000000: 0.0284 seconds
+
+Sorting Benchmark:
+  SORT - Size 1000, Iteration 1: 0.0002 seconds
+  SORT - Size 1000, Iteration 2: 0.0001 seconds
+  SORT - Size 1000, Iteration 3: 0.0002 seconds
+  Average SORT time for size 1000: 0.0002 seconds
+  SORT - Size 10000, Iteration 1: 0.0007 seconds
+  SORT - Size 10000, Iteration 2: 0.0007 seconds
+  SORT - Size 10000, Iteration 3: 0.0007 seconds
+  Average SORT time for size 10000: 0.0007 seconds
+  SORT - Size 100000, Iteration 1: 0.0084 seconds
+  SORT - Size 100000, Iteration 2: 0.0081 seconds
+  SORT - Size 100000, Iteration 3: 0.0079 seconds
+  Average SORT time for size 100000: 0.0081 seconds
+  SORT - Size 1000000, Iteration 1: 0.1019 seconds
+  SORT - Size 1000000, Iteration 2: 0.0959 seconds
+  SORT - Size 1000000, Iteration 3: 0.0945 seconds
+  Average SORT time for size 1000000: 0.0974 seconds
+
+5. STRESS TESTS
+-------------
+  Starting stress test for 5 seconds with 1000x1000 matrices
+  Stress test completed: 11 operations in 5.90 seconds
+  Performance: 1.86 operations/second
+  Matrices generated: 18
+
+6. MEMORY EFFICIENCY TESTS
+------------------------
+  Memory Test - Size 500x500: Allocation: 0.0014s, Operation: 0.0028s, Memory: 0.00 MB
+  Memory Test - Size 1000x1000: Allocation: 0.0054s, Operation: 0.0175s, Memory: 0.00 MB
+  Memory Test - Size 1500x1500: Allocation: 0.0132s, Operation: 0.1027s, Memory: 0.00 MB
+  Memory Test - Size 2000x2000: Allocation: 0.0203s, Operation: 0.3499s, Memory: 0.00 MB
+
+7. EFFICIENCY OPTIMIZATION SIMULATION
+-----------------------------------
+  Pi0n Simulation - 100D, Iteration 1: 0.0223 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 2: 0.1514 seconds, Final state max: 1.0000e+00
+  Pi0n Simulation - 100D, Iteration 3: 0.1928 seconds, Final state max: 1.0000e+00
+  Average time for 100D Pi0n simulation: 0.1222 seconds
+  Baseline Pi0n 100D performance: 0.1222 seconds
+  Optimization 1: Sparse matrix (sparsity=0.8)
+    Average time: 0.0660 seconds (45.94% improvement)
+  Optimization 2: Block diagonal (block_size=20)
+    Average time: 0.0645 seconds (47.18% improvement)
+  Optimization 3: Reduced precision (float32)
+    Average time: 0.1662 seconds (-36.07% improvement)
+  Optimization 4: Hierarchical bands
+    Average time: 0.0670 seconds (45.16% improvement)
+  Optimization 5: Eigendecomposition stabilized
+    Average time: 0.1304 seconds (-6.78% improvement)
+
+  Best Pi0n configuration: Block diagonal (block_size=20)
+  Best performance: 0.0645 seconds (47.18% improvement)
+
+8. SUMMARY AND RECOMMENDATIONS
+-----------------------------
+Thread Efficiency: 6.09% at maximum thread count
+Pi0n Simulation Scaling Efficiency: 9281.55%
+Numerical Stability Score: 96.77%
+Matrix Multiplication Efficiency: 1476.16%
+
+Overall Pi0 System Performance Score: 2715.14%
+
+Recommendations:
+1. Implement the 'Block diagonal (block_size=20)' configuration for Pi0n simulations
+2. Optimize thread management for better parallel scaling
+3. Numerical stability is good, consider implementing additional precision controls
+4. Matrix operations scale efficiently, consider specialized algorithms for very large matrices

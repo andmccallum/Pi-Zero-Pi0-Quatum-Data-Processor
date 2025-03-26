@@ -1,0 +1,31 @@
+Advanced Multithreading Simulation Report
+========================================
+Total Outer Tasks (i^16): 16
+Inner Tasks per Outer (i^8): 8
+
+Outer Task Results (after reverse flow and harmonic stabilization):
+  Outer Task 0: Result = 4137511.5931
+  Outer Task 1: Result = 4138229.3004
+  Outer Task 2: Result = 4136400.7236
+  Outer Task 3: Result = 4138230.0382
+  Outer Task 4: Result = 4136727.7175
+  Outer Task 5: Result = 4138979.5661
+  Outer Task 6: Result = 4137006.4817
+  Outer Task 7: Result = 4137457.0345
+  Outer Task 8: Result = 4136376.5809
+  Outer Task 9: Result = 4137560.3730
+  Outer Task 10: Result = 4137247.6210
+  Outer Task 11: Result = 4136345.1688
+  Outer Task 12: Result = 4138541.9597
+  Outer Task 13: Result = 4137077.8775
+  Outer Task 14: Result = 4137335.1646
+  Outer Task 15: Result = 4137503.2688
+
+Overall Combined Result: 66198530.4693
+Elapsed Time: 1.7950 seconds
+
+Analysis:
+- The reverse flow dynamics (aggregation in reverse order) successfully integrated the inner results to stabilize the outer structure.
+- The d-prime harmonic stabilization provided a harmonic mean correction to further enhance system stability.
+- This multithreaded structure shows improved load potential and reliability by complementing the overlying i^16 and underlying i^8 structures.
+- Further tuning and optimization may improve security and throughput.
