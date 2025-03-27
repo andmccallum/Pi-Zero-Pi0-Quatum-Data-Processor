@@ -1,0 +1,128 @@
+
+# Dimensional Moves in dmchess: A Comprehensive Guide
+
+## Introduction to Dimensional Movement
+In dmchess, pieces move not only across the traditional 2D board but through multiple dimensions. This document details the specific dimensional moves each piece can make, creating a rich tactical environment that extends chess into new realms of strategy.
+
+## Dimensional Framework
+- **Dimension 1**: The traditional x-axis (files a-h)
+- **Dimension 2**: The traditional y-axis (ranks 1-8)
+- **Dimension 3**: The z-axis (vertical layers, numbered 1-3)
+- **Dimension 4**: The temporal axis (t, representing future/past states)
+- **Dimension 5+**: Abstract strategic dimensions (for advanced play)
+
+## Piece Movement Capabilities
+
+### 1. Pawn
+- **Standard Move**: Forward one square in dimension 2
+- **Initial Move**: Option to move forward two squares on first move
+- **Capture Move**: Diagonal forward in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Can ascend/descend to adjacent layer (dimension 3) after reaching rank 4
+  - **4D Move**: After promotion, gains ability to "echo" in time, affecting the same square one move into the future
+  - **En Passant**: Extended to work across layers when a pawn uses a dimensional shift to avoid capture
+
+### 2. Knight
+- **Standard Move**: L-shape (2,1) in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Can leap to any valid knight position on an adjacent layer
+  - **4D Move**: Can perform a "temporal fork" by threatening a square in the current time and the same square in future time
+  - **Knight Shift**: Unique ability to move (1,1,1) in dimensions 1, 2, and 3 simultaneously
+
+### 3. Bishop
+- **Standard Move**: Diagonal movement in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Can move diagonally across layers, maintaining the same diagonal relationship
+  - **4D Move**: Can "phase" through time, appearing at the same position but one temporal unit away
+  - **Dimensional Slide**: Can slide between dimensions while maintaining relative position
+
+### 4. Rook
+- **Standard Move**: Orthogonal movement in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Can move vertically through layers in a straight line
+  - **4D Move**: Can "anchor" a position, affecting it across multiple time states
+  - **Dimensional Barrier**: Can block movement between dimensions along its orthogonal lines
+
+### 5. Queen
+- **Standard Move**: Combines bishop and rook movements in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Full movement capabilities across all three spatial dimensions
+  - **4D Move**: Can create "temporal echoes," affecting multiple time states simultaneously
+  - **Dimensional Nexus**: Can coordinate attacks across multiple dimensions
+
+### 6. King
+- **Standard Move**: One square in any direction in dimensions 1 and 2
+- **Dimensional Extensions**:
+  - **3D Move**: Can move one square in any direction, including to adjacent layers
+  - **4D Move**: Limited ability to "foresee" threats one move into the future
+  - **Castling**: Extended to work across layers under specific conditions
+  - **Dimensional Refuge**: Can seek safety by shifting dimensions when threatened
+
+### 7. Dimensional Specialist (New Piece)
+- **Base Move**: Moves like a knight in dimensions 1 and 2
+- **Dimensional Powers**:
+  - **Dimension Shift**: Can move any friendly piece to an adjacent dimension
+  - **Temporal Anchor**: Can freeze a square in time, preventing temporal moves
+  - **Dimensional Gateway**: Creates pathways between non-adjacent dimensions
+
+## Special Dimensional Moves
+
+### 1. Layer Shift
+- Any piece can attempt to shift one layer up or down by sacrificing a move
+- The king can perform this shift while castling
+- Pawns gain this ability after crossing the board's midpoint
+
+### 2. Temporal Echo
+- Queens and bishops can create a "temporal echo" that repeats their move in the next time state
+- This creates threats that materialize a move later, requiring defensive foresight
+
+### 3. Dimensional Fork
+- Knights excel at creating threats across multiple dimensions simultaneously
+- A piece can be attacked from a different dimension than the one it occupies
+
+### 4. Phase Shift
+- A special move allowing a piece to "phase" between dimensions without changing its x-y coordinates
+- Limited to once per piece per game
+
+### 5. Dimensional Castling
+- An extended version of castling that allows the king to move to safety across dimensions
+- Requires both the king and rook to be unmoved and a clear path in all relevant dimensions
+
+## Strategic Considerations
+
+### 1. Dimensional Control
+- Controlling key squares across multiple dimensions creates powerful strategic advantages
+- Pieces that can move freely between dimensions become more valuable as the game progresses
+
+### 2. Temporal Strategy
+- Planning moves that affect future board states requires anticipating opponent responses
+- Temporal attacks can be devastating if not foreseen
+
+### 3. Dimensional Bottlenecks
+- Certain squares serve as critical transition points between dimensions
+- Controlling these points restricts opponent mobility across the dimensional space
+
+### 4. Layer Dominance
+- Establishing control of an entire layer provides strategic advantages
+- Pieces can rain down attacks from higher layers with reduced risk
+
+### 5. Dimensional Harmony
+- Coordinating pieces across multiple dimensions creates powerful tactical opportunities
+- Balanced distribution of forces across dimensions prevents dimensional weaknesses
+
+## Notation for Dimensional Moves
+To record moves in dmchess, standard algebraic notation is extended:
+- **Standard move**: e4 (pawn to e4)
+- **Layer indicator**: e4z2 (pawn to e4 on layer 2)
+- **Temporal move**: e4t1 (pawn to e4 affecting the next time state)
+- **Combined dimensional move**: e4z2t1 (pawn to e4 on layer 2 affecting the next time state)
+- **Piece indicator**: Nf3z2 (knight to f3 on layer 2)
+- **Dimensional shift**: e4>z2 (piece shifts from current position to the same position on layer 2)
+- **Temporal shift**: e4>t1 (piece shifts from current position to the same position in the next time state)
+
+## Conclusion
+The dimensional moves in dmchess create a rich tactical environment that rewards spatial thinking, foresight, and creative strategy. By mastering these dimensional movements, players can explore chess in entirely new ways, discovering combinations and tactics impossible in traditional chess.
+
+---
+
+*This document serves as a reference guide for dimensional moves in the PI0 implementation of dmchess.*

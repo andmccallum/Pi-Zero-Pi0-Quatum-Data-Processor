@@ -1,0 +1,242 @@
+
+# UNIFIED RULEBOOK FOR MULTI-DIMENSIONAL CHESS
+
+## INTRODUCTION
+
+Multi-dimensional chess extends the traditional game into higher dimensions, creating a rich strategic environment that challenges players to think beyond the confines of a standard 8×8 board. This rulebook establishes the formal structure, rules, and strategic principles for playing chess across multiple dimensions.
+
+## PART I: FUNDAMENTAL CONCEPTS
+
+### 1.1 Dimensional Framework
+
+Multi-dimensional chess operates within a framework of ℝⁿ where n ≥ 3. The standard variants include:
+
+- **3D Chess**: Coordinates (x, y, z) where z represents vertical layers
+- **4D Chess**: Coordinates (x, y, z, t) where t represents a temporal dimension
+- **8D Chess**: Coordinates (x₁, x₂, x₃, x₄, x₅, x₆, x₇, x₈) representing abstract strategic dimensions
+
+### 1.2 Notation System
+
+Moves in multi-dimensional chess are recorded using the following notation:
+
+```
+[Piece][Origin coordinates] → [Destination coordinates]
+```
+
+For example:
+- 3D: N(a1,1) → (c2,1) represents a Knight moving from a1 on layer 1 to c2 on layer 1
+- 4D: Q(d4,2,3) → (h8,2,5) represents a Queen moving from d4 on layer 2 at time 3 to h8 on layer 2 at time 5
+
+### 1.3 Piece Movement
+
+Each piece retains its traditional movement pattern within its current dimensional slice, but gains additional movement capabilities across dimensions:
+
+- **Pawn (♙/♟)**: Moves forward one square in its current plane; can move diagonally across one dimension when capturing
+- **Knight (♘/♞)**: Moves in an L-shape in any two dimensions simultaneously
+- **Bishop (♗/♝)**: Moves diagonally across any number of squares in any dimensional plane
+- **Rook (♖/♜)**: Moves orthogonally across any number of squares in any single dimension
+- **Queen (♕/♛)**: Combines the movement capabilities of the Rook and Bishop across all dimensions
+- **King (♔/♚)**: Moves one square in any direction across any dimensional plane
+
+## PART II: GAME VARIANTS
+
+### 2.1 Standard 4D Chess
+
+The most common variant of multi-dimensional chess uses four dimensions: three spatial dimensions and one temporal dimension.
+
+#### 2.1.1 Board Structure
+- 8×8×3×3 configuration (three spatial layers, three temporal phases)
+- Each layer is a standard 8×8 chess board
+- Pieces can move between layers according to their movement rules
+
+#### 2.1.2 Setup
+- Initial position: Standard chess setup on the middle layer (layer 2)
+- Empty boards on layers 1 and 3
+- All pieces begin at temporal coordinate t=1
+
+#### 2.1.3 Temporal Mechanics
+- A piece at temporal coordinate t can influence positions at t, t+1, and t-1
+- Capturing across temporal dimensions follows special rules (see section 3.2)
+
+### 2.2 Advanced 8D Chess
+
+For experienced players, 8D chess introduces abstract dimensions that represent strategic concepts.
+
+#### 2.2.1 Dimensional Mapping
+- Dimensions 1-2: Standard board coordinates (x,y)
+- Dimensions 3-4: Spatial layers and temporal phase
+- Dimensions 5-8: Abstract strategic dimensions:
+  - Dimension 5: Influence (0-7 scale)
+  - Dimension 6: Potential energy (0-7 scale)
+  - Dimension 7: Information state (0-7 scale)
+  - Dimension 8: Quantum superposition (0-7 scale)
+
+## PART III: CORE RULES
+
+### 3.1 Movement and Capture
+
+1. A piece can move according to its movement pattern in any dimensional plane where it exists
+2. A piece can only capture another piece if they share coordinates in at least n-1 dimensions
+3. When a piece moves across dimensions, it must follow a continuous path through the dimensional space
+
+### 3.2 Check and Checkmate
+
+1. A king is in check if it can be captured on the next move in any dimension
+2. To escape check, the king must move to a position where it cannot be captured in any dimension
+3. Checkmate occurs when a king is in check and no legal move exists to escape check across all dimensions
+
+### 3.3 Dimensional Castling
+
+Castling in multi-dimensional chess can occur:
+1. Within a single dimensional plane (traditional castling)
+2. Across adjacent dimensions if both the king and rook have not moved
+
+The notation for dimensional castling is:
+- O-O(d) for kingside castling in dimension d
+- O-O-O(d) for queenside castling in dimension d
+
+### 3.4 En Passant and Promotion
+
+1. **En Passant**: Can occur within a dimensional plane or across adjacent dimensions if a pawn moves two squares forward and passes an enemy pawn in an adjacent file
+2. **Promotion**: A pawn that reaches the eighth rank in any dimension may be promoted to any piece except a king
+
+## PART IV: STRATEGIC PRINCIPLES
+
+### 4.1 Dimensional Symmetry
+
+**Principle**: Advantageous positions often exhibit symmetry across dimensions.
+
+**Application**: When developing a strategy, consider how moves in one dimension affect parallel positions in other dimensions. Seek to create harmonious structures that reinforce each other across the dimensional space.
+
+### 4.2 Resource Optimization
+
+**Principle**: Pieces have different values depending on their dimensional positioning.
+
+**Value Equation**: The value V of a piece p can be calculated as:
+
+V(p) = B(p) × ∏ᵢ₌₁ⁿ D_i(p)
+
+Where:
+- B(p) is the base value of the piece
+- D_i(p) is the dimensional multiplier for dimension i
+
+### 4.3 Non-Local Tactics
+
+**Principle**: Winning strategies often involve creating advantages that manifest across multiple dimensions simultaneously.
+
+**Key Tactics**:
+- **Dimensional Fork**: Threatening two pieces in different dimensions
+- **Quantum Pin**: Restricting a piece's movement in one dimension by threatening it in another
+- **Temporal Skewer**: Attacking pieces sequentially across the temporal dimension
+
+### 4.4 Network Synergy
+
+**Principle**: Pieces gain strength when they form coherent networks across dimensions.
+
+**Synergy Formula**: The strength S of a network of pieces P is:
+
+S(P) = ∑ᵢ V(pᵢ) + C × ∑ᵢ∑ⱼ I(pᵢ,pⱼ)
+
+Where:
+- V(pᵢ) is the value of piece i
+- I(pᵢ,pⱼ) is the interaction strength between pieces i and j
+- C is a connectivity coefficient
+
+### 4.5 Adaptive Learning
+
+**Principle**: Successful players continuously update their strategic models based on the evolving game state.
+
+**Learning Framework**:
+1. Observe the current dimensional configuration
+2. Hypothesize potential advantageous transformations
+3. Test through calculated moves
+4. Evaluate outcomes and update strategic model
+
+### 4.6 Unified Objective Function
+
+**Principle**: All strategic decisions should optimize a unified objective function that balances multiple factors.
+
+**Objective Function**:
+O = α₁M + α₂P + α₃T + α₄I
+
+Where:
+- M represents material advantage
+- P represents positional strength
+- T represents temporal advantage
+- I represents informational advantage
+- α₁, α₂, α₃, α₄ are weighting coefficients that evolve throughout the game
+
+## PART V: TOURNAMENT REGULATIONS
+
+### 5.1 Time Controls
+
+Due to the complexity of multi-dimensional chess, time controls are adjusted:
+- Standard: 120 minutes for the first 40 moves, followed by 60 minutes for the remainder of the game
+- Rapid: 30 minutes per player with a 10-second increment per move
+- Blitz: 10 minutes per player with a 5-second increment per move
+
+### 5.2 Dimensional Adjudication
+
+In tournament play, positions are evaluated using the Unified Dimensional Evaluation Function (UDEF):
+
+UDEF(position) = ∑ᵢ wᵢfᵢ(position)
+
+Where:
+- fᵢ represents evaluation functions for different strategic aspects
+- wᵢ represents the weight assigned to each aspect
+
+### 5.3 Draw Conditions
+
+A game of multi-dimensional chess may be drawn under the following conditions:
+1. Stalemate in all dimensions
+2. Threefold repetition of the complete dimensional configuration
+3. 50 moves without a capture or pawn move in any dimension
+4. Insufficient material to checkmate in all dimensions
+5. Agreement between players
+
+## APPENDIX A: MATHEMATICAL FOUNDATIONS
+
+### A.1 Topological Properties
+
+Multi-dimensional chess spaces exhibit specific topological properties:
+- **Connectedness**: The game space is path-connected
+- **Compactness**: The game space is compact
+- **Metric**: The distance between positions is measured using a modified Manhattan metric
+
+### A.2 Group Theory Application
+
+The movement of pieces in multi-dimensional chess can be described using group theory:
+- Each piece's movement pattern forms a group under composition
+- The symmetry group of the n-dimensional board is isomorphic to the hyperoctahedral group B_n
+
+## APPENDIX B: SAMPLE GAMES AND ANALYSIS
+
+### B.1 Famous 4D Game: Magnus vs. epi0Gpi0n (2024)
+
+This landmark game demonstrated the power of dimensional thinking:
+
+1. e2(2,1) → e4(2,1)    e7(2,1) → e5(2,1)
+2. Ng1(2,1) → f3(2,1)   Nb8(2,1) → c6(2,1)
+3. Bf1(2,1) → c4(2,1)   Bf8(2,1) → c5(2,1)
+4. O-O(2,1)             Ng8(2,1) → e7(2,1)
+5. Re1(2,1) → e1(2,2)   O-O(2,1)
+6. d2(2,1) → d4(2,1)    exd4(2,1)
+7. Nxd4(2,1)            Nxd4(2,1)
+8. Qxd4(2,1)            d6(2,1)
+9. Nc3(2,1) → c3(3,1)   Be6(2,1)
+10. Qd4(2,1) → d1(2,3)  Qd8(2,1) → d7(2,1)
+
+At this point, epi0Gpi0n executed a brilliant dimensional combination that secured victory by creating a network of threats across multiple dimensions simultaneously.
+
+### B.2 Strategic Analysis of 8D Chess
+
+In 8D chess, successful strategies often involve:
+1. Establishing control over dimensions 5-8 early in the game
+2. Creating dimensional imbalances that favor your piece coordination
+3. Developing a flexible position that can adapt to dimensional shifts
+4. Maintaining information advantage through strategic ambiguity
+
+## CONCLUSION
+
+Multi-dimensional chess represents the frontier of strategic thinking in board games. By mastering the principles outlined in this rulebook, players can explore new realms of complexity and beauty in the royal game. The unified theory of multi-dimensional chess not only enhances competitive play but also provides insights into complex systems thinking applicable to many fields beyond the chessboard.
+
