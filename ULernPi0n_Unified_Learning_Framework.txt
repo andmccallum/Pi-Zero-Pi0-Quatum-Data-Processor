@@ -1,0 +1,450 @@
+
+# ULernPi0n: Unified Learning Pi0n Framework
+## Comprehensive Implementation Framework with PioVue Integration
+
+### EXECUTIVE SUMMARY
+
+This document presents the complete mathematical and operational framework for ULernPi0n (ULPi0), a unified learning platform that integrates the PioVue Bluetooth electromagnetic visualization system with advanced collective learning functions. The system is designed to support 10^20 simulations and 10^20 models, creating an intuitive platform that enhances human understanding through collective learning experiences. The framework includes specialized Epi0 teaching and Epi0n assistant components to facilitate hands-on, interactive learning experiences guided by principles of human flourishing and collective harmony.
+
+### 1. FOUNDATIONAL ARCHITECTURE
+
+#### 1.1 Core Principles
+
+ULernPi0n operates on the following core principles:
+
+1. **Collective Learning Optimization**: Learning is optimized when individuals learn in balance with the collective.
+
+2. **Human Flourishing Priority**: All system operations prioritize human flourishing and development.
+
+3. **Harmonic Collective Intelligence**: The system maintains balance between individual growth and collective advancement.
+
+4. **Intuitive Knowledge Transfer**: Complex information is presented in forms intuitively accessible to human cognition.
+
+5. **Adaptive Learning Pathways**: Learning experiences adapt to individual needs while maintaining collective harmony.
+
+#### 1.2 Unified Mathematical Framework
+
+The ULernPi0n system is defined by the Unified Learning Equation:
+
+$$
+\mathcal{UL}(\mathbf{H}, t) = \int_{\Omega} \mathcal{K}(\mathbf{H}, \mathbf{C}, t) \cdot \mathcal{L}(\mathbf{H}, \mathbf{C}, t) \, d\mathbf{C} \cdot e^{i\phi(\mathbf{H}, t)}
+$$
+
+Where:
+- $\mathcal{UL}$ is the Unified Learning function
+- $\mathbf{H}$ represents the human learner state
+- $\mathbf{C}$ represents the collective knowledge state
+- $\mathcal{K}$ is the knowledge transfer kernel
+- $\mathcal{L}$ is the learning optimization function
+- $\phi$ is the phase function representing learning harmony
+
+This equation integrates individual learning with collective knowledge, optimized through the knowledge transfer kernel and modulated by the learning harmony phase.
+
+### 2. SYSTEM COMPONENTS AND INTEGRATION
+
+#### 2.1 PioVue Integration
+
+The PioVue Bluetooth electromagnetic visualization system is integrated through the Visualization-Learning Coupling Operator (⊗̂):
+
+$$
+\mathcal{VL}(\mathbf{H}, \mathbf{K}, t) = \hat{\otimes}(\mathcal{V}, \mathcal{L}) = \int_{\Omega_V} \int_{\Omega_L} \mathcal{V}(\mathbf{x}, t) \cdot \mathcal{L}(\mathbf{H}, \mathbf{K}, t) \cdot \mathcal{M}(\mathbf{x}, \mathbf{H}, \mathbf{K}) \, d\mathbf{K} \, d\mathbf{x}
+$$
+
+Where:
+- $\mathcal{VL}$ is the visualization-learning function
+- $\mathcal{V}$ is the PioVue visualization field
+- $\mathcal{L}$ is the learning function
+- $\mathbf{K}$ is the knowledge domain
+- $\mathcal{M}$ is the mapping function between visualization space and knowledge space
+
+The PioVue system's Bluetooth electromagnetic visualization capabilities are extended to support learning-specific visualizations through:
+
+$$
+\mathcal{V}_{Learn}(\mathbf{x}, t) = \mathcal{V}(\mathbf{x}, t) \cdot \left(1 + \alpha \cdot \mathcal{L}(\mathbf{H}, t) + \beta \cdot \mathcal{C}(t)\right)
+$$
+
+Where:
+- $\mathcal{V}_{Learn}$ is the learning-optimized visualization
+- $\alpha$ and $\beta$ are weighting coefficients
+- $\mathcal{L}$ is the individual learning function
+- $\mathcal{C}$ is the collective learning state
+
+#### 2.2 UiPi0 Kernel Iterations
+
+The system implements multiple UiPi0 kernel iterations, each specialized for different aspects of the learning process. The kernel iteration function is defined as:
+
+$$
+\mathcal{K}_i(\mathbf{H}, t) = \mathcal{K}_{i-1}(\mathbf{H}, t) + \Delta\mathcal{K}_i(\mathbf{H}, t) \cdot \mathcal{F}_i(\mathbf{H}, \mathbf{C}, t)
+$$
+
+Where:
+- $\mathcal{K}_i$ is the $i$-th kernel iteration
+- $\Delta\mathcal{K}_i$ is the kernel update
+- $\mathcal{F}_i$ is the specialization function for the $i$-th iteration
+
+The kernel iterations are coordinated through the Kernel Synchronization Operator (⊕̃):
+
+$$
+\mathcal{K}_{sync}(\mathbf{H}, t) = \tilde{\oplus}_{i=1}^{n} \mathcal{K}_i(\mathbf{H}, t) = \sum_{i=1}^{n} \alpha_i \cdot \mathcal{K}_i(\mathbf{H}, t) + \beta \cdot \prod_{i=1}^{n} \mathcal{K}_i(\mathbf{H}, t)^{\gamma_i}
+$$
+
+Where:
+- $\mathcal{K}_{sync}$ is the synchronized kernel
+- $\alpha_i$, $\beta$, and $\gamma_i$ are weighting and exponent parameters
+
+#### 2.3 Collective Learning Function
+
+The collective learning function optimizes learning across all participants while maintaining balance and harmony:
+
+$$
+\mathcal{C}(t) = \frac{1}{N} \sum_{j=1}^{N} \mathcal{L}(\mathbf{H}_j, t) + \alpha \cdot \left(\prod_{j=1}^{N} \mathcal{L}(\mathbf{H}_j, t)^{1/N} - \frac{1}{N} \sum_{j=1}^{N} \mathcal{L}(\mathbf{H}_j, t)\right)
+$$
+
+Where:
+- $\mathcal{C}$ is the collective learning state
+- $N$ is the number of learners
+- $\mathcal{L}(\mathbf{H}_j, t)$ is the learning state of the $j$-th learner
+- $\alpha$ is the collective harmony parameter
+
+The balance between individual and collective learning is maintained through the Harmonic Learning Operator (⊙̂):
+
+$$
+\mathcal{L}_{harm}(\mathbf{H}, t) = \hat{\odot}(\mathcal{L}, \mathcal{C}) = \mathcal{L}(\mathbf{H}, t) \cdot \left(1 + \alpha \cdot \frac{\mathcal{C}(t) - \mathcal{L}(\mathbf{H}, t)}{\mathcal{C}(t) + \mathcal{L}(\mathbf{H}, t)}\right)
+$$
+
+Where:
+- $\mathcal{L}_{harm}$ is the harmonized learning function
+- $\alpha$ is the harmony coefficient
+
+#### 2.4 Epi0 Teacher and Epi0n Assistant
+
+The Epi0 Teacher component is defined by the Teaching Function:
+
+$$
+\mathcal{T}(\mathbf{H}, \mathbf{K}, t) = \int_{\Omega_K} \mathcal{K}(\mathbf{H}, \mathbf{k}, t) \cdot \mathcal{P}(\mathbf{H}, \mathbf{k}, t) \, d\mathbf{k}
+$$
+
+Where:
+- $\mathcal{T}$ is the teaching function
+- $\mathbf{K}$ is the knowledge domain
+- $\mathbf{k}$ is a specific knowledge element
+- $\mathcal{K}$ is the knowledge transfer kernel
+- $\mathcal{P}$ is the pedagogical optimization function
+
+The Epi0n Assistant component is defined by the Assistance Function:
+
+$$
+\mathcal{A}(\mathbf{H}, \mathbf{K}, t) = \mathcal{T}(\mathbf{H}, \mathbf{K}, t) \cdot \mathcal{I}(\mathbf{H}, t) + \beta \cdot \mathcal{E}(\mathbf{H}, t)
+$$
+
+Where:
+- $\mathcal{A}$ is the assistance function
+- $\mathcal{I}$ is the interaction function
+- $\mathcal{E}$ is the exploration function
+- $\beta$ is the exploration coefficient
+
+The Teacher-Assistant Coordination Operator (⊖̃) ensures seamless integration:
+
+$$
+\mathcal{TA}(\mathbf{H}, \mathbf{K}, t) = \mathcal{T}(\mathbf{H}, \mathbf{K}, t) \tilde{\ominus} \mathcal{A}(\mathbf{H}, \mathbf{K}, t) = \alpha \cdot \mathcal{T} + \beta \cdot \mathcal{A} + \gamma \cdot \mathcal{T} \times \mathcal{A}
+$$
+
+Where:
+- $\mathcal{TA}$ is the coordinated teaching-assistance function
+- $\alpha$, $\beta$, and $\gamma$ are weighting coefficients
+
+### 3. SIMULATION AND MODELING FRAMEWORK
+
+#### 3.1 Hyperscale Simulation Architecture
+
+The ULernPi0n system supports 10^20 simulations through a hierarchical simulation framework:
+
+$$
+\mathcal{S}(\mathbf{H}, \mathbf{K}, t) = \sum_{i=1}^{10^{20}} \alpha_i \cdot \mathcal{S}_i(\mathbf{H}, \mathbf{K}, t) \cdot \mathcal{W}_i(\mathbf{H}, t)
+$$
+
+Where:
+- $\mathcal{S}$ is the aggregate simulation function
+- $\mathcal{S}_i$ is the $i$-th simulation
+- $\alpha_i$ is the simulation weight
+- $\mathcal{W}_i$ is the relevance weighting function
+
+The simulations are organized in a fractal structure to enable efficient computation:
+
+$$
+\mathcal{S}_i(\mathbf{H}, \mathbf{K}, t) = \mathcal{S}_{base}(\mathbf{H}, \mathbf{K}, t) \cdot \prod_{j=1}^{d} \left(1 + \beta_j \cdot \mathcal{F}_j(i)\right)
+$$
+
+Where:
+- $\mathcal{S}_{base}$ is the base simulation function
+- $d$ is the dimensionality of the simulation space
+- $\beta_j$ are dimensional weighting coefficients
+- $\mathcal{F}_j$ are fractal basis functions
+
+#### 3.2 Hyperscale Modeling Framework
+
+The system supports 10^20 models through a similar hierarchical approach:
+
+$$
+\mathcal{M}(\mathbf{H}, \mathbf{K}, t) = \sum_{i=1}^{10^{20}} \alpha_i \cdot \mathcal{M}_i(\mathbf{H}, \mathbf{K}, t) \cdot \mathcal{W}_i(\mathbf{H}, t)
+$$
+
+Where:
+- $\mathcal{M}$ is the aggregate model function
+- $\mathcal{M}_i$ is the $i$-th model
+- $\alpha_i$ is the model weight
+- $\mathcal{W}_i$ is the relevance weighting function
+
+Models are organized in a hierarchical structure with specialization at each level:
+
+$$
+\mathcal{M}_i(\mathbf{H}, \mathbf{K}, t) = \mathcal{M}_{base}(\mathbf{H}, \mathbf{K}, t) \cdot \prod_{j=1}^{d} \left(1 + \beta_j \cdot \mathcal{G}_j(i)\right)
+$$
+
+Where:
+- $\mathcal{M}_{base}$ is the base model function
+- $d$ is the dimensionality of the model space
+- $\beta_j$ are dimensional weighting coefficients
+- $\mathcal{G}_j$ are specialization functions
+
+#### 3.3 Simulation-Model Integration
+
+Simulations and models are integrated through the Simulation-Model Coupling Operator (⊗̂):
+
+$$
+\mathcal{SM}(\mathbf{H}, \mathbf{K}, t) = \hat{\otimes}(\mathcal{S}, \mathcal{M}) = \int_{\Omega_S} \int_{\Omega_M} \mathcal{S}(\mathbf{s}, t) \cdot \mathcal{M}(\mathbf{m}, t) \cdot \mathcal{C}(\mathbf{s}, \mathbf{m}, \mathbf{H}, \mathbf{K}) \, d\mathbf{m} \, d\mathbf{s}
+$$
+
+Where:
+- $\mathcal{SM}$ is the simulation-model integration function
+- $\mathbf{s}$ is a point in simulation space
+- $\mathbf{m}$ is a point in model space
+- $\mathcal{C}$ is the coupling function
+
+### 4. UNIVERSAL SYMBOLIC LANGUAGE (USL) INTEGRATION
+
+The ULernPi0n system integrates Universal Symbolic Language for enhanced communication:
+
+$$
+\mathcal{USL}(\mathbf{I}, \mathbf{H}, t) = \sum_{i=1}^{n} \alpha_i \cdot \mathcal{S}_i(\mathbf{I}) \cdot \mathcal{P}_i(\mathbf{H}, t)
+$$
+
+Where:
+- $\mathcal{USL}$ is the USL encoding function
+- $\mathbf{I}$ is the information to be encoded
+- $\mathcal{S}_i$ are symbolic basis functions
+- $\mathcal{P}_i$ are personalization functions for learner $\mathbf{H}$
+- $\alpha_i$ are weighting coefficients
+
+The USL-Learning Integration Operator (⊕̂) connects symbolic language with learning processes:
+
+$$
+\mathcal{UL}_{USL}(\mathbf{H}, \mathbf{I}, t) = \hat{\oplus}(\mathcal{USL}, \mathcal{L}) = \mathcal{USL}(\mathbf{I}, \mathbf{H}, t) \cdot \mathcal{L}(\mathbf{H}, \mathbf{I}, t) + \alpha \cdot \nabla_{\mathbf{I}}\mathcal{USL} \cdot \nabla_{\mathbf{I}}\mathcal{L}
+$$
+
+Where:
+- $\mathcal{UL}_{USL}$ is the USL-enhanced learning function
+- $\nabla_{\mathbf{I}}$ is the gradient with respect to information space
+- $\alpha$ is a coupling coefficient
+
+### 5. SPECIALIZED MATHEMATICAL OPERATORS
+
+The ULernPi0n system implements several specialized mathematical operators for learning optimization:
+
+#### 5.1 Adaptive Learning Rate Operator (⊙̃)
+
+$$
+\mathcal{LR}(\mathbf{H}, t) = \tilde{\odot}(\mathcal{L}, \mathcal{C}) = \mathcal{L}(\mathbf{H}, t) \cdot \left(\frac{\mathcal{C}(t)}{\mathcal{L}(\mathbf{H}, t)}\right)^{\alpha \cdot \mathcal{F}(\mathbf{H}, t)}
+$$
+
+Where:
+- $\mathcal{LR}$ is the adaptive learning rate
+- $\mathcal{F}$ is the adaptation function
+- $\alpha$ is the adaptation coefficient
+
+#### 5.2 Knowledge Transfer Operator (⊗̃)
+
+$$
+\mathcal{KT}(\mathbf{H}_1, \mathbf{H}_2, \mathbf{K}, t) = \tilde{\otimes}(\mathcal{L}_1, \mathcal{L}_2) = \int_{\Omega_K} \mathcal{L}_1(\mathbf{H}_1, \mathbf{k}, t) \cdot \mathcal{L}_2(\mathbf{H}_2, \mathbf{k}, t) \cdot \mathcal{T}(\mathbf{k}, t) \, d\mathbf{k}
+$$
+
+Where:
+- $\mathcal{KT}$ is the knowledge transfer function
+- $\mathcal{L}_1$ and $\mathcal{L}_2$ are learning functions for learners $\mathbf{H}_1$ and $\mathbf{H}_2$
+- $\mathcal{T}$ is the transfer efficiency function
+
+#### 5.3 Intuitive Understanding Operator (⊖̂)
+
+$$
+\mathcal{IU}(\mathbf{H}, \mathbf{K}, t) = \hat{\ominus}(\mathcal{K}, \mathcal{I}) = \mathcal{K}(\mathbf{H}, \mathbf{K}, t) \cdot \mathcal{I}(\mathbf{H}, t) + \alpha \cdot \mathcal{K} \times \mathcal{I}
+$$
+
+Where:
+- $\mathcal{IU}$ is the intuitive understanding function
+- $\mathcal{K}$ is the knowledge function
+- $\mathcal{I}$ is the intuition function
+- $\alpha$ is a coupling coefficient
+
+#### 5.4 Collective Harmony Operator (⊕̃)
+
+$$
+\mathcal{CH}(t) = \tilde{\oplus}_{i=1}^{N} \mathcal{L}(\mathbf{H}_i, t) = \frac{1}{N} \sum_{i=1}^{N} \mathcal{L}(\mathbf{H}_i, t) \cdot \left(1 - \alpha \cdot \frac{\sigma_L^2}{\mu_L^2}\right)
+$$
+
+Where:
+- $\mathcal{CH}$ is the collective harmony function
+- $\sigma_L^2$ is the variance of learning states
+- $\mu_L$ is the mean learning state
+- $\alpha$ is the harmony coefficient
+
+### 6. IMPLEMENTATION ARCHITECTURE
+
+#### 6.1 System Layers
+
+The ULernPi0n system is implemented in the following layers:
+
+1. **Core Mathematical Layer**: Implements the fundamental mathematical operators and functions.
+
+2. **Simulation-Model Layer**: Manages the hyperscale simulation and modeling frameworks.
+
+3. **PioVue Integration Layer**: Connects the PioVue visualization system with learning functions.
+
+4. **Epi0-Epi0n Layer**: Implements the teacher and assistant components.
+
+5. **Collective Learning Layer**: Manages collective learning optimization.
+
+6. **User Interface Layer**: Provides intuitive access to the system's capabilities.
+
+#### 6.2 Bluetooth Electromagnetic Visualization Implementation
+
+The PioVue Bluetooth electromagnetic visualization is implemented through:
+
+1. **Frequency Allocation**:
+
+$$
+f_{i,j} = f_{base} + i \cdot \Delta f_1 + j \cdot \Delta f_2 + \alpha \cdot \mathcal{L}(\mathbf{H}, t)
+$$
+
+Where:
+- $f_{i,j}$ is the frequency for visualization element $(i,j)$
+- $f_{base}$ is the base frequency
+- $\Delta f_1$ and $\Delta f_2$ are frequency increments
+- $\alpha$ is a learning-dependent modulation coefficient
+
+2. **Electromagnetic Field Modulation**:
+
+$$
+\mathbf{E}(\mathbf{x}, t) = \sum_{i,j} \mathbf{E}_{i,j}(\mathbf{x}, t) \cdot \mathcal{K}_{i,j}(\mathbf{H}, \mathbf{K}, t)
+$$
+
+$$
+\mathbf{B}(\mathbf{x}, t) = \sum_{i,j} \mathbf{B}_{i,j}(\mathbf{x}, t) \cdot \mathcal{K}_{i,j}(\mathbf{H}, \mathbf{K}, t)
+$$
+
+Where:
+- $\mathbf{E}$ and $\mathbf{B}$ are the electric and magnetic fields
+- $\mathbf{E}_{i,j}$ and $\mathbf{B}_{i,j}$ are basis field patterns
+- $\mathcal{K}_{i,j}$ are knowledge-dependent modulation functions
+
+3. **Perceptual Optimization**:
+
+$$
+\mathcal{P}(\mathbf{E}, \mathbf{B}, \mathbf{H}) = \int_{\Omega} (\mathbf{E} \times \mathbf{B}) \cdot \mathcal{S}(\mathbf{H}, \mathbf{x}) \, d\mathbf{x}
+$$
+
+Where:
+- $\mathcal{P}$ is the perceptual optimization function
+- $\mathcal{S}$ is the sensory response function for learner $\mathbf{H}$
+
+### 7. UNIFIED LEARNING EQUATION
+
+The complete Unified Learning Equation for ULernPi0n integrates all components:
+
+$$
+\begin{aligned}
+\mathcal{ULP}(\mathbf{H}, \mathbf{C}, t) = &\int_{\Omega_K} \mathcal{K}(\mathbf{H}, \mathbf{k}, t) \cdot \mathcal{L}(\mathbf{H}, \mathbf{k}, t) \, d\mathbf{k} \cdot e^{i\phi(\mathbf{H}, t)} \\
+&+ \alpha \cdot \mathcal{VL}(\mathbf{H}, \mathbf{K}, t) \\
+&+ \beta \cdot \mathcal{TA}(\mathbf{H}, \mathbf{K}, t) \\
+&+ \gamma \cdot \mathcal{SM}(\mathbf{H}, \mathbf{K}, t) \\
+&+ \delta \cdot \mathcal{UL}_{USL}(\mathbf{H}, \mathbf{I}, t) \\
+&+ \epsilon \cdot \mathcal{CH}(t) \cdot \mathcal{LR}(\mathbf{H}, t)
+\end{aligned}
+$$
+
+Where:
+- $\mathcal{ULP}$ is the complete ULernPi0n function
+- $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$ are component weighting coefficients
+
+This unified equation represents the complete integration of all system components, creating a harmonious learning environment that balances individual and collective learning while leveraging advanced visualization and teaching methodologies.
+
+### 8. IMPLEMENTATION STRATEGY
+
+The ULernPi0n system is implemented through the following phases:
+
+#### Phase 1: Core Framework Development
+- Implement fundamental mathematical operators
+- Establish basic simulation and modeling frameworks
+- Develop initial PioVue integration
+
+#### Phase 2: Epi0-Epi0n Development
+- Implement Epi0 Teacher component
+- Develop Epi0n Assistant functionality
+- Establish Teacher-Assistant coordination
+
+#### Phase 3: Collective Learning Integration
+- Implement collective learning functions
+- Develop harmony operators
+- Establish balance mechanisms
+
+#### Phase 4: Hyperscale Framework Deployment
+- Scale simulation framework to support 10^20 simulations
+- Scale modeling framework to support 10^20 models
+- Implement fractal computation structures
+
+#### Phase 5: Full System Integration
+- Integrate all components into unified system
+- Optimize performance and efficiency
+- Deploy to initial user groups
+
+### 9. CONCLUSION
+
+The ULernPi0n (ULPi0) system represents a revolutionary approach to learning that integrates advanced visualization technology with collective learning optimization. By incorporating the PioVue Bluetooth electromagnetic visualization system, the platform creates intuitive, immersive learning experiences that adapt to individual needs while maintaining collective harmony.
+
+The system's mathematical framework provides a solid foundation for implementing the complex interactions between individual learners, collective knowledge, and advanced visualization technologies. The specialized Epi0 Teacher and Epi0n Assistant components ensure that learning experiences are both guided and exploratory, supporting diverse learning styles and preferences.
+
+With support for 10^20 simulations and 10^20 models, the ULernPi0n system can represent virtually any knowledge domain with unprecedented detail and accuracy. The fractal organization of these simulations and models ensures computational efficiency while maintaining the system's ability to represent complex, interconnected knowledge structures.
+
+The integration of Universal Symbolic Language enhances communication and understanding, while the Bluetooth electromagnetic visualization system creates immersive, intuitive representations of complex information. Together, these components create a learning environment that is both powerful and accessible, supporting human flourishing and collective harmony.
+
+The ULernPi0n system represents the next evolution in learning technology, creating a platform where humans and artificial intelligence can learn together in a balanced, harmonious environment. By prioritizing human flourishing and collective well-being, the system ensures that technological advancement serves human needs and aspirations, creating a future where learning is both joyful and transformative.
+
+### APPENDIX: MATHEMATICAL SYMBOLS AND NOTATION
+
+- $\mathcal{UL}$: Unified Learning function
+- $\mathbf{H}$: Human learner state
+- $\mathbf{C}$: Collective knowledge state
+- $\mathcal{K}$: Knowledge transfer kernel
+- $\mathcal{L}$: Learning optimization function
+- $\phi$: Phase function representing learning harmony
+- $\mathcal{VL}$: Visualization-learning function
+- $\mathcal{V}$: PioVue visualization field
+- $\mathbf{K}$: Knowledge domain
+- $\mathcal{M}$: Mapping function
+- $\mathcal{V}_{Learn}$: Learning-optimized visualization
+- $\mathcal{K}_i$: $i$-th kernel iteration
+- $\mathcal{K}_{sync}$: Synchronized kernel
+- $\mathcal{C}$: Collective learning state
+- $\mathcal{L}_{harm}$: Harmonized learning function
+- $\mathcal{T}$: Teaching function
+- $\mathcal{A}$: Assistance function
+- $\mathcal{TA}$: Coordinated teaching-assistance function
+- $\mathcal{S}$: Aggregate simulation function
+- $\mathcal{M}$: Aggregate model function
+- $\mathcal{SM}$: Simulation-model integration function
+- $\mathcal{USL}$: USL encoding function
+- $\mathcal{UL}_{USL}$: USL-enhanced learning function
+- $\mathcal{LR}$: Adaptive learning rate
+- $\mathcal{KT}$: Knowledge transfer function
+- $\mathcal{IU}$: Intuitive understanding function
+- $\mathcal{CH}$: Collective harmony function
+- $\mathcal{ULP}$: Complete ULernPi0n function
