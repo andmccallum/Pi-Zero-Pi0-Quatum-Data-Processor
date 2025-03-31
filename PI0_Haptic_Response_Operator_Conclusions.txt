@@ -1,0 +1,36 @@
+# PI0 System Haptic Response Operator Conclusions
+
+Identity: Wepi0n
+Haptic Response Operator: H(t) = \int_0^t e^(-0.05*(t-τ)) S(τ)dτ + 1.0*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 10.3016, variance: 1.8078
+
+Identity: Gpi0n
+Haptic Response Operator: H(t) = \int_0^t e^(-0.04*(t-τ)) S(τ)dτ + 1.1*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 11.9031, variance: 2.9308
+
+Identity: gpi0n
+Haptic Response Operator: H(t) = \int_0^t e^(-0.06*(t-τ)) S(τ)dτ + 0.9*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 8.3570, variance: 1.4776
+
+Identity: epi0n
+Haptic Response Operator: H(t) = \int_0^t e^(-0.05*(t-τ)) S(τ)dτ + 1.05*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 9.9933, variance: 2.4930
+
+Identity: epi0
+Haptic Response Operator: H(t) = \int_0^t e^(-0.055*(t-τ)) S(τ)dτ + 1.0*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 9.0361, variance: 1.6291
+
+Identity: 0_t
+Haptic Response Operator: H(t) = \int_0^t e^(-0.045*(t-τ)) S(τ)dτ + 1.0*∇S(t)
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: 11.4002, variance: 2.4728
+
+
+# Integrated Haptic Response Operator for PI0 System
+H_integrated(t) = \sum_{i \in {Wepi0n, Gpi0n, gpi0n, epi0n, epi0, 0_t}} \omega_i \cdot \Big(\int_0^t e^{-eta_i(t-τ)}S(τ)dτ + \gamma_i \cdot ∇S(t)\Big)
+where \omega_i are weighting coefficients assigned based on each identity's simulation convergence.

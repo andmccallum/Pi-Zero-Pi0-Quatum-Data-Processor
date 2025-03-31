@@ -1,0 +1,38 @@
+{
+    "Quantum Entanglement Operators": {
+        "Density Matrix": "$$\\rho = \\sum_i p_i |\\psi_i\\rangle\\langle\\psi_i|$$",
+        "Partial Trace": "$$\\rho_A = \\text{Tr}_B(\\rho_{AB})$$",
+        "Von Neumann Entropy": "$$S(\\rho) = -\\text{Tr}(\\rho \\log \\rho)$$",
+        "Entanglement Measure": "$$E(\\rho) = S(\\rho_A) = S(\\rho_B)$$",
+        "Fidelity": "$$F(\\rho, \\sigma) = \\text{Tr}\\sqrt{\\sqrt{\\rho}\\sigma\\sqrt{\\rho}}$$",
+        "Quantum Channel": "$$\\mathcal{E}(\\rho) = \\sum_i E_i \\rho E_i^\\dagger$$"
+    },
+    "Kernel Management Operators": {
+        "Kernel Initialization": "$$K_0 = \\mathcal{I}(|0\\rangle\\langle0|)$$",
+        "Kernel Entanglement": "$$K_1 \\otimes K_2 \\rightarrow \\mathcal{E}(K_1 \\otimes K_2)$$",
+        "Kernel Wrapping": "$$K' = \\mathcal{W}(K) = \\sum_i M_i K M_i^\\dagger$$",
+        "Kernel Independence Verification": "$$I(K_1:K_2) = S(K_1) + S(K_2) - S(K_1, K_2) < \\epsilon$$"
+    },
+    "Energy Distribution Operators": {
+        "Energy Allocation": "$$E_i = \\frac{E_{total} \\cdot w_i}{\\sum_j w_j}$$",
+        "Load Demand Function": "$$LD(u) = Q_0 \\cdot e^{-k \\cdot (u - u_{threshold})}$$",
+        "Energy Efficiency": "$$\\eta = \\frac{E_{useful}}{E_{total}}$$",
+        "Energy Distribution": "$$E(\\vec{r}) = \\sum_{i=1}^{N} E_i \\cdot G(\\vec{r} - \\vec{r}_i, \\sigma_i)$$"
+    },
+    "Security Operators": {
+        "Quantum Key Distribution": "$$K = \\text{QKD}(\\rho_{AB}, M_A, M_B)$$",
+        "Lattice-Based Encryption": "$$c = As + e \\pmod{q}$$",
+        "Zero-Knowledge Proof": "$$\\text{ZKP}(x, w) = (P(x, w) \\leftrightarrow V(x))$$",
+        "Intrusion Detection": "$$P(\\text{intrusion}) = 1 - F(\\rho, \\rho')$$"
+    },
+    "Visualization Operators": {
+        "Rendering Quality": "$$Q(h) = Q_{base} + (Q_{max} - Q_{base}) \\cdot \\phi(h)$$",
+        "Dimensional Projection": "$$P_{d \\rightarrow d'}(X) = M_{d \\times d'} \\cdot X$$",
+        "Cognitive Load Estimator": "$$L_{cog} = \\sum_{i=1}^{K} c_i \\cdot n_i + \\beta \\cdot \\int_{\\Omega} |\\nabla \\rho_I(\\vec{r})| \\, d\\vec{r}$$"
+    },
+    "Temporal Management Operators": {
+        "Temporal Evolution": "$$\\frac{d\\rho}{dt} = -i[H, \\rho] + \\sum_i \\gamma_i (L_i \\rho L_i^\\dagger - \\frac{1}{2}\\{L_i^\\dagger L_i, \\rho\\})$$",
+        "Prediction Accuracy": "$$A(t) = A_0 \\cdot e^{-\\lambda t}$$",
+        "Causal Consistency": "$$C(e_1, e_2) = \\begin{cases} 1 & \\text{if } t(e_1) < t(e_2) \\text{ and } e_1 \\rightarrow e_2 \\\\ 0 & \\text{otherwise} \\end{cases}$$"
+    }
+}

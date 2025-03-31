@@ -1,0 +1,50 @@
+{
+    "dimensional_projection": {
+        "equation": "$$P_{n\\to m}(\\vec{x}) = M_{n\\times m} \\cdot \\vec{x}$$",
+        "description": "Projection from n-dimensional space to m-dimensional space using projection matrix M"
+    },
+    "depth_perception_function": {
+        "equation": "$$D(z) = D_0 \\cdot e^{-\\lambda z} + D_{min}$$",
+        "description": "Depth perception function with distance z, base perception D_0, decay rate \u03bb, and minimum perception D_min"
+    },
+    "visual_energy_distribution": {
+        "equation": "$$E(\\vec{r}) = \\sum_{i=1}^{N} E_i \\cdot G(\\vec{r} - \\vec{r}_i, \\sigma_i)$$",
+        "description": "Energy distribution across visual field with Gaussian distribution G for each element i"
+    },
+    "information_density_gradient": {
+        "equation": "$$\\rho_I(\\vec{r}) = \\rho_0 \\cdot \\left(1 + \\alpha \\cdot \\frac{d}{dz}\\right) \\cdot f(\\vec{r})$$",
+        "description": "Information density with base density \u03c1_0, depth gradient factor \u03b1, and distribution function f"
+    },
+    "tactile_encoding_function": {
+        "equation": "$$T(\\vec{r}, t) = A(\\vec{r}) \\cdot \\sin(\\omega t + \\phi(\\vec{r}))$$",
+        "description": "Tactile encoding function with amplitude A, frequency \u03c9, and phase \u03c6 varying with position"
+    },
+    "visual_saliency_map": {
+        "equation": "$$S(\\vec{r}) = \\sum_{i=1}^{M} w_i \\cdot F_i(\\vec{r})$$",
+        "description": "Visual saliency map combining feature maps F_i with weights w_i"
+    },
+    "dimensional_transition_operator": {
+        "equation": "$$T_{d_1 \\to d_2}(t) = (1-g(t)) \\cdot P_{d_1} + g(t) \\cdot P_{d_2}$$",
+        "description": "Transition operator between dimensions d_1 and d_2 with transition function g(t)"
+    },
+    "orientation_transformation": {
+        "equation": "$$R(\\alpha, \\beta, \\gamma) = R_z(\\gamma) \\cdot R_y(\\beta) \\cdot R_x(\\alpha)$$",
+        "description": "Orientation transformation using Euler angles \u03b1, \u03b2, \u03b3 with rotation matrices R_x, R_y, R_z"
+    },
+    "visibility_function": {
+        "equation": "$$V(\\vec{r}) = V_{max} \\cdot \\left(1 - \\exp\\left(-\\frac{I(\\vec{r})}{I_0}\\right)\\right)$$",
+        "description": "Visibility function with maximum visibility V_max, intensity I, and threshold intensity I_0"
+    },
+    "cognitive_load_estimator": {
+        "equation": "$$L_{cog} = \\sum_{i=1}^{K} c_i \\cdot n_i + \\beta \\cdot \\int_{\\Omega} |\\nabla \\rho_I(\\vec{r})| \\, d\\vec{r}$$",
+        "description": "Cognitive load estimate with element counts n_i, complexity factors c_i, and information density gradient factor \u03b2"
+    },
+    "4d_visualization_tensor": {
+        "equation": "$$V^{4D}_{ijkl} = F(x_i, y_j, z_k, w_l)$$",
+        "description": "4D visualization tensor representing value at each 4D coordinate (x,y,z,w)"
+    },
+    "adaptive_resolution_function": {
+        "equation": "$$R(\\vec{r}) = R_{max} \\cdot \\frac{A(\\vec{r})}{A_{max}} \\cdot \\left(1 + \\delta \\cdot \\frac{I(\\vec{r})}{I_{max}}\\right)$$",
+        "description": "Adaptive resolution function based on attention A and information importance I"
+    }
+}

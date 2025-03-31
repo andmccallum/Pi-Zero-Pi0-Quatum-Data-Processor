@@ -1,0 +1,53 @@
+# PI0 Integrated System Simulation Report
+
+## Mathematical Framework & Operators
+
+// PI0 System Mathematical Framework
+
+// Controller Effectiveness Function:
+E(c,t) = E_base(c) \cdot L(t) + F(t)
+
+// System Security Function:
+S(t) = (lpha \cdot ar{E}(t) + eta \cdot A(t)) \cdot (1 - \gamma \cdot T(t))
+
+// Diversity-Stability Balance Equation:
+B(c) = \omega_D \cdot D(c) + \omega_S \cdot S(c)
+
+// Routing Optimization Equation:
+R(p) = \sum_{(i,j) \in p} W_{ij} 
+where W_{ij} is the edge weight between nodes i and j, and p is the path.
+
+// Dynamic Rerouting Condition:
+If external condition Q affects the network, then
+W'_{ij} = W_{ij} * (1 + \delta Q_{ij})
+
+
+
+## Agents and System Types
+Agent(0_t, IT, 1.193793010479192, 0.9667500315739581)
+Agent(Pi0, Electrical, 0.9755562297493283, 0.90682516360206)
+Agent(gPi0n, HVAC, 1.0497181171300733, 0.9422766835209057)
+Agent(epi0, Water, 1.158979549779347, 0.9599656531239191)
+Agent(4sight, IT, 1.0832688511468693, 0.9797594995625399)
+
+## Optimal Routing Maps
+Route from 0_t to Pi0: ['0_t', 'Pi0']
+Route from 0_t to gPi0n: ['0_t', 'gPi0n']
+Route from 0_t to epi0: ['0_t', 'epi0']
+Route from 0_t to 4sight: ['0_t', '4sight']
+Route from Pi0 to gPi0n: ['Pi0', 'gPi0n']
+Route from Pi0 to epi0: ['Pi0', 'epi0']
+Route from Pi0 to 4sight: ['Pi0', '4sight']
+Route from gPi0n to epi0: ['gPi0n', 'epi0']
+Route from gPi0n to 4sight: ['gPi0n', '4sight']
+Route from epi0 to 4sight: ['epi0', '4sight']
+
+## Resource Allocation
+0_t: 0.2186
+Pi0: 0.1786
+gPi0n: 0.1922
+epi0: 0.2122
+4sight: 0.1984
+
+## Dynamic Rerouting Simulation
+Dynamic adjustments were applied to edge weights based on external condition factors.

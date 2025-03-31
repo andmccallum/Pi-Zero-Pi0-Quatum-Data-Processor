@@ -1,0 +1,14 @@
+{
+    "load_demand_function": {
+        "equation": "$$LD(u) = BaseQuality \\cdot e^{-k \\cdot (u - u_{threshold})}$$",
+        "description": "Load demand function to balance quality based on user load (u), with a baseline threshold u_threshold and decay constant k."
+    },
+    "energy_distribution": {
+        "equation": "$$E(\u000bec{r}) = \\sum_{i=1}^{N} E_i \\cdot G(\u000bec{r} - \u000bec{r}_i, \\sigma_i)$$",
+        "description": "Energy distribution across the visual system to balance rendering loads."
+    },
+    "cognitive_load_estimator": {
+        "equation": "$$L_{cog} = \\sum_{i=1}^{K} c_i \\cdot n_i + \beta \\cdot \\int_{\\Omega} |\nabla \rho_I(\u000bec{r})| \\, d\u000bec{r}$$",
+        "description": "Estimator to calculate the cognitive load from both user interactions and system rendering."
+    }
+}

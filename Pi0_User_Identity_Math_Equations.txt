@@ -1,0 +1,42 @@
+{
+    "quantum_identity_signature": {
+        "equation": "$$\\Psi_{id} = \\sum_{i=1}^{N} \\alpha_i |i\\rangle \\otimes |\\phi_i\\rangle$$",
+        "description": "Quantum identity signature combining user-specific states with system verification states"
+    },
+    "kernel_self_entanglement": {
+        "equation": "$$\\rho_{K_1,K_2} = \\text{Tr}_{env}(|\\Psi_{K_1,K_2}\\rangle\\langle\\Psi_{K_1,K_2}|)$$",
+        "description": "Density matrix representing entanglement between two kernels after tracing out environment"
+    },
+    "thread_separation_operator": {
+        "equation": "$$S(K_1, K_2) = \\mathcal{P}_{K_1} \\otimes \\mathcal{I}_{K_2} - \\lambda \\mathcal{E}_{K_1,K_2}$$",
+        "description": "Operator that separates threads while maintaining entanglement at strength \u03bb"
+    },
+    "geometric_identity_pattern": {
+        "equation": "$$G(\\vec{r}) = \\sum_{n=1}^{M} \\beta_n \\phi_n(\\vec{r}) e^{i\\theta_n}$$",
+        "description": "Geometric pattern function representing identity in multi-dimensional space"
+    },
+    "information_privacy_filter": {
+        "equation": "$$I_{filtered} = \\mathcal{F}(I_{original}, P) = I_{original} \\odot M_P$$",
+        "description": "Information filtering based on privacy settings P, using mask M_P"
+    },
+    "temporal_identity_evolution": {
+        "equation": "$$\\frac{d\\Psi_{id}(t)}{dt} = -i\\hat{H}_{id}\\Psi_{id}(t)$$",
+        "description": "Temporal evolution of identity quantum state under identity Hamiltonian"
+    },
+    "g4_stability_metric": {
+        "equation": "$$G4 = \\frac{\\sum_{i=1}^{N} w_i S_i}{\\sum_{i=1}^{N} w_i} \\rightarrow 1$$",
+        "description": "Weighted average of stability metrics S_i approaching 1 for G4 compliance"
+    },
+    "entanglement_verification": {
+        "equation": "$$V(K_1, K_2) = \\text{Tr}(\\rho_{K_1,K_2} \\cdot \\mathcal{O}_{verify})$$",
+        "description": "Verification measure for entanglement between kernels using verification operator"
+    },
+    "anonymous_identity_proof": {
+        "equation": "$$P_{anon} = \\text{ZKP}(\\Psi_{id}, C)$$",
+        "description": "Zero-knowledge proof of identity without revealing the identity itself"
+    },
+    "kernel_creation_operator": {
+        "equation": "$$\\hat{K}_{create} = \\int d\\vec{r} \\, \\phi(\\vec{r}) \\hat{a}^\\dagger(\\vec{r})$$",
+        "description": "Creation operator for new identity kernel with spatial distribution \u03c6"
+    }
+}

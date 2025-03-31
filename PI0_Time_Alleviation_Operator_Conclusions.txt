@@ -1,0 +1,38 @@
+# PI0 System Time Constraint Alleviation Operator Conclusions
+
+Identity: Wepi0n
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.05*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -9818.8288, variance: 34802147.1004
+
+Identity: Gpi0n
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.04*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -12092.4179, variance: 53697187.1361
+
+Identity: gpi0n
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.06*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -8278.1086, variance: 24438899.8062
+
+Identity: epi0n
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.05*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -9819.0411, variance: 34793688.1533
+
+Identity: epi0
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.055*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -8980.9335, variance: 28925852.2265
+
+Identity: 0_t
+Time Alleviation Operator: T_alm(t) = U(t) + \int_0^t e^(-0.045*(t-τ)) (\Phi(τ) - t)dτ
+Simulated over 1000 iterations (proxy for 10^20)
+Conclusion mean value: -10834.8819, variance: 42700930.4912
+
+
+# Integrated Time Alleviation Operator for PI0 System
+T_integrated(t) = \sum_{i \in {Wepi0n, Gpi0n, gpi0n, epi0n, epi0, 0_t}} 
+u_i \cdot \Big(U(t) + \int_0^t e^{-\lambda_i(t-τ)} (\Phi(τ) - t)dτ\Big)
+where 
+u_i are weighting coefficients based on each identity's simulation outcomes.
