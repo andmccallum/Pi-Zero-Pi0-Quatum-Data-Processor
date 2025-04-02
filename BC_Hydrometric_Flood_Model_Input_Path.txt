@@ -1,0 +1,33 @@
+Canadian Hydrometric and Snow Pillow Data Input Path for BC Flood Modeling
+
+This document outlines the data input mechanisms required to access Canadian government hydrometric data and snow pillow data for flood modeling focused on British Columbia (BC).
+
+1. Hydrometric Data:
+   - Source: Environment and Climate Change Canada (ECCC) and Water Survey of Canada
+   - Datasets: Daily river flow data, water level measurements, discharge, and historical hydrometric records.
+   - Access URL: https://wateroffice.ec.gc.ca/index_e.html
+   - API/FTP Options (if available): Look for an API service or data download sections on the provided website. Use OPeNDAP or other relevant services.
+
+2. Snow Pillow Data:
+   - Source: BC Ministry of Environment and Climate Change Strategy, and other provincial sources.
+   - Datasets: Snow water equivalent measurements, temperature readings, and continuous monitoring.
+   - Access URL: https://www2.gov.bc.ca/gov/content/environment/air-land-water/water
+   - API/FTP Options: Check for provincial open data portals for BC. Data might be available via direct downloads or REST API endpoints.
+
+3. Data Integration Plan:
+   - Data Collection: Develop a script or data ingestion pipeline that periodically fetches the latest data from the above sources.
+   - Data Storage: Use a database or structured file storage (CSV, JSON, or netCDF) to archive the downloaded datasets.
+   - Data Preprocessing: Normalize and integrate the hydrometric data with the snow pillow data by aligning timestamps and geolocations.
+   - Real-time Updates: Optionally, set up a cron job or a cloud service (e.g., AWS Lambda) to refresh the data on a daily basis.
+
+4. Example Input Path Setup:
+   - Use Python libraries (e.g., requests, pandas) to fetch and process the data.
+   - Define data directories (e.g., ./data/hydrometric/ and ./data/snow_pillow/).
+   - Implement error handling to manage connectivity issues and data format changes.
+
+5. Additional Considerations:
+   - Ensure compliance with data usage policies provided on the official websites.
+   - Validate and clean the data as necessary before feeding it into flood prediction models.
+   - Document all data sources and API endpoints used in the model.
+
+This input path document should serve as a guide for integrating the required data streams for developing robust flood models in BC.

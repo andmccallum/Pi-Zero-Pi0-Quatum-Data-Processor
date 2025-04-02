@@ -1,0 +1,75 @@
+PI0 SYSTEM REDUNDANT MATH OPERATORS BACKTEST REPORT
+==================================================
+Report Date: 2025-04-01 06:06:20
+
+I. PER COMPONENT OPERATOR EVALUATIONS
+--------------------------------------------------
+Component: WEPi0n
+  - Base Value: 39.917
+  - Redundant Mean: 40.193
+  - Redundant Std Dev: 1.521
+  - Improvement Score: 0.038
+  - Improved Result: 40.04
+
+Component: GPi0n
+  - Base Value: 94.579
+  - Redundant Mean: 93.592
+  - Redundant Std Dev: 2.53
+  - Improvement Score: 0.027
+  - Improved Result: 93.339
+
+Component: EPi0n
+  - Base Value: 39.851
+  - Redundant Mean: 40.465
+  - Redundant Std Dev: 0.874
+  - Improvement Score: 0.022
+  - Improved Result: 40.378
+
+Component: ePi0_Agents
+  - Base Value: 86.346
+  - Redundant Mean: 87.468
+  - Redundant Std Dev: 3.382
+  - Improvement Score: 0.039
+  - Improved Result: 87.13
+
+Component: 0_t_4sight
+  - Base Value: 58.043
+  - Redundant Mean: 58.902
+  - Redundant Std Dev: 1.509
+  - Improvement Score: 0.026
+  - Improved Result: 58.751
+
+Component: Pi0n
+  - Base Value: 69.159
+  - Redundant Mean: 70.179
+  - Redundant Std Dev: 2.144
+  - Improvement Score: 0.031
+  - Improved Result: 69.965
+
+Component: gPi0n
+  - Base Value: 75.792
+  - Redundant Mean: 77.087
+  - Redundant Std Dev: 2.743
+  - Improvement Score: 0.036
+  - Improved Result: 76.813
+
+Component: pi0
+  - Base Value: 91.42
+  - Redundant Mean: 89.912
+  - Redundant Std Dev: 1.02
+  - Improvement Score: 0.011
+  - Improved Result: 89.81
+
+II. SYSTEM CONSIDERED IMPROVEMENT RECOMMENDATIONS
+--------------------------------------------------
+Component WEPi0n operators are robust. No major improvements needed.
+Component GPi0n operators are robust. No major improvements needed.
+Component EPi0n operators are robust. No major improvements needed.
+Component ePi0_Agents operators are robust. No major improvements needed.
+Component 0_t_4sight operators are robust. No major improvements needed.
+Component Pi0n operators are robust. No major improvements needed.
+Component gPi0n operators are robust. No major improvements needed.
+Component pi0 operators are robust. No major improvements needed.
+
+==================================================
+END OF REDUNDANT MATH OPERATORS BACKTEST REPORT

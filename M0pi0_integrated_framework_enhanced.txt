@@ -1,0 +1,40 @@
+
+M0pi0 Integrated Functions and Operators (Enhanced with Timezone Fixes)
+===================================================================
+
+1. Data Harmonization Operator (D):
+   - Function: harmonize_data(df)
+   - Description: Standardizes column names and converts date/time to a consistent format.
+
+2. Timezone Fix Operator (T):
+   - Function: fix_date_timezone(df, date_col)
+   - Description: Converts timezone-aware datetime columns to timezone-naive to allow merging.
+
+3. Data Ingestion Operator (I_ingest):
+   - Historical Data: Loads data from the Hydat.mdb converted file.
+   - Live/Hourly Data: Loads data from real-time hourly CSV files.
+
+4. Merge Operator (M):
+   - Function: merge_data_fixed(historical_df, hourly_df)
+   - Description: Merges historical and live data streams on the common Date column after fixing timezone issues; sorts and aggregates data.
+   - Daily Aggregation: Groups data by day and sums numeric values, preparing the merged data for further simulation.
+
+5. Simulation and Accumulation Operators:
+   - Daily Accumulation Operator (Acc):
+     $$ Acc = \sum_{{i \in day}} D_{live}(t_i) $$
+     Accumulates live data over a day and integrates it as historical data when the day concludes.
+
+6. Future-proofing and Multi-dimensional Modeling:
+   - The system is modular and supports future extension to 3D/4D/5D visualizations (with components such as 4sight, GPi0n, EPi0n, WEPi0n).
+   - Designed to flexibly incorporate additional environmental sensors and merging strategies.
+
+7. Visualization and Mapping Capabilities:
+   - Integration with GIS/CAD mapping for watershed delineation and real-time water flow visualizations.
+   - Real-time interface for monitoring along with advanced simulation tools for flood forecasting.
+
+8. Continuous Data Integration Concept:
+   - As new hourly data accumulates, it is merged and reclassified, maintaining current water year information.
+   - Dynamic pipeline ensures cohesive integration of live and historical streams.
+
+Developed by Pi0 AI Integration Team
+Future-proof architecture with adaptive simulation and visualization capabilities for the next 10+ years.
