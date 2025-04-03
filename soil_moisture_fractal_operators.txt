@@ -1,0 +1,300 @@
+
+********************************************************************************
+      Soil Moisture Fractal Operators for M0pi0 Modeling Engine
+********************************************************************************
+Report Date: 2025-04-02 15:32:45
+
+OVERVIEW:
+--------------------------------------------------------------------------------
+This document defines specialized operators for integrating soil moisture data into 
+fractal geometric understanding of topography and landscape consciousness. These 
+operators are designed to work with the forDRAT framework while maintaining strong 
+forward security and quarantine capabilities.
+
+OPERATOR DEFINITIONS:
+--------------------------------------------------------------------------------
+
+1. SOIL MOISTURE QUARANTINE OPERATOR (SMQO):
+--------------------------------------------------------------------------------
+Purpose: Evaluates soil moisture data quality and flags anomalies specific to hydrological patterns.
+
+Mathematical Formulation:
+$$ Q_{sm} = \delta_{sm}\left(M_{raw}, 	heta_{sm}, T, Sight) $$
+Where:
+ - $$ M_{raw} $$ is the raw soil moisture measurement data
+ - $$ 	heta_{sm} $$ is the soil moisture contamination threshold
+ - $$ T $$ is the trust level of the data source
+ - $$ S $$ represents seasonal adjustment factors
+ - $$ \delta_{sm} $$ is the soil-specific decision function
+
+Implementation:
+```
+def soil_moisture_quarantine(data, threshold=0.15, trust_level=1.0, seasonal_factors=None):
+    # Default seasonal factors if none provided
+    if seasonal_factors is None:
+        seasonal_factors = {
+            'winter': 1.2,  # Higher threshold in winter
+            'spring': 0.9,  # Lower threshold in spring
+            'summer': 0.8,  # Lowest threshold in summer
+            'fall': 1.0     # Baseline threshold in fall
+        }
+    
+    # Determine current season
+    current_month = datetime.now().month
+    if 3 <= current_month <= 5:
+        season = 'spring'
+    elif 6 <= current_month <= 8:
+        season = 'summer'
+    elif 9 <= current_month <= 11:
+        season = 'fall'
+    else:
+        season = 'winter'
+    
+    # Adjust threshold based on season and trust level
+    adjusted_threshold = threshold * seasonal_factors[season] / trust_level
+    
+    # Calculate contamination score
+    missing_fraction = data.isna().mean()
+    
+    # Calculate statistical outliers (values outside 3 standard deviations)
+    mean = data.mean()
+    std = data.std()
+    outlier_fraction = ((data < (mean - 3*std)) | (data > (mean + 3*std))).mean()
+    
+    # Compute final contamination score
+    contamination_score = 0.7 * missing_fraction + 0.3 * outlier_fraction
+    
+    # Flag data if contamination score exceeds adjusted threshold
+    is_contaminated = contamination_score > adjusted_threshold
+    
+    return {
+        'is_contaminated': is_contaminated,
+        'contamination_score': contamination_score,
+        'adjusted_threshold': adjusted_threshold
+    }
+```
+
+
+2. TOPOGRAPHICAL FRACTAL HARMONIZATION OPERATOR (TFHO):
+--------------------------------------------------------------------------------
+Purpose: Harmonizes soil moisture data with topographical features using fractal geometry.
+
+Mathematical Formulation:
+$$ M_{harm} = M_{raw} 	imes \left(1 - rac{\sigma}{\sigma_{max}}ight) 	imes F(E, S, A) $$
+Where:
+ - $$ M_{harm} $$ is the harmonized soil moisture measurement
+ - $$ \sigma $$ is the contamination score from SMQO
+ - $$ \sigma_{max} $$ is the maximum acceptable contamination
+ - $$ F(E, S, A) $$ is a fractal adjustment function based on:
+   - $$ E $$ is elevation
+   - $$ S $$ is slope
+   - $$ A $$ is aspect
+
+Implementation:
+```
+def topographical_fractal_harmonization(soil_moisture, contamination_score, 
+                                        elevation, slope, aspect, max_contamination=0.3):
+    # Calculate base adjustment factor from contamination
+    base_adjustment = 1 - (contamination_score / max_contamination)
+    
+    # Ensure base adjustment is within [0, 1]
+    base_adjustment = max(0, min(1, base_adjustment))
+    
+    # Calculate fractal adjustment based on topographical features
+    # Normalize elevation to [0, 1] range assuming max elevation of 3000m
+    norm_elevation = min(1.0, elevation / 3000.0)
+    
+    # Normalize slope to [0, 1] range assuming max slope of 45 degrees
+    norm_slope = min(1.0, slope / 45.0)
+    
+    # Convert aspect to radians and calculate north-south component
+    aspect_rad = aspect * (3.14159 / 180.0)
+    ns_component = abs(math.cos(aspect_rad))
+    
+    # Fractal adjustment formula - weights can be tuned
+    fractal_adjustment = (
+        0.5 * norm_elevation +
+        0.3 * norm_slope +
+        0.2 * ns_component
+    )
+    
+    # Apply both adjustments to raw soil moisture data
+    harmonized_moisture = soil_moisture * base_adjustment * fractal_adjustment
+    
+    return harmonized_moisture
+```
+
+
+3. FRACTAL INTEGRATION OPERATOR (FIO):
+--------------------------------------------------------------------------------
+Purpose: Integrates harmonized soil moisture data into a fractal representation of landscape consciousness.
+
+Mathematical Formulation:
+$$ I_f = \sum_{i=1}^n w_i 	imes M_{harm,i} 	imes D(x_i, y_i, z_i) $$
+Where:
+ - $$ I_f $$ is the fractal integrated data
+ - $$ M_{harm,i} $$ is the harmonized soil moisture at point i
+ - $$ w_i $$ is the weight for point i
+ - $$ D(x_i, y_i, z_i) $$ is a fractal dimension function at coordinates (x,y,z)
+
+Implementation:
+```
+def fractal_integration(harmonized_data, coordinates, weights=None):
+    # Default to equal weights if none provided
+    if weights is None:
+        weights = [1.0/len(harmonized_data)] * len(harmonized_data)
+    
+    # Initialize fractal integrated value
+    fractal_integrated = 0.0
+    
+    for i in range(len(harmonized_data)):
+        # Extract coordinates
+        x, y, z = coordinates[i]
+        
+        # Calculate fractal dimension at this point
+        # This is a simplified version - real implementation would use
+        # more sophisticated fractal dimension calculations
+        fractal_dim = calculate_fractal_dimension(x, y, z)
+        
+        # Add weighted contribution
+        fractal_integrated += weights[i] * harmonized_data[i] * fractal_dim
+    
+    return fractal_integrated
+
+def calculate_fractal_dimension(x, y, z):
+    # Simplified fractal dimension calculation
+    # In a real implementation, this would use box-counting or other methods
+    # to calculate the actual fractal dimension of the landscape at this point
+    
+    # For demonstration, we use a simple function of coordinates
+    return 1.0 + 0.1 * math.sin(x/1000.0) + 0.1 * math.cos(y/1000.0) + 0.05 * z/100.0
+```
+
+
+4. FORWARD SECURITY OPERATOR WITH 4SIGHT (FSO4):
+--------------------------------------------------------------------------------
+Purpose: Provides forward security for the integrated data with predictive capabilities.
+
+Mathematical Formulation:
+$$ S_f = I_f 	imes (1 - \eta 	imes P_c) $$
+Where:
+ - $$ S_f $$ is the secured fractal integrated data
+ - $$ I_f $$ is the fractal integrated data
+ - $$ \eta $$ is the security sensitivity parameter
+ - $$ P_c $$ is the predicted contamination probability from 4sight
+
+Implementation:
+```
+def forward_security_with_4sight(integrated_data, sensitivity=0.5):
+    # Calculate predicted contamination probability using 4sight
+    # This is a placeholder for the actual 4sight algorithm
+    predicted_contamination = predict_contamination_4sight(integrated_data)
+    
+    # Apply forward security adjustment
+    secured_data = integrated_data * (1 - sensitivity * predicted_contamination)
+    
+    return {
+        'secured_data': secured_data,
+        'predicted_contamination': predicted_contamination,
+        'security_factor': (1 - sensitivity * predicted_contamination)
+    }
+
+def predict_contamination_4sight(data):
+    # Placeholder for 4sight algorithm
+    # In a real implementation, this would use machine learning or other
+    # predictive methods to forecast potential contamination
+    
+    # For demonstration, we return a random value between 0 and 0.2
+    import random
+    return random.uniform(0, 0.2)
+```
+
+
+5. REPOSITORY VALIDATION OPERATOR (RVO):
+--------------------------------------------------------------------------------
+Purpose: Validates GitHub repositories for safe integration with the system.
+
+Mathematical Formulation:
+$$ V = \gamma(R, \Omega) $$
+Where:
+ - $$ V $$ is the validation result (binary and score)
+ - $$ R $$ represents the repository content
+ - $$ \Omega $$ is the set of validation criteria
+ - $$ \gamma $$ is the validation function
+
+Implementation:
+```
+def repository_validation(repo_url, validation_criteria=None):
+    # Default validation criteria if none provided
+    if validation_criteria is None:
+        validation_criteria = {
+            'trusted_domains': ['github.com/bcgov', 'github.com/governmentofbc'],
+            'required_files': ['README.md', 'LICENSE'],
+            'forbidden_patterns': ['exec(', 'eval(', 'os.system('],
+            'max_file_size_mb': 100
+        }
+    
+    # Extract repository information
+    repo_info = extract_repo_info(repo_url)
+    
+    # Initialize risk score
+    risk_score = 0.0
+    
+    # Check if domain is trusted
+    domain_trusted = any(repo_url.startswith(domain) for domain in validation_criteria['trusted_domains'])
+    if not domain_trusted:
+        risk_score += 0.3
+    
+    # Check for required files
+    missing_required_files = [file for file in validation_criteria['required_files'] 
+                             if file not in repo_info['files']]
+    risk_score += 0.1 * len(missing_required_files) / len(validation_criteria['required_files'])
+    
+    # Check for forbidden patterns in code
+    has_forbidden_patterns = any(pattern in repo_info['code_content'] 
+                                for pattern in validation_criteria['forbidden_patterns'])
+    if has_forbidden_patterns:
+        risk_score += 0.4
+    
+    # Check file sizes
+    oversized_files = [file for file in repo_info['file_sizes'] 
+                      if repo_info['file_sizes'][file] > validation_criteria['max_file_size_mb']]
+    if oversized_files:
+        risk_score += 0.2 * len(oversized_files) / len(repo_info['file_sizes'])
+    
+    # Determine if repository is valid (risk score below threshold)
+    is_valid = risk_score < 0.5
+    
+    return {
+        'is_valid': is_valid,
+        'risk_score': risk_score,
+        'domain_trusted': domain_trusted,
+        'missing_required_files': missing_required_files,
+        'has_forbidden_patterns': has_forbidden_patterns,
+        'oversized_files': oversized_files
+    }
+
+def extract_repo_info(repo_url):
+    # Placeholder function to extract repository information
+    # In a real implementation, this would use GitHub API or git commands
+    
+    # For demonstration, we return dummy data
+    return {
+        'files': ['README.md', 'LICENSE', 'code.py'],
+        'code_content': 'print("Hello World")',
+        'file_sizes': {'README.md': 0.01, 'LICENSE': 0.02, 'code.py': 0.005}
+    }
+```
+
+INTEGRATION WORKFLOW:
+--------------------------------------------------------------------------------
+1. Retrieve soil moisture and topographical data from trusted sources.
+2. Apply SOIL MOISTURE QUARANTINE OPERATOR to evaluate data quality.
+3. Use TOPOGRAPHICAL FRACTAL HARMONIZATION OPERATOR to harmonize soil moisture with topography.
+4. Apply FRACTAL INTEGRATION OPERATOR to create a unified fractal representation.
+5. Implement FORWARD SECURITY OPERATOR WITH 4SIGHT to secure the integrated data.
+6. Use REPOSITORY VALIDATION OPERATOR when incorporating external GitHub repositories.
+
+********************************************************************************
+End of Soil Moisture Fractal Operators Documentation
+********************************************************************************

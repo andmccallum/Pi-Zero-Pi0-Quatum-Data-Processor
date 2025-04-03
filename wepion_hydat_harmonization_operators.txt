@@ -1,0 +1,210 @@
+
+----------------------------------------------------------------------------------------------------
+WEPi0n Harmonization Operators for Canadian Hydrometric Data (HYDAT)
+----------------------------------------------------------------------------------------------------
+
+Overview:
+This module defines specialized operators and functions for WEPi0n to harmonize the Canadian Hydrometric Data (HYDAT) available at:
+https://open.canada.ca/data/en/dataset/2a8dc1e3-c5bc-4d95-a633-7881e576df52/resource/90114f2c-f7ba-43de-8bba-e955383673b2
+
+The HYDAT database contains water level and streamflow data collected at over 2,500 active and 5,500 discontinued hydrometric monitoring stations across Canada. WEPi0n will harmonize this data for integration into the M0pi0 system, enabling comprehensive water resource analysis and visualization.
+
+Key Components:
+
+1. Data Acquisition & Database Connection:
+   - acquire_hydat_database(url):
+       Downloads and extracts the HYDAT SQLite database from the provided URL.
+   - establish_hydat_connection(db_path):
+       Establishes a connection to the HYDAT SQLite database for data extraction.
+
+2. Data Extraction & Transformation:
+   - extract_station_metadata(connection):
+       Extracts metadata for all hydrometric stations (location, name, status, etc.).
+   - extract_hydrometric_data(connection, station_id, data_type, start_date, end_date):
+       Extracts time series data for a specific station, data type, and time period.
+   - transform_hydrometric_data(raw_data):
+       Transforms raw hydrometric data into a standardized format compatible with M0pi0.
+
+3. Spatial Harmonization & Integration:
+   - harmonize_spatial_coordinates(station_data):
+       Converts station coordinates to a standard coordinate reference system and generates geometric tags.
+   - integrate_with_bioterrain(hydat_data, bioterrain_data):
+       Integrates hydrometric data with previously harmonized bioterrain data for comprehensive environmental analysis.
+
+4. Temporal Harmonization & Flow Analysis:
+   - harmonize_temporal_resolution(time_series_data):
+       Standardizes temporal resolution across different data streams (daily, monthly, annual).
+   - calculate_flow_statistics(harmonized_data):
+       Computes statistical measures for streamflow data (mean, median, percentiles, etc.).
+   - detect_flow_anomalies(harmonized_data):
+       Identifies anomalies in streamflow patterns using statistical and machine learning methods.
+
+5. M0pi0 Integration & Visualization:
+   - integrate_hydat_into_M0pi0(harmonized_data):
+       Integrates harmonized HYDAT data into the M0pi0 system.
+   - generate_flow_visualization(station_id, time_period):
+       Creates visualizations of streamflow data for specific stations and time periods.
+
+Mathematical Equations and Formulas:
+
+- Flow Duration Curve Calculation:
+  $$P(Q \geq q) = \frac{m}{n+1} \times 100\%$$
+  where \(m\) is the rank of the flow value \(q\) when arranged in descending order, and \(n\) is the total number of flow values.
+
+- Baseflow Separation using Digital Filter:
+  $$b_t = \alpha \times b_{t-1} + \frac{1-\alpha}{2} \times (Q_t + Q_{t-1})$$
+  where \(b_t\) is the baseflow at time \(t\), \(Q_t\) is the total streamflow, and \(\alpha\) is the filter parameter.
+
+- Spatial Interpolation of Streamflow using Inverse Distance Weighting:
+  $$Q_p = \frac{\sum_{i=1}^{n} w_i \times Q_i}{\sum_{i=1}^{n} w_i}$$
+  where \(w_i = \frac{1}{d_i^p}\), \(d_i\) is the distance from point \(p\) to station \(i\), and \(p\) is the power parameter.
+
+- Flow Anomaly Detection using Z-score:
+  $$Z = \frac{Q - \mu}{\sigma}$$
+  where \(Q\) is the observed flow, \(\mu\) is the historical mean flow, and \(\sigma\) is the standard deviation.
+
+Function Stubs (Python Implementation):
+
+# Data Acquisition & Database Connection
+
+def acquire_hydat_database(url):
+    """
+    Downloads and extracts the HYDAT SQLite database from the provided URL.
+    Returns the path to the extracted database file.
+    """
+    # Implementation: Use requests to download and extract the database
+    pass
+
+
+def establish_hydat_connection(db_path):
+    """
+    Establishes a connection to the HYDAT SQLite database.
+    Returns a database connection object.
+    """
+    # Implementation: Use sqlite3 to connect to the database
+    pass
+
+# Data Extraction & Transformation
+
+def extract_station_metadata(connection):
+    """
+    Extracts metadata for all hydrometric stations.
+    Returns a DataFrame containing station information.
+    """
+    # Implementation: Execute SQL query to retrieve station metadata
+    pass
+
+
+def extract_hydrometric_data(connection, station_id, data_type, start_date, end_date):
+    """
+    Extracts time series data for a specific station, data type, and time period.
+    Returns a DataFrame containing the requested data.
+    """
+    # Implementation: Execute SQL query to retrieve hydrometric data
+    pass
+
+
+def transform_hydrometric_data(raw_data):
+    """
+    Transforms raw hydrometric data into a standardized format compatible with M0pi0.
+    Returns a DataFrame with transformed data.
+    """
+    # Implementation: Clean, normalize, and restructure the data
+    pass
+
+# Spatial Harmonization & Integration
+
+def harmonize_spatial_coordinates(station_data):
+    """
+    Converts station coordinates to a standard coordinate reference system and generates geometric tags.
+    Returns a DataFrame with harmonized spatial information.
+    """
+    # Implementation: Convert coordinates and generate geometric tags
+    pass
+
+
+def integrate_with_bioterrain(hydat_data, bioterrain_data):
+    """
+    Integrates hydrometric data with bioterrain data for comprehensive environmental analysis.
+    Returns a DataFrame with integrated data.
+    """
+    # Implementation: Perform spatial join and attribute integration
+    pass
+
+# Temporal Harmonization & Flow Analysis
+
+def harmonize_temporal_resolution(time_series_data):
+    """
+    Standardizes temporal resolution across different data streams.
+    Returns a DataFrame with harmonized temporal resolution.
+    """
+    # Implementation: Resample and aggregate data to standard time intervals
+    pass
+
+
+def calculate_flow_statistics(harmonized_data):
+    """
+    Computes statistical measures for streamflow data.
+    Returns a DataFrame with calculated statistics.
+    """
+    # Implementation: Calculate mean, median, percentiles, etc.
+    pass
+
+
+def detect_flow_anomalies(harmonized_data):
+    """
+    Identifies anomalies in streamflow patterns using statistical and machine learning methods.
+    Returns a DataFrame with detected anomalies.
+    """
+    # Implementation: Apply anomaly detection algorithms
+    pass
+
+# M0pi0 Integration & Visualization
+
+def integrate_hydat_into_M0pi0(harmonized_data):
+    """
+    Integrates harmonized HYDAT data into the M0pi0 system.
+    """
+    # Implementation: Update M0pi0 with harmonized data
+    pass
+
+
+def generate_flow_visualization(station_id, time_period):
+    """
+    Creates visualizations of streamflow data for specific stations and time periods.
+    Returns visualization objects.
+    """
+    # Implementation: Generate plots and interactive visualizations
+    pass
+
+# WEPi0n Specialized Operators
+
+def wepion_hydrological_modeling(harmonized_data, precipitation_data):
+    """
+    Performs hydrological modeling using harmonized HYDAT data and precipitation data.
+    Returns model results.
+    """
+    # Implementation: Apply hydrological models (e.g., rainfall-runoff models)
+    pass
+
+
+def wepion_flood_forecasting(harmonized_data, weather_forecast):
+    """
+    Generates flood forecasts based on harmonized HYDAT data and weather forecasts.
+    Returns forecast results.
+    """
+    # Implementation: Apply flood forecasting algorithms
+    pass
+
+
+def wepion_drought_analysis(harmonized_data, climate_indices):
+    """
+    Analyzes drought conditions using harmonized HYDAT data and climate indices.
+    Returns drought analysis results.
+    """
+    # Implementation: Calculate drought indices and perform trend analysis
+    pass
+
+----------------------------------------------------------------------------------------------------
+END OF WEPION HYDAT HARMONIZATION OPERATORS EXPORT
+----------------------------------------------------------------------------------------------------

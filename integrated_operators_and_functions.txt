@@ -1,0 +1,94 @@
+
+********************************************************************************
+      Integrated Operators and Functions for M0pi0 Modeling Engine
+********************************************************************************
+Report Date: 2025-04-02 15:27:38
+
+OVERVIEW:
+--------------------------------------------------------------------------------
+This document defines a suite of integrated operators and functions designed to harmonize,
+compress, and integrate hydrologic data streams for active memory processing with reduced weight.
+
+The Operators and their Mathematical Formulations:
+
+1. DATA QUARANTINE OPERATOR (QO):
+--------------------------------------------------------------------------------
+Purpose: Evaluates the quality of raw data and flags anomalies prior to integration.
+
+Mathematical Formulation:
+$$ Q = \delta\left(M_{raw}, 	hetaight) $$
+Where:
+ - $$ M_{raw} $$ is the raw measurement data
+ - $$ 	heta $$ is the contamination threshold
+ - $$ \delta $$ is the decision function that outputs a binary flag and a contamination score
+
+Implementation:
+ - Compute fraction of missing values and statistical outliers
+ - Score = 0.7 * (missing fraction) + 0.3 * (outlier fraction)
+
+
+2. DATA HARMONIZATION OPERATOR (HO):
+--------------------------------------------------------------------------------
+Purpose: Adjusts raw data based on contamination score and aligns measurements across datasets.
+
+Mathematical Formulation:
+$$ M_{harm} = M_{raw} 	imes \left(1 - rac{\sigma}{\sigma_{max}}ight) $$
+Where:
+ - $$ M_{harm} $$ is the harmonized measurement
+ - $$ \sigma $$ is the contamination score from QO
+ - $$ \sigma_{max} $$ is the maximum acceptable contamination
+
+Implementation:
+ - Apply equation element-wise to all numeric measurements
+
+
+3. DATA INTEGRATION OPERATOR (DIO):
+--------------------------------------------------------------------------------
+Purpose: Integrates harmonized data streams from multiple hydrological sources into a unified representation.
+
+Mathematical Formulation:
+$$ I = \sum_{i=1}^n w_i 	imes M_{harm,i} $$
+Where:
+ - $$ I $$ is the integrated data signal
+ - $$ M_{harm,i} $$ is the harmonized measurement from dataset i
+ - $$ w_i $$ is a weight derived from statistical prioritization of dataset i
+
+Implementation:
+ - Compute weights based on data completeness, relevance, and temporal consistency
+ - Sum over all datasets
+
+
+4. DATA COMPRESSION OPERATOR (DCO):
+--------------------------------------------------------------------------------
+Purpose: Compresses the integrated data into an active memory structure with minimized storage weight.
+
+Mathematical Formulation:
+$$ C = \mathcal{C}\left(Iight) $$
+Where:
+ - $$ C $$ is the compressed representation
+ - $$ \mathcal{C} $$ is a compression function (e.g. wavelet or fractal compression)
+
+Implementation:
+ - Apply compression algorithm to the integrated signal
+
+
+DATA FLOW WORKFLOW:
+--------------------------------------------------------------------------------
+1. Retrieve Data:
+   - Access datasets: Hydrometric (Provincial), Hydrometric (Other), Snow, Groundwater.
+
+2. Evaluate Data Quality using QO:
+   - Execute Quarantine Operator on each raw dataset to obtain contamination scores.
+
+3. Harmonize Data using HO:
+   - Adjust raw measurements using the contamination scores.
+
+4. Integrate Harmonized Data using DIO:
+   - Compute a weighted sum over the harmonized datasets.
+
+5. Compress the Integrated Data using DCO:
+   - Apply compression to derive a low-weight, high-fidelity active memory representation.
+
+********************************************************************************
+End of Integrated Operators Documentation
+********************************************************************************

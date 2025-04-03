@@ -1,0 +1,53 @@
+
+********************************************************************************
+      Air Quality Data Workflow Results
+********************************************************************************
+Report Date: 2025-04-02 15:39:15
+
+WORKFLOW SUMMARY:
+--------------------------------------------------------------------------------
+1. Raw Data Collection:
+   - Collected data from 7 monitoring sites across 7 air zones
+   - Raw data size: 480 records with 13 parameters
+   - Memory usage: 0.10 MB
+
+2. Data Quarantine:
+   - Applied contamination detection algorithms
+   - Identified 0 sites with potential data quality issues
+   - Average contamination score: 0.012
+
+3. Data Harmonization:
+   - Applied adjustments based on contamination scores
+   - Integrated wind factors to adjust pollutant concentrations
+
+4. Data Lightening:
+   - Reduced data precision and aggregated to hourly intervals
+   - Final data size: 480 records
+   - Memory usage: 0.12 MB
+   - Achieved -22.1% memory reduction
+
+5. Air Quality Index:
+   - Calculated simplified AQI for each zone
+   - Zones with highest AQI: Central Interior (73.4)
+   - Zones with lowest AQI: Peace (46.3)
+
+6. Vertical Air Analysis:
+   - Estimated inversion layer heights based on surface temperature
+   - Calculated vertical impact factors for pollutant trapping
+   - Zone with highest vertical impact: Okanagan (1.23)
+
+CONCLUSIONS:
+--------------------------------------------------------------------------------
+The workflow successfully demonstrates how air quality data can be gathered, 
+quarantined, harmonized, and lightened while extracting essential information about 
+air quality conditions and vertical air structure. The memory footprint was reduced 
+by -22.1% while maintaining the ability to 
+derive meaningful air quality indices and vertical air layer analysis.
+
+This approach allows for efficient modeling of air movement and the layer of air 
+between the ground surface and higher atmosphere cloud density without storing 
+excessive data in memory.
+
+********************************************************************************
+End of Air Quality Data Workflow Results
+********************************************************************************

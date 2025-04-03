@@ -1,0 +1,317 @@
+
+----------------------------------------------------------------------------------------------------
+WEPi0n Snow Pillow Data Operators for M0pi0 Integration
+----------------------------------------------------------------------------------------------------
+
+Overview:
+This module defines specialized operators and functions for WEPi0n to capture, stream, and harmonize 
+snow pillow data from the British Columbia Automated Snow Weather Station network:
+https://catalogue.data.gov.bc.ca/dataset/current-season-automated-snow-weather-station-data
+
+The BC Automated Snow Weather Station network provides real-time data on snow water equivalent (SWE), 
+snow depth, temperature, and other meteorological parameters. WEPi0n will implement operators to 
+stream this data in real-time and harmonize it with existing hydrological and bioterrain data in the 
+M0pi0 system, enabling comprehensive snow pack analysis, water supply forecasting, and flood risk assessment.
+
+Key Components:
+
+1. Data Acquisition & Real-time Streaming:
+   - establish_snow_data_connection(url):
+       Establishes a connection to the BC snow pillow data API endpoint.
+   - stream_snow_pillow_data(connection, station_ids=None):
+       Streams real-time snow pillow data for all stations or specified station IDs.
+   - schedule_data_polling(interval_minutes):
+       Sets up a scheduled polling mechanism to regularly fetch updated snow data.
+
+2. Data Parsing & Transformation:
+   - parse_snow_pillow_xml(xml_data):
+       Parses XML-formatted snow pillow data into structured format.
+   - transform_snow_data(raw_data):
+       Transforms raw snow data into a standardized format compatible with M0pi0.
+   - calculate_derived_metrics(snow_data):
+       Calculates derived metrics such as SWE change rates, melt rates, and accumulation rates.
+
+3. Spatial Harmonization & Integration:
+   - harmonize_snow_station_coordinates(station_data):
+       Converts snow station coordinates to a standard coordinate reference system and generates geometric tags.
+   - integrate_with_hydat_data(snow_data, hydat_data):
+       Integrates snow data with previously harmonized HYDAT data for comprehensive hydrological analysis.
+   - integrate_with_bioterrain(snow_data, bioterrain_data):
+       Integrates snow data with bioterrain data for terrain-based snow distribution analysis.
+
+4. Temporal Harmonization & Snow Analysis:
+   - harmonize_temporal_resolution(time_series_data):
+       Standardizes temporal resolution across different data streams.
+   - detect_snow_anomalies(harmonized_data):
+       Identifies anomalies in snow accumulation and melt patterns.
+   - calculate_snow_statistics(harmonized_data):
+       Computes statistical measures for snow data (percentiles relative to historical records, etc.).
+
+5. M0pi0 Integration & Visualization:
+   - integrate_snow_data_into_M0pi0(harmonized_data):
+       Integrates harmonized snow data into the M0pi0 system.
+   - generate_snow_visualization(station_id, time_period):
+       Creates visualizations of snow data for specific stations and time periods.
+   - generate_snow_distribution_map(date):
+       Creates spatial distribution maps of snow parameters across the region.
+
+Mathematical Equations and Formulas:
+
+- Snow Water Equivalent (SWE) Calculation from Snow Pillow Pressure:
+  $$SWE = \frac{P}{\rho_w \times g}$$
+  where \(P\) is the measured pressure, \(\rho_w\) is the density of water, and \(g\) is the gravitational acceleration.
+
+- Snow Melt Rate Calculation:
+  $$M_r = -\frac{dSWE}{dt}$$
+  where \(M_r\) is the melt rate and \(\frac{dSWE}{dt}\) is the rate of change of SWE over time (negative values indicate melt).
+
+- Temperature Index Snow Melt Model:
+  $$M = C_m \times (T - T_{base}) \quad \text{for} \quad T > T_{base}$$
+  where \(M\) is the melt rate, \(C_m\) is the melt factor, \(T\) is the air temperature, and \(T_{base}\) is the base temperature (typically 0°C).
+
+- Spatial Interpolation of SWE using Elevation-Dependent Regression:
+  $$SWE_p = SWE_{ref} + \beta \times (Z_p - Z_{ref})$$
+  where \(SWE_p\) is the estimated SWE at point \(p\), \(SWE_{ref}\) is the measured SWE at a reference station, \(\beta\) is the elevation gradient, \(Z_p\) is the elevation at point \(p\), and \(Z_{ref}\) is the elevation at the reference station.
+
+- Snow Anomaly Calculation:
+  $$A_{SWE} = \frac{SWE - SWE_{median}}{SWE_{IQR}}$$
+  where \(A_{SWE}\) is the SWE anomaly, \(SWE\) is the observed SWE, \(SWE_{median}\) is the historical median SWE for the date, and \(SWE_{IQR}\) is the interquartile range.
+
+- Snow Accumulation Rate:
+  $$A_r = \frac{dSWE}{dt} \quad \text{for} \quad \frac{dSWE}{dt} > 0$$
+  where \(A_r\) is the accumulation rate and \(\frac{dSWE}{dt}\) is the rate of change of SWE over time (positive values indicate accumulation).
+
+Function Stubs (Python Implementation):
+
+# Data Acquisition & Real-time Streaming
+
+def establish_snow_data_connection(url):
+    """
+    Establishes a connection to the BC snow pillow data API endpoint.
+    Returns a connection object.
+    """
+    # Implementation: Use requests or similar library to establish connection
+    pass
+
+
+def stream_snow_pillow_data(connection, station_ids=None):
+    """
+    Streams real-time snow pillow data for all stations or specified station IDs.
+    Returns a DataFrame containing the latest snow data.
+    """
+    # Implementation: Fetch data from API endpoint
+    pass
+
+
+def schedule_data_polling(interval_minutes):
+    """
+    Sets up a scheduled polling mechanism to regularly fetch updated snow data.
+    Returns a scheduler object.
+    """
+    # Implementation: Use APScheduler or similar library to set up scheduled polling
+    pass
+
+# Data Parsing & Transformation
+
+def parse_snow_pillow_xml(xml_data):
+    """
+    Parses XML-formatted snow pillow data into structured format.
+    Returns a DataFrame with parsed data.
+    """
+    # Implementation: Use xml.etree.ElementTree or similar library to parse XML
+    pass
+
+
+def transform_snow_data(raw_data):
+    """
+    Transforms raw snow data into a standardized format compatible with M0pi0.
+    Returns a DataFrame with transformed data.
+    """
+    # Implementation: Clean, normalize, and restructure the data
+    pass
+
+
+def calculate_derived_metrics(snow_data):
+    """
+    Calculates derived metrics such as SWE change rates, melt rates, and accumulation rates.
+    Returns a DataFrame with additional derived metrics.
+    """
+    # Implementation: Calculate derived metrics using mathematical formulas
+    pass
+
+# Spatial Harmonization & Integration
+
+def harmonize_snow_station_coordinates(station_data):
+    """
+    Converts snow station coordinates to a standard coordinate reference system and generates geometric tags.
+    Returns a DataFrame with harmonized spatial information.
+    """
+    # Implementation: Convert coordinates and generate geometric tags
+    pass
+
+
+def integrate_with_hydat_data(snow_data, hydat_data):
+    """
+    Integrates snow data with HYDAT data for comprehensive hydrological analysis.
+    Returns a DataFrame with integrated data.
+    """
+    # Implementation: Perform spatial join and attribute integration
+    pass
+
+
+def integrate_with_bioterrain(snow_data, bioterrain_data):
+    """
+    Integrates snow data with bioterrain data for terrain-based snow distribution analysis.
+    Returns a DataFrame with integrated data.
+    """
+    # Implementation: Perform spatial join and attribute integration
+    pass
+
+# Temporal Harmonization & Snow Analysis
+
+def harmonize_temporal_resolution(time_series_data):
+    """
+    Standardizes temporal resolution across different data streams.
+    Returns a DataFrame with harmonized temporal resolution.
+    """
+    # Implementation: Resample and aggregate data to standard time intervals
+    pass
+
+
+def detect_snow_anomalies(harmonized_data):
+    """
+    Identifies anomalies in snow accumulation and melt patterns.
+    Returns a DataFrame with detected anomalies.
+    """
+    # Implementation: Apply anomaly detection algorithms
+    pass
+
+
+def calculate_snow_statistics(harmonized_data):
+    """
+    Computes statistical measures for snow data.
+    Returns a DataFrame with calculated statistics.
+    """
+    # Implementation: Calculate percentiles, means, etc. relative to historical records
+    pass
+
+# M0pi0 Integration & Visualization
+
+def integrate_snow_data_into_M0pi0(harmonized_data):
+    """
+    Integrates harmonized snow data into the M0pi0 system.
+    """
+    # Implementation: Update M0pi0 with harmonized snow data
+    pass
+
+
+def generate_snow_visualization(station_id, time_period):
+    """
+    Creates visualizations of snow data for specific stations and time periods.
+    Returns visualization objects.
+    """
+    # Implementation: Generate plots and interactive visualizations
+    pass
+
+
+def generate_snow_distribution_map(date):
+    """
+    Creates spatial distribution maps of snow parameters across the region.
+    Returns map visualization objects.
+    """
+    # Implementation: Generate spatial distribution maps using interpolation
+    pass
+
+# WEPi0n Specialized Snow Analysis Operators
+
+def wepion_snowmelt_runoff_modeling(snow_data, temperature_data, precipitation_data):
+    """
+    Performs snowmelt-runoff modeling using snow data, temperature data, and precipitation data.
+    Returns model results.
+    """
+    # Implementation: Apply snowmelt-runoff models
+    pass
+
+
+def wepion_snow_water_supply_forecasting(snow_data, climate_forecast):
+    """
+    Generates water supply forecasts based on current snow conditions and climate forecasts.
+    Returns forecast results.
+    """
+    # Implementation: Apply water supply forecasting algorithms
+    pass
+
+
+def wepion_avalanche_risk_assessment(snow_data, terrain_data, weather_forecast):
+    """
+    Assesses avalanche risk based on snow conditions, terrain characteristics, and weather forecasts.
+    Returns risk assessment results.
+    """
+    # Implementation: Apply avalanche risk assessment algorithms
+    pass
+
+
+def wepion_snow_climate_change_analysis(historical_snow_data, climate_projections):
+    """
+    Analyzes the impact of climate change on snow conditions using historical data and climate projections.
+    Returns analysis results.
+    """
+    # Implementation: Apply trend analysis and climate change impact assessment
+    pass
+
+# Implementation Example: Snow Water Equivalent Calculation
+
+def calculate_swe_from_pressure(pressure_data):
+    """
+    Calculates Snow Water Equivalent (SWE) from snow pillow pressure data.
+    
+    Parameters:
+    pressure_data (DataFrame): DataFrame containing pressure measurements in kPa
+    
+    Returns:
+    DataFrame: DataFrame with calculated SWE values in mm
+    """
+    # Constants
+    water_density = 1000  # kg/m³
+    g = 9.81  # m/s²
+    
+    # Calculate SWE in mm
+    # SWE (mm) = Pressure (kPa) / (water_density (kg/m³) * g (m/s²)) * 1,000,000
+    swe_data = pressure_data.copy()
+    swe_data['swe_mm'] = pressure_data['pressure_kpa'] / (water_density * g) * 1000000
+    
+    return swe_data
+
+# Implementation Example: Snow Melt Rate Calculation
+
+def calculate_melt_rate(swe_data, time_column='datetime'):
+    """
+    Calculates snow melt rate from SWE time series data.
+    
+    Parameters:
+    swe_data (DataFrame): DataFrame containing SWE measurements and datetime
+    time_column (str): Name of the column containing datetime information
+    
+    Returns:
+    DataFrame: DataFrame with calculated melt rates in mm/day
+    """
+    # Ensure data is sorted by time
+    swe_data = swe_data.sort_values(by=time_column)
+    
+    # Calculate SWE change
+    swe_data['swe_change'] = swe_data['swe_mm'].diff()
+    
+    # Calculate time difference in days
+    swe_data['time_diff_days'] = swe_data[time_column].diff().dt.total_seconds() / (24 * 3600)
+    
+    # Calculate melt rate (negative values indicate melt)
+    swe_data['melt_rate_mm_per_day'] = -swe_data['swe_change'] / swe_data['time_diff_days']
+    
+    # Filter for melt periods (negative SWE change)
+    melt_data = swe_data[swe_data['swe_change'] < 0].copy()
+    
+    return melt_data
+
+----------------------------------------------------------------------------------------------------
+END OF WEPION SNOW PILLOW DATA OPERATORS EXPORT
+----------------------------------------------------------------------------------------------------
