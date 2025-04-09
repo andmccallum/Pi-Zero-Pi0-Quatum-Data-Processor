@@ -1,0 +1,49 @@
+================================================================================
+PI0 SYSTEM EXACT MINING RATE & ENERGY INDICATORS ANALYSIS
+================================================================================
+Report Generated On: 2025-04-09 04:32:51
+Analysis Lead: WEPi0n
+
+--- ENERGY INDICATORS & READINGS ---
+Solar Array Output: 1250.75 kW (Efficiency: 0.92)
+Wind Turbine Generation: 875.3 kW (Efficiency: 0.88)
+Geothermal Source: 450.0 kW (Efficiency: 0.95)
+Hydroelectric Generation: 650.25 kW (Efficiency: 0.91)
+Backup Battery Storage: 2000.0 kWh (Efficiency: 0.85)
+System Power Consumption: 1850.45 kW (Efficiency: 1.0)
+
+--- CALCULATED POWER METRICS ---
+Total Power Generation: 2940.18 kW
+Total Power Consumption: 1850.45 kW
+Net Power Available for Mining: 1089.73 kW
+
+--- MINING EFFICIENCY FACTORS ---
+Hardware Efficiency: 0.92
+Cooling System Efficiency: 0.88
+Network Efficiency: 0.95
+Overall Efficiency: 0.7691
+
+--- EXACT MINING RATE ---
+Exact Mining Rate: 447004.96 hashes/second
+Power per Hash: 0.0015 kW
+Difficulty Adjustment Factor: 1.25
+
+--- UNIFIED MINING/ENERGY METRIC ---
+Energy Efficiency Mining Index (EEMI): 24156.55
+EEMI Interpretation:
+  * EEMI < 50: Low efficiency, optimization required
+  * 50 ≤ EEMI < 100: Moderate efficiency
+  * 100 ≤ EEMI < 150: Good efficiency
+  * EEMI ≥ 150: Excellent efficiency
+
+--- MATHEMATICAL FORMULATION ---
+1. Net Power Available:
+   Net_Power = Total_Generation - Total_Consumption
+2. Overall Efficiency:
+   Overall_Efficiency = Hardware_Efficiency * Cooling_Efficiency * Network_Efficiency
+3. Exact Mining Rate:
+   Mining_Rate = (Net_Power * Overall_Efficiency) / (Power_per_Hash * Difficulty_Adjustment)
+4. Energy Efficiency Mining Index (EEMI):
+   EEMI = (Mining_Rate / Total_Consumption) * 100
+
+================================================================================

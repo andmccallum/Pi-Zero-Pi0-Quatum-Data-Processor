@@ -1,0 +1,219 @@
+
+# Pi0 Integrated Payroll System Implementation
+# This script contains the full implementation of the Pi0 payroll system
+
+import math
+import random
+import json
+import numpy as np
+from datetime import datetime
+
+class Pi0PayrollSystem:
+    def __init__(self):
+        self.employees = {}
+        self.payment_history = []
+        self.tax_rates = {'federal': 0.22, 'state': 0.05, 'local': 0.02}
+        self.benefit_rates = {'health': 0.08, 'retirement': 0.06, 'insurance': 0.03}
+        self.execution_log = []
+        self.entities = {
+            'WEPi0n': {'role': 'Payroll Manager', 'access_level': 'admin'},
+            'GPi0n': {'role': 'Tax Specialist', 'access_level': 'elevated'},
+            'EPi0n': {'role': 'Benefits Coordinator', 'access_level': 'standard'},
+            'ePi0_Agents': {'role': 'Payment Processors', 'access_level': 'standard'},
+            'Pi0Secure': {'role': 'Security Auditor', 'access_level': 'admin'}
+        }
+        self.execution_log.append("Pi0 Payroll System initialized")
+
+    def add_employee(self, employee_id, name, salary, department, hire_date):
+        self.employees[employee_id] = {
+            'name': name,
+            'salary': salary,
+            'department': department,
+            'hire_date': hire_date,
+            'status': 'active'
+        }
+        self.execution_log.append(f"Added employee {name} with ID {employee_id}")
+        return f"Employee {name} added successfully with ID {employee_id}"
+
+    def calculate_payroll(self, pay_period_start, pay_period_end):
+        payroll = []
+        for emp_id, emp_data in self.employees.items():
+            if emp_data['status'] != 'active':
+                continue
+                
+            gross_pay = emp_data['salary'] / 26  # Bi-weekly pay
+            
+            # Calculate taxes
+            federal_tax = gross_pay * self.tax_rates['federal']
+            state_tax = gross_pay * self.tax_rates['state']
+            local_tax = gross_pay * self.tax_rates['local']
+            
+            # Calculate benefits
+            health_deduction = gross_pay * self.benefit_rates['health']
+            retirement_deduction = gross_pay * self.benefit_rates['retirement']
+            insurance_deduction = gross_pay * self.benefit_rates['insurance']
+            
+            # Calculate net pay
+            net_pay = gross_pay - (federal_tax + state_tax + local_tax + 
+                                  health_deduction + retirement_deduction + insurance_deduction)
+            
+            payment = {
+                'employee_id': emp_id,
+                'name': emp_data['name'],
+                'pay_period_start': pay_period_start,
+                'pay_period_end': pay_period_end,
+                'gross_pay': gross_pay,
+                'federal_tax': federal_tax,
+                'state_tax': state_tax,
+                'local_tax': local_tax,
+                'health_deduction': health_deduction,
+                'retirement_deduction': retirement_deduction,
+                'insurance_deduction': insurance_deduction,
+                'net_pay': net_pay,
+                'payment_date': datetime.now().strftime('%Y-%m-%d'),
+                'status': 'processed'
+            }
+            
+            payroll.append(payment)
+            self.payment_history.append(payment)
+        
+        self.execution_log.append(f"Processed payroll for {len(payroll)} employees")
+        return payroll
+
+    def generate_tax_report(self, year, quarter):
+        tax_report = {
+            'year': year,
+            'quarter': quarter,
+            'federal_total': 0,
+            'state_total': 0,
+            'local_total': 0,
+            'employee_details': []
+        }
+        
+        for payment in self.payment_history:
+            payment_date = datetime.strptime(payment['payment_date'], '%Y-%m-%d')
+            payment_year = payment_date.year
+            payment_quarter = (payment_date.month - 1) // 3 + 1
+            
+            if payment_year == year and payment_quarter == quarter:
+                tax_report['federal_total'] += payment['federal_tax']
+                tax_report['state_total'] += payment['state_tax']
+                tax_report['local_total'] += payment['local_tax']
+                
+                tax_report['employee_details'].append({
+                    'employee_id': payment['employee_id'],
+                    'name': payment['name'],
+                    'federal_tax': payment['federal_tax'],
+                    'state_tax': payment['state_tax'],
+                    'local_tax': payment['local_tax']
+                })
+        
+        self.execution_log.append(f"Generated tax report for {year} Q{quarter}")
+        return tax_report
+
+    def generate_benefits_report(self, year, month):
+        benefits_report = {
+            'year': year,
+            'month': month,
+            'health_total': 0,
+            'retirement_total': 0,
+            'insurance_total': 0,
+            'employee_details': []
+        }
+        
+        for payment in self.payment_history:
+            payment_date = datetime.strptime(payment['payment_date'], '%Y-%m-%d')
+            payment_year = payment_date.year
+            payment_month = payment_date.month
+            
+            if payment_year == year and payment_month == month:
+                benefits_report['health_total'] += payment['health_deduction']
+                benefits_report['retirement_total'] += payment['retirement_deduction']
+                benefits_report['insurance_total'] += payment['insurance_deduction']
+                
+                benefits_report['employee_details'].append({
+                    'employee_id': payment['employee_id'],
+                    'name': payment['name'],
+                    'health_deduction': payment['health_deduction'],
+                    'retirement_deduction': payment['retirement_deduction'],
+                    'insurance_deduction': payment['insurance_deduction']
+                })
+        
+        self.execution_log.append(f"Generated benefits report for {year}-{month}")
+        return benefits_report
+
+    def audit_payroll_system(self):
+        audit_results = {
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'auditor': 'Pi0Secure',
+            'employees_count': len(self.employees),
+            'payments_count': len(self.payment_history),
+            'system_integrity': 'verified',
+            'findings': []
+        }
+        
+        # Check for unusual payments
+        for payment in self.payment_history:
+            if payment['gross_pay'] <= 0:
+                audit_results['findings'].append(f"Invalid gross pay for {payment['name']}")
+                audit_results['system_integrity'] = 'issues_found'
+            
+            if payment['net_pay'] < 0:
+                audit_results['findings'].append(f"Negative net pay for {payment['name']}")
+                audit_results['system_integrity'] = 'issues_found'
+        
+        # Check for inactive employees receiving payments
+        for payment in self.payment_history:
+            emp_id = payment['employee_id']
+            if emp_id in self.employees and self.employees[emp_id]['status'] != 'active':
+                audit_results['findings'].append(f"Payment to inactive employee {payment['name']}")
+                audit_results['system_integrity'] = 'issues_found'
+        
+        self.execution_log.append("Completed payroll system audit")
+        return audit_results
+
+    def run_payroll_investigation(self, investigator, target_period=None):
+        investigation_results = {
+            'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'investigator': investigator,
+            'scope': 'full_system' if target_period is None else f"period_{target_period}",
+            'findings': []
+        }
+        
+        # Verify tax calculations
+        for payment in self.payment_history:
+            expected_federal = payment['gross_pay'] * self.tax_rates['federal']
+            if abs(payment['federal_tax'] - expected_federal) > 0.01:
+                investigation_results['findings'].append(
+                    f"Tax calculation error for {payment['name']}: expected ${expected_federal:.2f}, found ${payment['federal_tax']:.2f}"
+                )
+        
+        # Check for payment consistency
+        employee_payments = {}
+        for payment in self.payment_history:
+            emp_id = payment['employee_id']
+            if emp_id not in employee_payments:
+                employee_payments[emp_id] = []
+            employee_payments[emp_id].append(payment['gross_pay'])
+        
+        for emp_id, payments in employee_payments.items():
+            if len(payments) > 1:
+                variance = np.var(payments)
+                if variance > 0.01:
+                    emp_name = self.employees[emp_id]['name'] if emp_id in self.employees else "Unknown"
+                    investigation_results['findings'].append(
+                        f"Inconsistent payments for {emp_name}: variance ${variance:.2f}"
+                    )
+        
+        self.execution_log.append(f"Completed payroll investigation by {investigator}")
+        return investigation_results
+
+# Example usage:
+# payroll_system = Pi0PayrollSystem()
+# payroll_system.add_employee("E001", "John Doe", 75000, "Engineering", "2023-01-15")
+# payroll_system.add_employee("E002", "Jane Smith", 85000, "Finance", "2022-11-01")
+# payroll = payroll_system.calculate_payroll("2023-06-01", "2023-06-15")
+# tax_report = payroll_system.generate_tax_report(2023, 2)
+# benefits_report = payroll_system.generate_benefits_report(2023, 6)
+# audit_results = payroll_system.audit_payroll_system()
+# investigation = payroll_system.run_payroll_investigation("WEPi0n")

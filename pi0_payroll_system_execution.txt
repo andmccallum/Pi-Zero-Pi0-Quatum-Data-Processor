@@ -1,0 +1,43 @@
+
+# Pi0 Payroll System Execution Example
+# This script demonstrates the Pi0 payroll system in action
+
+from pi0_payroll_system_implementation import Pi0PayrollSystem
+
+# Initialize the payroll system
+payroll_system = Pi0PayrollSystem()
+print("Pi0 Payroll System initialized")
+
+# Add employees
+payroll_system.add_employee("E001", "John Doe", 75000, "Engineering", "2023-01-15")
+payroll_system.add_employee("E002", "Jane Smith", 85000, "Finance", "2022-11-01")
+payroll_system.add_employee("E003", "Michael Johnson", 65000, "Marketing", "2023-03-10")
+payroll_system.add_employee("E004", "Emily Williams", 95000, "Research", "2022-08-22")
+payroll_system.add_employee("E005", "Robert Brown", 70000, "Customer Support", "2023-02-05")
+print("Added 5 employees to the system")
+
+# Calculate payroll for a pay period
+payroll = payroll_system.calculate_payroll("2023-06-01", "2023-06-15")
+print(f"Processed payroll for {len(payroll)} employees")
+
+# Generate tax report
+tax_report = payroll_system.generate_tax_report(2023, 2)
+print(f"Generated tax report for Q2 2023 with {len(tax_report['employee_details'])} employee records")
+
+# Generate benefits report
+benefits_report = payroll_system.generate_benefits_report(2023, 6)
+print(f"Generated benefits report for June 2023 with {len(benefits_report['employee_details'])} employee records")
+
+# Audit the payroll system
+audit_results = payroll_system.audit_payroll_system()
+print(f"Completed system audit with status: {audit_results['system_integrity']}")
+if audit_results['findings']:
+    print(f"Audit findings: {len(audit_results['findings'])}")
+else:
+    print("No issues found during audit")
+
+# Run an investigation
+investigation = payroll_system.run_payroll_investigation("WEPi0n")
+print(f"Completed payroll investigation with {len(investigation['findings'])} findings")
+
+print("Pi0 Payroll System execution completed successfully")
